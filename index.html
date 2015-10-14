@@ -27,11 +27,11 @@ html, body {
 	font-family: 'Oxygen', Candara, Calibri, Segoe, "Segoe UI", Optima, Arial, sans-serif;
 }
 .svg {
-	background: white url('./web/img/devices.svg') no-repeat 50% 50%;
+	background: white url('./dep/img/devices.svg') no-repeat 50% 50%;
 	height: 40em;
 }
 .GUN {
-	background: transparent url('./web/img/gun.svg') no-repeat 50% 50%;
+	background: transparent url('./dep/img/gun.svg') no-repeat 50% 50%;
 	background-size: 60%;
 }
 .dull {
@@ -99,12 +99,12 @@ html, body {
 
 		<div class="graphic grid" style="min-width: 300px; max-width: 600px; height: 400px; position: relative; margin:0 auto; padding:0;">
 
-			<img src="./web/img/server.png" class="server" style="position: absolute; top: 2%; left: 35%; wid-th: 50%;">
+			<img src="./dep/img/server.png" class="server" style="position: absolute; top: 2%; left: 35%; wid-th: 50%;">
 
 			<div class="desktop" style="height: 10em; width: 17em; position: absolute; top: 36%; left: 3%;">
 				<div class="monitor" style="height: 100%; width: 100%; background: #222; padding: .75em; margin-left: -.75em; border-radius: 1em;">
 					<div class="dull screen GUN" style="height: 100%; width: 100%;">
-						<img class="mouse" src="./web/img/mouse.png">
+						<img class="mouse" src="./dep/img/mouse.png">
 					</div>
 				</div>
 				<div class="stand" style="margin: 1px auto 0px;
@@ -211,7 +211,7 @@ html, body {
 				</div>
 			</div>
 
-			<img src="./web/img/server.png" class="server" style="position: absolute; top: 2%; right: 35%;">
+			<img src="./dep/img/server.png" class="server" style="position: absolute; top: 2%; right: 35%;">
 
 			<div class="desktop" style="height: 10em; width: 17em; position: absolute; top: 36%; right: 3%;">
 				<div class="monitor" style="height: 100%; width: 100%; background: #222; padding: .75em; margin-left: -.75em; border-radius: 1em;">
@@ -384,6 +384,13 @@ html, body {
   heap.load("2174172773");
 </script>
 
+<!--
+<div style="margin: 0 auto;">
+<blockquote class="twitter-tweet" lang="en"><p lang="en" dir="ltr">With the proliferation of simple apps that sometimes become huge, it&#39;s cool to see projects like GunDB happening. <a href="http://t.co/rgTuZ4LbLR">http://t.co/rgTuZ4LbLR</a></p>&mdash; Tom Preston-Werner (@mojombo) <a href="https://twitter.com/mojombo/status/571027932048723969">February 26, 2015</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+-->
+
 <!-- BEGIN TUTORIAL -->
 <div class="tutorial">
 	<script src="https://gunjs.herokuapp.com/gun.js"></script>
@@ -400,6 +407,7 @@ html, body {
 		color: #eee;
 		overflow: auto;
 	}
+	.tutorial a { color: skyblue; }
 	.center {
 		text-align: center;
 	}
@@ -497,7 +505,7 @@ ref.on(function(data){
 
 
 	<div class="step hide step3">
-
+		<style>.step3 a { color: skyblue; }</style>
 		<div class="full grid">
 			<style>
 				.browser {
@@ -567,8 +575,8 @@ ref.on(function(data){
 			</div>
 			<div class="middle unit teft" style="min-width: 20em; max-width: 30em; margin-bottom: 1em;">
 				<button type="submit" class="left" style="margin-right: 1em;"><big>Update!</big></button>
-				Let's update the "hello" field with a different value.
-				We can path into any field, and update it directly.
+				<span class="instruct">Let's update the "hello" field with a different value.
+				We can path into any field, and update it directly.</span>
 			</div>
 		</div>
 		</form>
@@ -582,13 +590,13 @@ ref.on(function(data){
 				$("pre").each(function(){
 					hljs.highlightBlock(this);
 				})
-			}
+			}, tut = {};
 			$(".your-key").text(key);
 			hili();
 			location.hash = 'step1';
 			$(window).on('hashchange', function(){
 				$('.step').removeClass('show').addClass('hide')
-			  $(location.hash.replace('#','.')).addClass('show');
+				$(location.hash.replace('#','.')).addClass('show');
 			});
 			$(".step1").find('button').on('click', function(e){
 				if(gun){ return }
@@ -596,20 +604,119 @@ ref.on(function(data){
 				gun.put({hello: "world"}).key(key);
 			});
 			$(".step2").find('button').on('click', function(e){
-				$(".browser").find("iframe").attr("src", "./web/tabs.html?key=" + key);
+				$(".browser").find("iframe").attr("src", "./tabs.html?key=" + key);
 			});
 			$(".step3").find('form').on('submit', function(e){
 				var val = $("#try-sync").val() || null;
 				var path = $("#try-path").val();
 				gun.get(key).path(path).put(val);
+				if(!tut.sync){
+					$(this).find('.instruct').html("Great job! That is it, <a href='http://gun.js.org/web/think.html'>click here</a> if you want a more advanced tutorial. Thanks for trying GUN!");
+				}
+				tut.sync = (tut.sync || 0) + 1;
 			});
 		})
 	</script>
 	</div>
 </div>
-<!-- BEGIN TUTORIAL -->
+<!-- END TUTORIAL -->
 
-<! OLD BLOG POST HERE -->
+<div id="quotes" style="margin: 0 auto; text-align: center;">
+<style>
+	#quotes iframe, #quotes blockquote, .twitter-tweet { 
+		display: inline-block !important;
+	}
+</style>
+
+<blockquote class="twitter-tweet" lang="en"><p lang="en" dir="ltr">With the proliferation of simple apps that sometimes become huge, it&#39;s cool to see projects like GunDB happening. <a href="http://t.co/rgTuZ4LbLR">http://gunDB.io/</a></p>&mdash; Tom Preston-Werner (@mojombo) <a href="https://twitter.com/mojombo/status/571027932048723969">February 26, 2015</a></blockquote>
+
+<blockquote class="twitter-tweet" lang="en"><p lang="en" dir="ltr">So a bunch of folks have asked what I make of <a href="http://t.co/vhpuGJYoIp">http://gunDB.io/</a> and the gist of it is that it assumes loosely synchronized clocks.</p>&mdash; Arf Installation (@aphyr) <a href="https://twitter.com/aphyr/status/646302398575587332">September 22, 2015</a></blockquote>
+
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+
+<style>
+	#main {
+		min-width: 250px;
+		max-width: 700px;
+		width: 75%;
+		margin: 7% auto;
+		padding: 2% 5%;
+		background: white;
+		background: rgba(100%,100%,100%,.6);
+		font-family: Arial;
+		font-size: 18pt;
+		text-shadow: 0px 0px 7px #DDD;
+		line-height: 20pt;
+	}
+	#main p {
+		text-indent: 2em;
+	}
+</style>
+
+<div id="fields">
+	<style>
+		#fields ul { list-style-type: none; text-align: center; padding: 0; margin: 0; }
+		#fields li { 
+			width: 20%; min-width: 22em; display: inline-block; padding: 0; margin: 1%; 
+			vertical-align: top;
+		}
+		#fields img { height: 10em; clear: both; }
+		#fields .field { font-size: 200%; }
+		#fields p { text-align: left; text-align: justify; }
+		#fields .row {
+			display: inline-block; padding: 0; margin: 0;
+			min-width: 300px;
+		}
+	</style>
+	<ul>
+		<div class="row">
+		<li>
+			<img src="./dep/img/graph.svg"><br>
+			<span class="field">Graph</span>
+			<p>Have it your way, key/value, document, relational, or graph.</p>
+		</li>
+		<li>
+			<img src="./dep/img/bolt.svg"><br>
+			<span class="field">Realtime</span>
+			<p>Expect more from your database with less work.</p>
+		</li>
+		</div>
+		<div class="row">
+		<li>
+			<img src="./dep/img/sync.svg"><br>
+			<span class="field">Decentralized</span>
+			<p>Synchronize and recover from failures, kiss Master-Slave goodbye.</p>
+		</li>
+		<li>
+			<img src="./dep/img/dinosaur.svg"><br>
+			<span class="field">Offline-First</span>
+			<p>Keep chugging away even when the network cannot.</p>
+		</li>
+		</div>
+	</ul>
+</div>
+
+<div class="tutorial">
+
+	<div class="main">
+		<div id="videos" style="text-align: center;">
+			<style>#videos iframe { display: inline-block; margin: 1%; width: 250px; }</style>
+			
+			<iframe src="https://www.youtube.com/embed/-i-11T5ZI9o?rel=0" frameborder="0" allowfullscreen></iframe>
+			
+			<iframe src="https://www.youtube.com/embed/nG3yz1FsAxc?rel=0" frameborder="0" allowfullscreen></iframe>
+			
+			<iframe src="https://www.youtube.com/embed/cOO6wz1rZVY?rel=0" frameborder="0" allowfullscreen></iframe>
+		</div>
+		<p>
+			Check out our <a href="./events.html">Events</a> page for meetups! More useful links coming soon.
+			Please join the <a href="https://gitter.im/amark/gun">gitter</a> chatroom for discussion!
+		</p>
+	</div>
+</div>
+
+<!-- OLD BLOG POST HERE -->
 
 <style>
 	#main {

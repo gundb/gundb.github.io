@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+	</head>
+	<body>
+	
+		<div class="table">
+			<div id="col-add" class="header col ui"><button>+</button></div>
+		</div>
+		<button id="row-add" class="row ui" style="clear: both;">+</button>
+		
+		<div class="model" style="display: none;">
+			<div class="col"><input class="header val"></div>
+			<div class="cell"><input class="val"></div>
+		</div>
+		
+		<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+		<script src="https://rawgit.com/amark/gun/master/gun.js"></script>
+		<script>
+			var sheet = {};
+			
+			var gun = Gun();
+			sheet.gun = gun.get('example/sheets/table').set();
+			sheet.$ = $(".table").first();
+			
+			$('#col-add').on('click', function(){
+				var header = {};
+				header.sort = sheet.$.children('.col').length;
+				header.val = String.fromCharCode((25 + header.sort) % 26 + 65);
+				sheet.gun.path('cols').set(header);
+			});
+			sheet.gun.path('cols').map(function(header, cid){
+				sheet.render(cid, {}, '.col', '#col-add', 'insertBefore')
+					.data({val: header.val, cid: cid, rid: 'header', path: ['cols', cid]})
+					.find('.header').val(header.val);
+			});
+			
+			$('#row-add').on('click', function(){
+				var row = {cells: {}};
+				row.sort = sheet.$.children('.col').first().children('.cell').length + 1;
+				sheet.gun.path('rows').set(row);
+			});
+			sheet.gun.path('rows').map(function(row, rid){
+				sheet.$.children('.col').not('.ui').each(function(){
+					var cid = $(this).data('cid'), id = cid + '-' + rid;
+					if(!cid || !rid || !id){ return }
+					sheet.render(id, {}, '.cell', $(this))
+						.data({cid: cid, rid: rid, path: ['rows', rid, 'cells', cid]});
+				});
+				this.path("cells").map(function(cell, cid){
+					$("#" + cid + '-' + rid).data('val', cell.val).find('input').val(cell.val);
+				});
+			});
+			
+			$(document).on('keyup change', '.table input', function(){
+				var thi$ = $(this);
+				clearTimeout(sheet.typing);
+				sheet.typing = setTimeout(function(){
+					var val = thi$.val();
+					var pre = thi$.parent().data();
+					if(!pre || !pre.path || !pre.cid || !pre.rid || pre.val == val){ return }
+					sheet.gun.path(pre.path).put({val: val});
+				}, 250);
+			});
+			
+			sheet.render = function(id, data, model, onto, pre){
+				var $data = $(
+						$('#' + id).get(0) ||
+						$('.model').find(model).clone(true).attr('id', id)[pre || 'appendTo'](onto)
+				);
+				Gun.obj.map(data, function(val, field){
+					if(Gun.obj.is(val)){ return }
+					$data.find('.' + field).val(val).text(val);
+				});
+				return $data;
+			}
+		</script>
+		<style>
+			html, body {
+				margin: 0; padding: 0;
+			}
+			table, tr, td {
+				border: solid black 1px;
+				border-spacing: 0px;
+				padding: 0;
+				margin: 0;
+			}
+			button, input {
+				width: 100%;
+				box-sizing: border-box;
+			}
+			.table {
+				width: 999999999px;
+			}
+			.col {
+				float: left;
+				width: 200px;
+			}
+			.header {
+				font-size: 200%;
+			}
+		</style>
+		</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+	</head>
+	<body>
+		<div class="page" id="take">
+			<div id="survey-modify">
+				<h1 class="name"></h1>
+				<ul></ul>
+			</div>
+			<button href="done">Submit.</button>
+			
+			<div class="model">
+				<li class="questions">
+					<h3 class="q"></h3>
+					<textarea class="hide"></textarea>
+					<input class="hide"/>
+				</li>
+			</div>
+		</div>
+		<!--
+		<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+		<script src="https://rawgit.com/amark/gun/master/gun.js"></script>
+		-->
+		<script src="../../../jquery.js"></script>
+		<script src="../../db/gun.js"></script>
+		<script>
+			var surv = {page:{}};
+			
+			//$('.page').not(':first').hide();
+			surv.page.home = function(){
+				var id = (location.hash||"").slice(1);
+				if(!id){ return alert("No study to take!") }
+				var study = Gun('https://gunjs.herokuapp.com/gun').get('inc/survey/data/study/' + id);
+				study.val(function(survey){
+					surv.render('survey-modify', survey);
+				});
+				study.path('questions').map(function(q, id){
+					surv.render('d' + id, q, $('#take .questions'), $('#survey-modify ul'))
+						.find(q.type == 'words'? 'input' : 'textarea')
+						.removeClass('hide');
+				});
+				$('#take').find('.link').text(id);
+			};
+			
+			$('a, button').on('click', function(e){
+				e.preventDefault();
+				surv.route($(this).attr('href'));
+			});
+			surv.render = function(id, data, model, onto){
+				var $data = $(
+						$('#' + id).get(0) ||
+						$('.model').find(model).clone(true).attr('id', id).appendTo(onto)
+				);
+				Gun.obj.map(data, function(val, field){
+					if(Gun.obj.is(val)){ return }
+					$data.find('.' + field).val(val).text(val);
+				});
+				return $data;
+			}
+			surv.page.home();
+		</script>		
+		<style>
+			.page {}
+			.model, .hide {display: none}
+			input, textarea {width: 100%;}
+		</style>
+	</body>
+</html>
