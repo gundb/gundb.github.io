@@ -611,7 +611,7 @@ ref.on(function(data){
 				var path = $("#try-path").val();
 				gun.get(key).path(path).put(val);
 				if(!tut.sync){
-					$(this).find('.instruct').html("Great job! That is it, <a href='http://gun.js.org/web/think.html'>click here</a> if you want a more advanced tutorial. Thanks for trying GUN!");
+					$(this).find('.instruct').html("Great job! That is it, <a href='./think.html'>click here</a> if you want a more advanced tutorial. Thanks for trying GUN!");
 				}
 				tut.sync = (tut.sync || 0) + 1;
 			});
