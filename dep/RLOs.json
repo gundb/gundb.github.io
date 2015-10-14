@@ -1,0 +1,83 @@
+{"rlos": [
+  { "type": "tuts",
+    "KSAs": { "html": "0", "js": "0", "jq": "0", "node": "0", "gun": "0"
+    },
+    "name": "Simple TO DO",
+    "url": "think.html",
+    "urlCode": "",
+    "urlDemo": "",
+    "description": "A primer on HTML, JavaScript, jQuery, and gun that assumes no prior knowledge."
+  } ,
+  { "type": "tuts",
+    "KSAs": { "html": "1", "js": "2", "jq": "0", "node": "0", "gun": "0"
+    },
+    "name": "GPS Path Recording - COMING SOON",
+    "urlCode": "",
+    "urlDemo": "",
+    "description": "Building a basic mapping application with Leaflet and gun."
+  } ,
+  { "type": "examples",
+    "KSAs": { "html": "1", "js": "3", "jq": "0", "node": "0", "gun": "0"
+    },
+    "name": "Basic Chat page",
+    "url": "",
+    "urlCode": "https://github.com/amark/gun/blob/master/examples/chat/index.html",
+    "urlDemo": "http://gunjs.herokuapp.com/chat/index.html",
+    "description": "A terse (60 lines of code) chat page built with gun."
+  } ,
+  { "type": "examples",
+    "KSAs": { "html": "1", "js": "3", "jq": "0", "node": "0", "gun": "0"
+    },
+    "name": "JSON Editor",
+    "url": "",
+    "urlCode": "https://github.com/amark/gun/blob/master/examples/json/index.html",
+    "urlDemo": "http://gunjs.herokuapp.com/json/index.html",
+    "description": "A terse (75 lines of code) proof of concept JSON editor built with gun."
+  } ,
+  { "type": "examples",
+    "KSAs": { "html": "1", "js": "2", "jq": "0", "node": "0", "gun": "0"
+    },
+    "name": "Basic ToDo page",
+    "url": "",
+    "urlCode": "https://github.com/amark/gun/blob/master/examples/todo/index.html",
+    "urlDemo": "http://gunjs.herokuapp.com/todo/index.html",
+    "description": "A terse (38 lines of code) ToDo page built with gun."
+  }, 
+  { "type": "walks",
+    "KSAs": { "html": "1", "js": "3", "jq": "0", "node": "0", "gun": "0"
+    },
+    "name": "gun tracker - COMING SOON",
+    "url": "",
+    "urlCode": "",
+    "urlDemo": "",
+    "description": "A Leaflet and gun web app that will track your location and let you share your tracks with friends."
+  }  ,
+  { "type": "examples",
+    "KSAs": { "html": "1", "js": "3", "jq": "1", "node": "0", "gun": "1"
+    },
+    "name": "Sheets (Proof of concept)",
+    "url": "",
+    "urlCode": "https://github.com/gundb/gundb.github.io/blob/master/apps/sheets.html",
+    "urlDemo": "",
+    "description": "A proof of concept editable table system built with gun.  Could be extended into a spreedsheet system."
+  }, 
+  { "type": "examples",
+    "KSAs": { "html": "1", "js": "2", "jq": "1", "node": "0", "gun": "1"
+    },
+    "name": "Survey generation (Proof of concept)",
+    "url": "",
+    "urlCode": "https://github.com/gundb/gundb.github.io/blob/master/apps/survey.html",
+    "urlDemo": "",
+    "description": "A proof of concept to create surveys with gun.  Used in conjunction with 'Study'."
+  } , 
+  { "type": "examples",
+    "KSAs": { "html": "1", "js": "2", "jq": "1", "node": "0", "gun": "1"
+    },
+    "name": "Study (Proof of concept)",
+    "url": "",
+    "urlCode": "https://github.com/gundb/gundb.github.io/blob/master/apps/study.html",
+    "urlDemo": "",
+    "description": "A proof of concept to survey form display with gun.  Used in conjunction with 'Survey'."
+  }
+]}
+

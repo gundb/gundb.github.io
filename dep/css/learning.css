@@ -1,0 +1,163 @@
+
+@import url(https://fonts.googleapis.com/css?family=Dosis|Poiret+One|Oxygen);
+html, body {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	font-family: 'Oxygen', Candara, Calibri, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+}
+.center {
+	text-align: center;
+}
+.lean {
+	font-family: 'Poiret One', Candara, Calibri, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+}
+.clean {
+	font-family: 'Dosis', Candara, Calibri, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+}
+.crisp {
+	font-family: 'Oxygen', Candara, Calibri, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+}
+.svg {
+	background: white url('./web/img/devices.svg') no-repeat 50% 50%;
+	height: 40em;
+}
+.GUN {
+	background: transparent url('./web/img/gun.svg') no-repeat 50% 50%;
+	background-size: 60%;
+}
+.dull {
+	background-color: #EEE;
+	-webkit-transition: background-color 600ms linear;
+	-moz-transition: background-color 600ms linear;
+	transition: background-color 600ms linear;
+}
+.blue {
+	background-color: skyblue;
+	-webkit-transition: background-color 600ms linear;
+	-moz-transition: background-color 600ms linear;
+	transition: background-color 600ms linear;
+}
+.red {
+	background-color: red;
+	-webkit-transition: background-color 600ms linear;
+	-moz-transition: background-color 600ms linear;
+	transition: background-color 600ms linear;
+}
+.green {
+	background-color: MediumSpringGreen;
+	-webkit-transition: background-color 600ms linear;
+	-moz-transition: background-color 600ms linear;
+	transition: background-color 600ms linear;
+}
+.fold {
+	width: 100%;
+	position: relative;
+	overflow: hidden;
+}
+.behold {
+	margin-top: 8%;
+	padding:0;
+	text-align: center;
+}
+.grid {
+	display: inline-block;
+}
+@media (max-width: 760px) {
+	body {
+		font-size: 10pt;
+	}
+}
+@media (max-width: 1279px) {
+	.wide {
+		display: none;
+	}
+}
+.screen {
+	position: relative;
+	overflow: hidden;
+}
+.mouse {
+	display: block;
+	position: absolute;
+	top: 60%;
+	left: -6%;
+}
+
+.heading {
+  font-size: 300%;
+  font-weight: 900;
+}
+
+
+/* GENERAL PURPOSE STYLES */
+
+.hide { display: none; }
+
+p {
+  padding: 0.5em 0.5em 0.75em 0.5em;
+}
+
+.ranges, .rlos { list-style-type: none; }
+
+/* KSA Range-related styles */
+
+.KSA-Ranges {
+  margin: 0;
+  padding-bottom: 0.3em;
+}
+
+fieldset { border: none; }
+
+.fsLabel { 
+  display: inline-block; 
+  width: 5em; 
+  font-weight: 700; 
+  color: gray;}
+
+.KSA-Ranges input { /* without the following, the slider is too high in FireFox */
+  height: 1em;
+  line-height: 1em; 
+  background-color: transparent; 
+}
+
+/* RLO type related styles */
+
+.RLO-Types fieldset {
+  margin: 0;
+  padding-bottom: 0.4em;
+  border-bottom: 5px solid #369;
+  z-index: 0;
+}
+
+label.rloType { 
+    background-color:#87ceeb; 
+    color: #000;
+    margin: 1em;
+    padding: 0.5em 1em;
+    margin-left: -20px; /* positions label over X & Y of corresponding checkbox */
+    margin-bottom: 0;
+    line-height: 1.25em;
+    border-radius: 0.75em 0.75em 0 0;
+    border: 5px #369 solid;
+    border-bottom: 3px #369 solid;
+    z-index: 0;
+}
+
+input[type="checkbox"]:checked + label {
+    color: #369;
+    font-weight: 700;
+    background: #eee; /* #06c */
+    border-bottom: 5px #eee solid;
+    z-index: 100;
+}
+
+.RLOs {
+  background-color: #eee; /* #06c */
+  z-index: 50;
+}
+
+.RLOs ul, .RLOs h3 {
+  margin: 0;
+  padding: 0.5em;
+}
