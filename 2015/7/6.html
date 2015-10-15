@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+
+<a href="https://github.com/amark/gun" target="_blank"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png"></a>
+
+<a href="https://gunDB.io/" style="font-family: Arial;">Home</a>
+
+<!-- BLOG POST HERE -->
+
+<style>
+	.page {
+		min-width: 250px;
+		max-width: 36em;
+		width: 75%;
+		margin: 7% auto;
+		padding: 2% 5%;
+		background: white;
+		background: rgba(100%,100%,100%,.6);
+		font-family: Arial;
+		font-size: 18pt;
+		text-shadow: 0px 0px 7px #DDD;
+		line-height: 20pt;
+	}
+	.page p {
+		text-indent: 2em;
+	}
+</style>
+
+<div class="page">
+	<h1>v0.2.0-alpha Release</h3>
+	<p>
+		V0.1.x had phenomenal success, hitting the Top 4% of NPM and getting over 8k installs. But with that, came a lot of feature requests and complaints from you. "How could I scan over all my data?" "The chaining system is broken." "Can I query my data using SQL?" "Things are too buggy" "Can I build chat apps with this?" "The system keeps getting disconnected". And we're excited to announce that the new version has made huge <a href="https://github.com/amark/gun">improvements</a> towards these points.
+	</p>
+	<p>
+		Despite how much I tried to design GUN's architecture to be flexible enough to build any emergent structure on top, I somehow had missed the ability for peers to retrieve information on what data other peers had. Turns out, without this ability it is impossible to do any worthwhile querying. So adding this to the wire protocol became necessary before doing anything else. But it also posed some interesting new problems.
+	</p>
+	<p>
+		Keys act as O(1) pointers to data so you do not have to scan over your data to find a node. But if you do not know the key in advance, you might want to scan over the keys themselves. For instance, if you made a key for every user with the pattern of 'users/username', you might want to be able to ask for all the keys with the prefix of 'users/'. This might be a lot of keys though if you are a popular website with millions of users. Therefore we need to optimize how we transfer the keys for speed.
+	</p>
+	<p>
+		So how can we make transferring millions of keys fast? Well, streaming! Streaming already can be done in HTTP, Websockets, or JSONP. Rather than queueing up a big response in memory on the server and flushing it in one go, you can write out chunks incrementally over the wire. The browser will receive those updates as they come, which is great!
+	</p>
+	<p>
+		But there is a problem, JSON was designed for describing object documents. This type of serialization does not stream very well because before you can parse the data you have to have the closing "}" at the end of it. The good news though is that GUN was designed for <a href="https://github.com/amark/gun/wiki/Partials-and-Circular-References">partial updates</a>, which means it can merge objects together over time to produce the intended final object. This lets us bypass JSON's limitation while still being compatible.
+	</p>
+	<p>
+		I had another problem though, objects in GUN have to be a node. Previously, I had assumed that a node would always be of finite size. But now I needed to stream out any number of keys - which proved my assumption wrong, as they usually are. This gave me an opportunity to upgrade GUN's node system to allow for objects of any length. Now we are able to stream them across peers and incrementally process them. A huge benefit of this is that you can now have a node that holds an infinitely growing list!
+	</p>
+	<p>
+		Getting this to work also made us rehaul the entire chaining API, which I had noticed was being buggy anyways. In that process we caused some breaking changes by renaming a couple method names. But know that it is now powered by a really robust and flexible system. However, as it is with software, this produced a couple other interesting things. Since the chain could now process a graph of nodes, it should mean all our methods could too, right? Nope.
+	</p>
+	<p>
+		The key command itself was previously designed to only be able to point to one node at a time. This did not seem to make sense any more. So we changed it, and now a key can point to multiple nodes - but this resulted in a really fascinating philosophical consequence. GUN's conflict resolution algorithm would merge all these nodes into one view, giving the machine an odd ability for abstract reasoning or Platonic Forms. Strange, to say the least.
+	</p>
+	<p>
+		 At first it was almost like a spooky Artificial Intelligence movie, it was not the results I wanted. So why keep it? Well, it has the intended benefit of working really well in mesh based peer-to-peer systems. If two people are trying to update a shared ToDo list but are both offline and you have no centralized authority, you do not want that data to get separated. This ability to do a "pseudo-merge" across the nodes based on some higher abstraction, like the key, has the incredible property of maintaining a singular ToDo list upon being reconnected.
+	</p>
+	<p>
+		It is a concept that is awfully familiar to us humans. We all have a shared understanding of what the Earth or the Sun or the Moon is, but every one of our minds has independent knowledge about it - unique neurons in distinct brains store the same information. Wikipedia is an attempt to merge all these thoughts into one, and it can do that because it is a centralized authority. But as humans, we do this all the time without centralization - shouldn't your database?
+	</p>
+	<p>
+		We hope you are just as excited about GUN as we are. It started by doing things differently, focusing on making things easier for the every developer, not the SysAdmin and DevOps experts. Now it has grown and evolved into something even more powerful, ever more interesting. But we can not make progress without you, we need you to <a href="http://gunDB.io/">check it out</a> or <a href="http://gun.js.org/web/think.html">try it out</a>, then report bugs and complain about problems in the new version. This is why it is an alpha release. Your fresh perspectives and ideas are the only way we can truly build a better database.
+	</p>
+	<p>
+		Thank you! To all those who helped with this release. And to all those who will help with requests, feedback, and contributions to the next release. With that, let's dive into some disclaimers about what needs to be finished to get to a non-alpha v0.2.0 release. First off, we were unable to actually include API implementations for the <i>`.all`</i> method, so that is broken and does not work. Second, while the architecture for streaming is set up, I've not yet implemented actual chunking over the wire.
+	</p>
+	<p>That's all, folks!</p>
+	</div>
+	<!-- END BLOG POST -->
+</body>
+</html>
