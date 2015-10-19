@@ -1,0 +1,170 @@
+
+@import url(https://fonts.googleapis.com/css?family=Dosis|Poiret+One|Oxygen);
+html, body {
+	margin: 0;
+	padding: 0;
+	font-family: 'Oxygen', Candara, Calibri, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+}
+.lean {
+	font-family: 'Poiret One', Candara, Calibri, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+}
+
+
+.heading {
+  font-size: 3em;
+  font-weight: 900;
+}
+
+
+/* GENERAL PURPOSE STYLES */
+
+html {
+	/* Basic background: http://learnlayout.com/box-sizing.html;
+		 Universal Box Sizing with Inheritance: https://css-tricks.com/box-sizing/
+		 related; but does not impact this layout: 
+		  	https://css-tricks.com/transparent-borders-with-background-clip/ */
+	-webkit-box-sizing: border-box; 
+	-moz-box-sizing: border-box;		
+	box-sizing: border-box; 
+}
+*, *:before, *:after {
+	-webkit-box-sizing: inherit;
+	-moz-box-sizing: inherit;
+	box-sizing: inherit;
+}
+html, body {
+	border: 0;
+	margin: 0;
+	padding: 0;
+	font-size: 100%;
+}
+body {
+	font-size: 1.75vmin;
+	width: 100vw;
+	height: 100vh;
+}
+
+.hide { display: none; }
+
+p {
+  padding: 0.5em 0.5em 0.75em 0.5em;
+}
+
+.ranges, .rlos { 
+  list-style-type: none;
+  padding-left: 0;
+}
+
+/* KSA Range-related styles */
+
+.KSA-Ranges {
+  margin: 0;
+  padding-bottom: 0.3em;
+}
+
+.learning h1 {
+  margin-top: 0;
+  padding-top: 0.25em;
+}
+
+fieldset { 
+  border: none;
+}
+
+.fsLabel { 
+  display: inline-block; 
+  width: 5em; 
+  font-weight: 700; 
+  color: gray;
+}
+
+.KSA-Ranges input { /* without the following, the slider is too high in FireFox */
+  height: 1em;
+  line-height: 1em; 
+  background-color: transparent; 
+}
+
+/* RLO type related styles */
+
+.RLO-Types fieldset {
+  margin: 0;
+  padding-bottom: 0.4em;
+  border-bottom: 0.5em solid #369;
+  z-index: 0;
+}
+
+label.rloType { 
+    background-color:#87ceeb; 
+    color: #000;
+    margin: 1em;
+    padding: 0.5em 1em;
+    margin-left: -20px; /* positions label over X & Y of corresponding checkbox */
+    margin-bottom: 0;
+    line-height: 1.25em;
+    border-radius: 0.75em 0.75em 0 0;
+    border: 0.5em #369 solid;
+    border-bottom: 0.2em #369 solid;
+    z-index: 0;
+}
+
+input[type="checkbox"]:checked + label {
+    color: #369;
+    font-weight: 700;
+    background: #eee; /* #06c */
+    border-bottom: 0.6em #eee solid;
+    z-index: 100;
+}
+
+.RLOs {
+  background-color: #eee; /* #06c */
+  z-index: 50;
+}
+
+.RLOs ul {
+  margin: 0;
+  padding: 0.5em;
+}
+
+.RLOs h3 {
+  margin-top: 0;
+  padding-top: 0.5em;
+  margin-bottom: 0;
+  padding-bottom: 0.5em;
+}
+
+li.rlo {
+  width: 98vw;
+  margin: 0.5em 0;
+  padding: 0 0.75em 0.75em 0.75em;
+  background-color: #fff;
+  border: 1px solid #369;
+  color: #369;
+}
+
+li .rlo-links {
+  padding-top: 0.5em;
+}
+
+.learning .intro {
+  background-color: #fff;
+  padding-left: 1em;
+}
+
+.RLO-Types {
+  background-color: #fff;
+}
+
+.learning {
+  background-color: #eee;
+}
+@media (max-width: 800px) {
+	body {
+	  font-size: 2.0vmin;
+	}
+}
+
+@media (max-width: 400px) {
+	body {
+	  font-size: 2.5vmin;
+	}
+}

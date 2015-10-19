@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>Learning gun</title>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0" name="viewport" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js"></script>
+    <link rel="stylesheet" href="dep/css/learning.css" />
+    <script src="dep/learning.js"></script>
+  </head>
+
+  <body class='learning'>
+    <div class='intro'>
+      <h1 class="lean heading">Learning gun</h1>
+      <div class="KSA-Ranges">
+        <p>Please indicate your comfort with the following technologies:</p>
+        <!-- TODO: save selected KSA values to localStorage -->
+        <ul class="ranges"></ul>
+      </div>
+      <a href="#RLO_list"></a>
+    </div>
+      <div class="RLO-Types">
+        <fieldset>
+          <p>Select the types of learning objects you'd like to see:</p>
+          <input type="checkbox" class="rloType" checked="" id="tuts" title="Step-by-step procedure to build specific functionality." onchange="changeRLOtype()" />
+          <label for="tuts" class="rloType">Tutorials</label>
+          <input type="checkbox" class="rloType" id="walks" title="Example code with additional explination." onchange="changeRLOtype()" />
+          <label for="walks" class="rloType">Walk-abouts</label>
+          <input type="checkbox" class="rloType" id="examples" title="Open source example code." onchange="changeRLOtype()" />
+          <label for="examples" class="rloType">Examples</label>
+        </fieldset>
+    </div>
+    <div class="RLOs">
+      <ul class="rlos"></ul>
+    </div>
+    <!-- this `div` with the `class="hide model"` provides the template that
+         be copied into the `ul class='ranges'` above and populated -->
+    <div class="hide model">
+      <!-- KSA Range -->
+      <li class="range">
+        <fieldset>
+          <label for="htmlInput" class="fsLabel"></label>
+          <input type="range" id="inputId" step="1" />
+          <output id="resultId" class="resultLabel"></output>
+        </fieldset>
+      </li>
+      <!-- RLO -->
+      <li class="rlo">
+        <h3 class="rlo-title"></h3>
+        <div class="rlo-description"></div>
+        <div class="rlo-links"></div>
+      </li>
+    </div>
+  </body>
+
+</html>
