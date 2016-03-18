@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="gun_dev.css">
+	<link href='https://fonts.googleapis.com/css?family=Oxygen:400,700' rel='stylesheet' type='text/css'>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	<link href='https://fonts.googleapis.com/css?family=Alegreya+Sans+SC:800italic' rel='stylesheet' type='text/css'>
+<!--Adobe Edge Runtime-->
+    <script type="text/javascript" charset="utf-8" src="http://animate.adobe.com/runtime/6.0.0/edge.6.0.0.min.js"></script>
+<!--Adobe Edge Runtime End-->
+</head>
+<body>
+	<div class="intro">
+		<a href="https://github.com/amark/gun" target="blank"><img class="forkMe" src="img/forkMe.png"></a>
+		<!-- GRAPHIC STARTS -->
+		<div id="graphic">
+			<div class="graphic grid">
+				<img src="img/server.png" class="server" style="position: absolute; top: 2%; left: 35%; width: 50%;">
+
+				<div class="desktop">
+					<div class="monitor" style="height: 100%; width: 100%; background: #222; padding: .75em; margin-left: -.75em; border-radius: 1em;">
+						<div class="dull screen GUN" style="height: 100%; width: 100%;">
+							<img class="mouse" src="img/mouse.png">
+						</div>
+					</div>
+					<div class="stand" style="margin: 1px auto 0px;
+						border-bottom: 2.75em solid #888;
+						border-left: .5em solid transparent;
+						border-right: .5em solid transparent;
+						height: 0;
+						width: 3.2em;">
+					</div>
+					<div class="stand" style="width: 6em; height: .5em; background: #888; margin: 0px auto"></div>
+				</div>
+
+				<div class="laptop">
+					<div class="lid" style="height: 100%; width: 100%; background: #222; padding: .6em; margin-left: -.6em; border-radius: .6em .6em 0em 0em;">
+						<div class="dull screen GUN" style="height: 100%; width: 100%;">
+						</div>
+					</div>
+					<div class="case" style="height: .75em; width: 140%; margin-left: -20%; background: #999; border-radius: 0em 0em 5em 5em;">
+					</div>
+				</div>
+
+				<div class="phone">
+					<div class="case" style="height: 100%; width: 100%; background: #222; padding: .5em .2em; margin-left: -.2em; border-radius: 0.25em;">
+						<div class="dull screen GUN" style="height: 100%; width: 100%;">
+						</div>
+					</div>
+				</div>
+
+				<div class="arrow desktop-server" style="width: 52px; height: 52px; border: dashed 0px tomato; border-radius: 50px 0 0 0;
+					position: absolute; left: 20%; top: 15%; border-width: 3px 0px 0px 3px;">
+					<div class="rarr" style="position: absolute; top: -.59em; right: -.7em;
+						width: 0;
+						height: 0;
+						border-top: .5em solid transparent;
+						border-left: 1em solid Tomato;
+						border-bottom: .5em solid transparent;">
+					</div>
+					<div class="darr" style="position: absolute; bottom: -.75em; left: -.59em;
+						width: 0;
+						height: 0;
+						border-left: .5em solid transparent;
+						border-right: .5em solid transparent;
+						border-top: 1em solid Tomato;">
+					</div>
+				</div>
+
+				<div class="arrow phone-server" style="width: 26px; height: 52px; border: dashed 0px Tomato; border-radius: 0 0 50px 0;
+					position: absolute; left: 80%; top: 35%; border-width: 0px 3px 3px 0px;">
+					<div class="uarr" style="position: absolute; top: -.9em; right: -.59em;
+						width: 0;
+						height: 0;
+						border-left: .5em solid transparent;
+						border-right: .5em solid transparent;
+						border-bottom: 1em solid Tomato;">
+					</div>
+					<div class="larr" style="position: absolute; bottom: -.55em; left: -.59em;
+						width: 0;
+						height: 0;
+						border-top: .5em solid transparent;
+						border-right: 1em solid Tomato;
+						border-bottom: .5em solid transparent;">
+					</div>
+				</div>
+
+				<div class="arrow updown laptop-server" style="height: 50px; border: dashed 0px Tomato; border-radius: 0;
+					position: absolute; left: 60%; top: 40%; border-width: 0px 3px 0px 0px;">
+					<div class="uarr" style="position: absolute; top: -1em; left: -.45em;
+						width: 0;
+						height: 0;
+						border-left: .5em solid transparent;
+						border-right: .5em solid transparent;
+						border-bottom: 1em solid Tomato;">
+					</div>
+					<div class="darr" style="position: absolute; bottom: -1em; left: -.45em;
+						width: 0;
+						height: 0;
+						border-left: .5em solid transparent;
+						border-right: .5em solid transparent;
+						border-top: 1em solid Tomato;">
+					</div>
+				</div>
+			</div>
+			<div class="graphic wide grid" style="min-width: 300px; max-width: 600px; height: 400px;
+				position: relative; margin:0 auto; padding:0; display: none;">
+
+				<div class="arrow server-server" style="width: 100px; height: 0px; border: dashed 0px FireBrick; border-radius: 0;
+					position: absolute; left: -9%; top: 15%; border-width: 3px 0px 0px 0px;">
+					<div class="rarr" style="position: absolute; top: -.59em; left: -.5em;
+						width: 0;
+						height: 0;
+						border-top: .5em solid transparent;
+						border-right: 1em solid FireBrick;
+						border-bottom: .5em solid transparent;">
+					</div>
+					<div class="larr" style="position: absolute; top: -.59em; right: -.6em;
+						width: 0;
+						height: 0;
+						border-left: 1em solid FireBrick;
+						border-bottom: .5em solid transparent;
+						border-top: .5em solid transparent;">
+					</div>
+				</div>
+
+				<img src="img/server.png" class="server" style="position: absolute; top: 2%; right: 35%; width: 50%;">
+
+				<div class="desktop" style="height: 10em; width: 17em; position: absolute; top: 36%; right: 3%;">
+					<div class="monitor" style="height: 100%; width: 100%; background: #222; padding: .75em; margin-left: -.75em; border-radius: 1em;">
+						<div class="dull screen GUN" style="height: 100%; width: 100%;">
+						</div>
+					</div>
+					<div class="stand" style="margin: 1px auto 0px;
+						border-bottom: 2.75em solid #888;
+						border-left: .5em solid transparent;
+						border-right: .5em solid transparent;
+						height: 0;
+						width: 3.2em;">
+					</div>
+					<div class="stand" style="width: 6em; height: .5em; background: #888; margin: 0px auto"></div>
+				</div>
+
+				<div class="laptop" style="height: 7em; width: 12em; position: absolute; top: 60%; right: 48%;">
+					<div class="lid" style="height: 100%; width: 100%; background: #222; padding: .6em; margin-left: -.6em; border-radius: .6em .6em 0em 0em;">
+						<div class="dull screen GUN" style="height: 100%; width: 100%;">
+						</div>
+					</div>
+					<div class="case" style="height: .75em; width: 140%; margin-left: -20%; background: #999; border-radius: 0em 0em 5em 5em;">
+					</div>
+				</div>
+
+				<div class="phone" style="height: 3.75em; width: 2.25em; position: absolute; top: 35%; right: 70%;">
+					<div class="case" style="height: 100%; width: 100%; background: #222; padding: .5em .2em; margin-left: -.2em; border-radius: 0.25em;">
+						<div class="dull screen GUN" style="height: 100%; width: 100%;">
+						</div>
+					</div>
+				</div>
+
+				<div class="arrow desktop-server" style="width: 52px; height: 52px; border: dashed 0px FireBrick; border-radius: 0 50px 0 0;
+					position: absolute; right: 20%; top: 15%; border-width: 3px 3px 0px 0px;">
+					<div class="rarr" style="position: absolute; top: -.59em; left: -.5em;
+						width: 0;
+						height: 0;
+						border-top: .5em solid transparent;
+						border-right: 1em solid FireBrick;
+						border-bottom: .5em solid transparent;">
+					</div>
+					<div class="darr" style="position: absolute; bottom: -.75em; right: -.59em;
+						width: 0;
+						height: 0;
+						border-left: .5em solid transparent;
+						border-right: .5em solid transparent;
+						border-top: 1em solid FireBrick;">
+					</div>
+				</div>
+
+
+				<div class="arrow phone-server" style="width: 26px; height: 52px; border: dashed 0px FireBrick; border-radius: 0 0 0px 50px;
+					position: absolute; right: 80.3%; top: 34.3%; border-width: 0px 0px 3px 3px;">
+					<div class="uarr" style="position: absolute; top: -.8em; left: -.59em;
+						width: 0;
+						height: 0;
+						border-left: .5em solid transparent;
+						border-right: .5em solid transparent;
+						border-bottom: 1em solid FireBrick;">
+					</div>
+					<div class="rarr" style="position: absolute; bottom: -.55em; right: -.7em;
+						width: 0;
+						height: 0;
+						border-top: .5em solid transparent;
+						border-left: 1em solid FireBrick;
+						border-bottom: .5em solid transparent;">
+					</div>
+				</div>
+
+				<div class="arrow updown laptop-server" style="height: 50px; border: dashed 0px FireBrick; border-radius: 0;
+					position: absolute; right: 60%; top: 40%; border-width: 0px 3px 0px 0px;">
+					<div class="uarr" style="position: absolute; top: -1em; left: -.45em;
+						width: 0;
+						height: 0;
+						border-left: .5em solid transparent;
+						border-right: .5em solid transparent;
+						border-bottom: 1em solid FireBrick;">
+					</div>
+					<div class="darr" style="position: absolute; bottom: -1em; left: -.45em;
+						width: 0;
+						height: 0;
+						border-left: .5em solid transparent;
+						border-right: .5em solid transparent;
+						border-top: 1em solid FireBrick;">
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- GRAPHIC ENDS -->
+		<h1 class="oxygen">Easiest Database Ever</h1>
+		<h3>Sync state in a cinch at a distributed system scale.</h3>
+	</div>
+	<!-- TRY NOW SECTION -->
+	<div class="try">
+<!-- BEGIN TUTORIAL -->
+<div class="tutorial">
+	<script src="https://gunjs.herokuapp.com/gun.js"></script>
+	<link id="style" rel="stylesheet" href="https://yandex.st/highlightjs/8.0/styles/ir_black.min.css">
+	<script src="https://yandex.st/highlightjs/8.0/highlight.min.js"></script>
+	<style>
+	.tutorial {
+		margin: 0;
+		padding: 0;
+		color: #eee;
+		overflow: auto;
+	}
+	.tutorial a { color: skyblue; }
+	.center {
+		text-align: center;
+	}
+	.lean {
+		font-family: 'Poiret One', Candara, Calibri, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+	}
+	.clean {
+		font-family: 'Dosis', Candara, Calibri, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+	}
+	.crisp {
+		font-family: 'Oxygen', Candara, Calibri, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+	}
+	pre {
+		background-color: black;
+		border: 1px dashed white;
+		color: white;
+		line-height: 1.5em;
+		padding: .5em;
+		margin: 0em;
+		overflow: auto;
+	}
+	button {
+		border: none;
+		color: white;
+		background: skyblue;
+		padding: 1em;
+		cursor: pointer;
+	}
+	.hide {
+		display: none;
+	}
+	.show {
+		display: block;
+	}
+	.grid {
+		text-align: center;
+	}
+	.unit {
+		display: inline-block;
+	}
+	.tutorial .main {
+		min-width: 250px;
+		max-width: 1024px;
+		width: 90%;
+		margin: 0% auto;
+		padding: 2% 5%;
+	}
+	div {
+		position: relative;
+	}
+	.left { float: left;}
+	.teft { text-align: left; }
+	.middle {
+		vertical-align: middle;
+	}
+	.full {
+		width: 100%;
+	}
+	</style>
+	<div class="wrapper">
+		<div class="main">
+		<h1 style="color: white;" class="oxygen dark_header">Try it now</h1>
+		
+		<div class="step show step1">
+
+			<div class="full grid">
+				<div class="middle unit teft">
+	<pre style="max-width: 30.1em; margin: 0 1em 1em 0;">var gun = Gun('https://gunjs.herokuapp.com/gun');
+gun.put({hello: "world"}).key('<span class="your-key">example/tutorial</span>');</pre>
+				</div>
+				<div class="middle unit teft" style="min-width: 20em; max-width: 28em; margin-bottom: 1em;">
+					<a href="#step2"><button class="left" style="margin-right: 1em;"><big>Run!</big></button></a>
+					In this <b>1 minute</b> tutorial, we will connect to a gun peer, create an object, and sync data in realtime.
+				</div>
+			</div>
+
+		</div>
+		
+		<div class="step hide step2">
+
+			<div class="full grid">
+				<div class="middle unit teft">
+	<pre style="max-width: 30.1em; margin: 0 1em 1em 0;">var ref = gun.get('<span class="your-key">example/tutorial</span>');
+ref.on(function(data){
+  $('body').text(JSON.stringify(data));
+});</pre>
+				</div>
+				<div class="middle unit teft" style="min-width: 34em; max-width: 28em; margin-bottom: 1em;">
+					<a href="#step3"><button class="left" style="margin-right: 1em; background: MediumSpringGreen;"><big>Next</big></button></a>
+					Congratulations! You just made an object and saved a reference to it.
+					In two tabs, we'll load that key to open a shared reference.
+				</div>
+			</div>
+
+		</div>
+
+
+		<div class="step hide step3">
+			<style>.step3 a { color: skyblue; }</style>
+			<div class="full grid">
+				<style>
+					.browser {
+						background: white;
+						border-radius: .25em;
+						width: 250px;
+						//height: 300px;
+						color: #222;
+						margin: .5em;
+						overflow: hidden;
+					}
+					.b-bar {
+						background: #EEE;
+						border-radius: .25em .25em 0 0;
+					}
+					.b-but {
+						float: left;
+						width: 1em;
+						height: 1em;
+					}
+					.browser a {
+						text-decoration: none;
+						background: white;
+						border-radius: .4em;
+						padding: 0 1em;
+						color: #555;
+					}
+					.browser iframe { border: none; padding: 0; }
+				</style>
+				<div class="browser unit teft">
+					<div class="b-bar">
+						<div class="b-but">&larr;</div>
+						<div class="b-but">&rarr;</div>
+						<div class="b-but"><small>&#8635;</small></div>
+						<small><small><span>
+							<a href="https://gunjs.herokuapp.com/" target="_blank">https://gunjs.herokuapp.com/</a>
+						</span></small></small>
+						<small class="center" style="position: relative; top: -.14em;">x</small>
+						<span class="center">&equiv;<span>
+					</div>
+					<iframe></iframe>
+				</div>
+				<div class="browser unit teft">
+					<div class="b-bar">
+						<div class="b-but">&larr;</div>
+						<div class="b-but">&rarr;</div>
+						<div class="b-but"><small>&#8635;</small></div>
+						<small><small><span>
+							<a href="https://gunjs.herokuapp.com/" target="_blank">https://gunjs.herokuapp.com/</a>
+						</span></small></small>
+						<small class="center" style="position: relative; top: -.14em;">x</small>
+						<span class="center">&equiv;<span>
+					</div>
+					<iframe></iframe>
+				</div>
+			</div>
+
+			<form action="#step3" onsubmit="return false;">
+			<style>
+				.step3 input {
+					width: 6em;
+				}
+			</style>
+			<div class="grid">
+				<div class="middle unit teft">
+	<pre style="max-width: 40em; margin: 0 1em 1em 0;">ref.path('<input id="try-path" value="hello">').put("<input id="try-sync" value="sync">");</pre>
+				</div>
+				<div class="middle unit teft" style="min-width: 20em; max-width: 30em; margin-bottom: 1em;">
+					<button type="submit" class="left" style="margin-right: 1em;"><big>Update!</big></button>
+					<span class="instruct">Let's update the "hello" field with a different value.
+					We can path into any field, and update it directly.</span>
+				</div>
+			</div>
+			</form>
+
+		</div>
+
+		<script>
+			$(function(){
+				var gun, key = "random/" + Gun.text.random(9),
+					hili = function(){
+					$("pre").each(function(){
+						hljs.highlightBlock(this);
+					})
+				}, tut = {};
+				$(".your-key").text(key);
+				hili();
+				location.hash = 'step1';
+				$(window).on('hashchange', function(){
+					$('.step').removeClass('show').addClass('hide')
+					$(location.hash.replace('#','.')).addClass('show');
+				});
+				$(".step1").find('button').on('click', function(e){
+					if(gun){ return }
+					gun = Gun('https://gunjs.herokuapp.com/gun');
+					gun.put({hello: "world"}).key(key);
+				});
+				$(".step2").find('button').on('click', function(e){
+					//$(".browser").find("iframe").attr("src", "./tabs.html?key=" + key);
+					$(".browser").find("iframe").attr("src", "http://gun.js.org/tabs.html?key=" + key);
+				});
+				$(".step3").find('form').on('submit', function(e){
+					var val = $("#try-sync").val() || null;
+					var path = $("#try-path").val();
+					gun.get(key).path(path).put(val);
+					if(!tut.sync){
+						//$(this).find('.instruct').html("Great job! That is it, <a href='./think.html'>click here</a> if you want a more advanced tutorial. Thanks for trying GUN!");
+						$(this).find('.instruct').html("Great job! That is it, <a href='http://gun.js.org/think.html'>click here</a> if you want a more advanced tutorial. Thanks for trying GUN!");
+					}
+					tut.sync = (tut.sync || 0) + 1;
+				});
+			})
+		</script>
+		</div>
+	</div>
+</div>
+<!-- END TUTORIAL -->
+	</div>
+	<!-- SWIPER CUBE EFFECT STARTS HERE -->
+	<div class="slider">
+		<img class="prev" src="img/icons/arrow.svg">
+		<img class="next" src="img/icons/arrow.svg">
+		<div class="panels">
+		<div class="panel red">
+			<div class="content">
+				<h1>Realtime</h1>
+				<p>It may be trivial to get realtime updates with socket.io or something, but what you do not get is state synchronization. GUN does this for you out of the box, assuring that two users' simultaneous updates won't concurrently break each other.</p>
+			</div>
+				<!-- REAL TIME ANIMATION STARTS -->
+			<div class="aniHolder">
+					<div id="RealTime" class="realtime">
+
+				        <div id="RealTime_iMac2" class="edgeLoad-realtime">
+				            <div id="RealTime_iMac2_RoundRect"></div>
+				            <div id="RealTime_iMac2_Rectangle4"></div>
+				            <div id="RealTime_iMac2_Ellipse"></div>
+				            <div id="RealTime_iMac2_Rectangle3"></div>
+				            <div id="RealTime_iMac2_Rectangle2"></div>
+				            <div id="RealTime_iMac2_Rectangle"></div>
+				            <div id="RealTime_iMac2_Pasted2"></div>
+				        </div>
+				        <div id="RealTime_iMac3" class="edgeLoad-realtime">
+				            <div id="RealTime_iMac3_RoundRect"></div>
+				            <div id="RealTime_iMac3_Rectangle4"></div>
+				            <div id="RealTime_iMac3_Ellipse"></div>
+				            <div id="RealTime_iMac3_Rectangle3"></div>
+				            <div id="RealTime_iMac3_Rectangle2"></div>
+				            <div id="RealTime_iMac3_Rectangle"></div>
+				            <div id="RealTime_iMac3_Pasted2"></div>
+				        </div>
+				    </div>
+			</div>
+			<!-- REAL TIME ANIMATION ENDS -->
+		</div>
+		<div class="panel blue">
+			<div class="content">
+				<h1>Distributed</h1>
+				<p>GUN is peer-to-peer by design, meaning you have no centralized database server to maintain or that could crash. This lets you sleep through the night without worrying about database DevOps - we call this "NoDB". From that, you can build decentralized, federated, or centralized apps.</p>
+			</div>
+			<!-- DISTRIBUTED ANIMATION BEGINS -->
+			<div class="aniHolder">
+				<div id="Dist" class="distributed">
+
+			        <div id="Dist_Rectangle10" class="edgeLoad-distributed"></div>
+			        <div id="Dist_Rectangle11" class="edgeLoad-distributed"></div>
+			        <div id="Dist_Rectangle9" class="edgeLoad-distributed"></div>
+			        <div id="Dist_Rectangle8" class="edgeLoad-distributed"></div>
+			        <div id="Dist_Rectangle7" class="edgeLoad-distributed"></div>
+			        <div id="Dist_Rectangle6" class="edgeLoad-distributed"></div>
+			        <div id="Dist_Rectangle5" class="edgeLoad-distributed"></div>
+			        <div id="Dist_Rectangle4Copy2" class="edgeLoad-distributed"></div>
+			        <div id="Dist_Rectangle4Copy" class="edgeLoad-distributed"></div>
+			        <div id="Dist_Rectangle4" class="edgeLoad-distributed"></div>
+			        <div id="Dist_imac" class="edgeLoad-distributed"></div>
+			        <div id="Dist_screen" class="edgeLoad-distributed">
+			            <div id="Dist_screen_Ellipse2"></div>
+			            <div id="Dist_screen_Ellipse"></div>
+			            <div id="Dist_screen_Rectangle3"></div>
+			            <div id="Dist_screen_Rectangle2Copy"></div>
+			            <div id="Dist_screen_Rectangle2"></div>
+			            <div id="Dist_screen_Rectangle"></div>
+			        </div>
+			        <div id="Dist_Pasted32" class="edgeLoad-distributed"></div>
+			        <div id="Dist_Pasted42" class="edgeLoad-distributed"></div>
+			        <div id="Dist_screen2" class="edgeLoad-distributed">
+			            <div id="Dist_screen2_Ellipse2"></div>
+			            <div id="Dist_screen2_Ellipse"></div>
+			            <div id="Dist_screen2_Rectangle3"></div>
+			            <div id="Dist_screen2_Rectangle2Copy"></div>
+			            <div id="Dist_screen2_Rectangle2"></div>
+			            <div id="Dist_screen2_Rectangle"></div>
+			        </div>
+			        <div id="Dist_Pasted63" class="edgeLoad-distributed"></div>
+			        <div id="Dist_Pasted43" class="edgeLoad-distributed"></div>
+			        <div id="Dist_screen5" class="edgeLoad-distributed">
+			            <div id="Dist_screen5_Ellipse2"></div>
+			            <div id="Dist_screen5_Ellipse"></div>
+			            <div id="Dist_screen5_Rectangle3"></div>
+			            <div id="Dist_screen5_Rectangle2Copy"></div>
+			            <div id="Dist_screen5_Rectangle2"></div>
+			            <div id="Dist_screen5_Rectangle"></div>
+			        </div>
+			        <div id="Dist_screen6" class="edgeLoad-distributed">
+			            <div id="Dist_screen6_Ellipse2"></div>
+			            <div id="Dist_screen6_Ellipse"></div>
+			            <div id="Dist_screen6_Rectangle3"></div>
+			            <div id="Dist_screen6_Rectangle2Copy"></div>
+			            <div id="Dist_screen6_Rectangle2"></div>
+			            <div id="Dist_screen6_Rectangle"></div>
+			        </div>
+			        <div id="Dist_Pasted7" class="edgeLoad-distributed"></div>
+			        <div id="Dist_Pasted3" class="edgeLoad-distributed"></div>
+			    </div>
+			</div>
+			<!-- DISTRIBUTED ANIMATION ENDS -->
+		</div>
+		<div class="panel green">
+			<div class="content">
+				<h1>Offline-first</h1>
+				<p>GUN works even if your internet or cell reception doesn't. Users can still plug away and save data as normal, and then when the network comes back online GUN will automatically synchronize all the changes and handle any conflicts for you.</p>
+			</div>
+			<!-- OFFLINE ANIMATION STARTS -->
+			<div class="aniHolder">
+				<div id="Offline" class="offline">
+
+			        <div id="Offline_tablet" class="edgeLoad-offline"></div>
+			        <div id="Offline_laptop" class="edgeLoad-offline"></div>
+			        <div id="Offline_Rectangle" class="edgeLoad-offline"></div>
+			        <div id="Offline_Rectangle2" class="edgeLoad-offline"></div>
+			        <div id="Offline_circle_cont" class="edgeLoad-offline">
+			            <div id="Offline_circle" class="edgeLoad-offline"></div>
+			        </div>
+			        <div id="Offline_bigger_screen" class="edgeLoad-offline"></div>
+			        <div id="Offline_Rectangle2Copy" class="edgeLoad-offline"></div>
+			        <div id="Offline_circle_contCopy" class="edgeLoad-offline">
+			            <div id="Offline_circleCopy2" class="edgeLoad-offline"></div>
+			        </div>
+			        <div id="Offline_hand" class="edgeLoad-offline"></div>
+			        <div id="Offline_circleCopy2" class="edgeLoad-offline"></div>
+			        <div id="Offline_Pasted9" class="edgeLoad-offline"></div>
+			        <div id="Offline_Pasted9Copy" class="edgeLoad-offline"></div>
+			        <div id="Offline_cross2" class="edgeLoad-offline">
+			            <div id="Offline_cross2_cross"></div>
+			        </div>
+			    </div>
+			</div>
+			<!-- OFFLINE ANIMATION ENDS -->
+		</div>
+		<div class="panel yellow">
+			<div class="content">
+				<h1>Graph</h1>
+				<p>Most databases force you to bend over backwards to match their storage constraints. But graphs are different, they let you have any data structure you want. Whether that be traditional tables with relations, document oriented trees, or tons of circular references. You choose.</p>
+			</div>
+			<!-- GRAPH ANIMATION STARTS -->
+			<div class="aniHolder">
+				<div id="Graph" class="graph">
+
+			        <div id="Graph_arrow9" class="edgeLoad-graph">
+			            <div id="Graph_arrow9_Pasted3"></div>
+			        </div>
+			        <div id="Graph_arrow5Copy" class="edgeLoad-graph">
+			            <div id="Graph_arrow5Copy_Pasted3"></div>
+			        </div>
+			        <div id="Graph_arrow5Copy2" class="edgeLoad-graph">
+			            <div id="Graph_arrow5Copy2_Pasted3"></div>
+			        </div>
+			        <div id="Graph_arrow5" class="edgeLoad-graph">
+			            <div id="Graph_arrow5_Pasted3"></div>
+			        </div>
+			        <div id="Graph_arrow6" class="edgeLoad-graph">
+			            <div id="Graph_arrow6_Pasted3"></div>
+			        </div>
+			        <div id="Graph_arrow7" class="edgeLoad-graph">
+			            <div id="Graph_arrow7_Pasted3"></div>
+			        </div>
+			        <div id="Graph_arrow13" class="edgeLoad-graph">
+			            <div id="Graph_arrow13_Pasted3"></div>
+			        </div>
+			        <div id="Graph_arrow14" class="edgeLoad-graph">
+			            <div id="Graph_arrow14_Pasted3"></div>
+			        </div>
+			        <div id="Graph_Rectangle" class="edgeLoad-graph"></div>
+			        <div id="Graph_RectangleCopy" class="edgeLoad-graph"></div>
+			        <div id="Graph_RectangleCopy6" class="edgeLoad-graph"></div>
+			        <div id="Graph_RectangleCopy2" class="edgeLoad-graph"></div>
+			        <div id="Graph_RectangleCopy3" class="edgeLoad-graph"></div>
+			        <div id="Graph_RectangleCopy4" class="edgeLoad-graph"></div>
+			        <div id="Graph_RectangleCopy5" class="edgeLoad-graph"></div>
+			        <div id="Graph_Rectangle2Copy4" class="edgeLoad-graph"></div>
+			        <div id="Graph_Rectangle2Copy5" class="edgeLoad-graph"></div>
+			        <div id="Graph_Rectangle2Copy2" class="edgeLoad-graph"></div>
+			        <div id="Graph_Rectangle2Copy3" class="edgeLoad-graph"></div>
+			        <div id="Graph_Rectangle3" class="edgeLoad-graph"></div>
+			        <div id="Graph_key3" class="edgeLoad-graph">
+			            <div id="Graph_key3_Pasted5"></div>
+			        </div>
+			        <div id="Graph_Ellipse" class="edgeLoad-graph"></div>
+			    </div>
+			</div>
+			<!-- GRAPH ANIMATION ENDS -->
+		</div>
+		</div>
+	</div>
+	<!-- END OF SWIPER -->
+	<!-- START OF GITTER SECTION -->
+	<div class="in_touch">
+		<div class="wrapper">
+			<h1>Community</h1>
+			<p>Are you currently working on a project using GUN or perhaps you would like more information before you make up your mind.</p>
+
+			<p>We always love to be in touch with our community and listen about what you're working on and maybe we can give you a hand. Click the button below and talk to us on Gitter!</p>
+
+			<button class="js-gitter-toggle-chat-button open blue" data-gitter-toggle-chat-state="true">Open Chat</button>
+			<button class="js-gitter-toggle-chat-button close red" data-gitter-toggle-chat-state="false">Close Chat</button>
+		</div>
+		<div class="gitter">
+			<!-- THE ANIMATION STARTS HERE -->
+			<div id="Gitter" class="gitter_animation">
+	
+		        <div id="Gitter_laptop4" class="edgeLoad-gitter_animation">
+		            <div id="Gitter_laptop4_check"></div>
+		            <div id="Gitter_laptop4_Pasted32"></div>
+		            <div id="Gitter_laptop4_Pasted22"></div>
+		            <div id="Gitter_laptop4_Rectangle3Copy5"></div>
+		            <div id="Gitter_laptop4_Rectangle3Copy3"></div>
+		            <div id="Gitter_laptop4_Rectangle3Copy2"></div>
+		            <div id="Gitter_laptop4_Rectangle3Copy"></div>
+		            <div id="Gitter_laptop4_Rectangle3Copy7"></div>
+		            <div id="Gitter_laptop4_Rectangle3"></div>
+		            <div id="Gitter_laptop4_screen"></div>
+		            <div id="Gitter_laptop4_mcAir"></div>
+		        </div>
+		        <div id="Gitter_gun_laptop" class="edgeLoad-gitter_animation">
+		            <div id="Gitter_gun_laptop_bubble3">
+		                <div id="Gitter_gun_laptop_bubble3_Pasted"></div>
+		            </div>
+		            <div id="Gitter_gun_laptop_logo">
+		                <div id="Gitter_gun_laptop_logo_gun_logo_white"></div>
+		            </div>
+		            <div id="Gitter_gun_laptop_Rectangle4"></div>
+		            <div id="Gitter_gun_laptop_mcAir"></div>
+		        </div>
+		    </div>
+			<!-- ANIMATION ENDS HERE -->
+		</div>
+	</div>
+	<!-- END OF GITTER -->
+	<div class="api_reference">
+		<div class="wrapper">
+			<h1 class="dark_header">API</h1>
+		
+			<div class="grid">
+				<div class="grid-item">
+					<div class="red tile">
+						<h2>Gun constructor</h2>
+						<p>Used to creates a new gun database instance.</p>
+						<a href="https://github.com/amark/gun/wiki/API-(v0.3.x)#Gun" target="_blank">Read more</a>
+					</div>
+				</div>
+				<div class="grid-item">
+					<div class="blue tile">
+						<h2>gun.put</h2>
+						<p>Save data into gun, syncing it with your connected peers.</p>
+						<a href="https://github.com/amark/gun/wiki/API-(v0.3.x)#put" target="_blank">Read more</a>
+					</div>
+				</div>
+				<div class="grid-item">
+					<div class="blue tile">
+						<h2>gun.key</h2>
+						<p>Index your data, so you can find it later, faster.</p>
+						<a href="https://github.com/amark/gun/wiki/API-(v0.3.x)#key" target="_blank">Read more</a>
+					</div>
+				</div>
+				<div class="grid-item">
+					<div class="blue tile">
+						<h2>gun.get</h2>
+						<p>Load all data under a key into the context.</p>
+						<a href="https://github.com/amark/gun/wiki/API-(v0.3.x)#get" target="_blank">Read more</a>
+					</div>
+				</div>
+				<div class="grid-item">
+					<div class="green tile">
+						<h2>gun.path</h2>
+						<p>Navigate through a node's properties</p>
+						<a href="https://github.com/amark/gun/wiki/API-(v0.3.x)#path" target="_blank">Read more</a>
+					</div>
+				</div>
+				<div class="grid-item">
+					<div class="green tile">
+						<h2>gun.back</h2>
+						<p>Move up to the parent context on the chain.</p>
+						<a href="https://github.com/amark/gun/wiki/API-(v0.3.x)#back" target="_blank">Read more</a>
+					</div>
+				</div>
+				<div class="grid-item">
+					<div class="green tile">
+						<h2>gun.on</h2>
+						<p>Subscribe to realtime updated changes on a node or property.</p>
+						<a href="https://github.com/amark/gun/wiki/API-(v0.3.x)#on" target="_blank">Read more</a>
+					</div>
+				</div>
+				<div class="grid-item">
+					<div class="yellow tile">
+						<h2>gun.map</h2>
+						<p>Loop over each property in a node, and subscribe to future changes. It's essentially performing a .path on each field.</p>
+						<a href="https://github.com/amark/gun/wiki/API-(v0.3.x)#map" target="_blank">Read more</a>
+					</div>
+				</div>
+				<div class="grid-item">
+					<div class="yellow tile">
+						<h2>gun.val</h2>
+						<p>Read a full object without subscribing updates.</p>
+						<a href="https://github.com/amark/gun/wiki/API-(v0.3.x)#val" target="_blank">Read more</a>
+					</div>
+				</div>
+				<div class="grid-item">
+					<div class="yellow tile">
+						<h2>gun.not</h2>
+						<p>Handle cases where data can't be found.</p>
+						<a href="https://github.com/amark/gun/wiki/API-(v0.3.x)#not" target="_blank">Read more</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="explanation" style="display: none;">
+		<div class="wrapper">
+			<h1>Interactive explainers</h1>
+			<p>The following are articles we created to understand the types of data.</p>
+			<div class="holder">
+				<img src="img/explanation_cover.jpg">
+			</div>
+		</div>
+	</div>
+	<div class="developed yellow">
+		<div class="wrapper">
+			<h1>Projects</h1>
+			<p>Our GUN community is working on great projects here are the promising ones.</p>
+		</div>
+		<div class="grid">
+			<div class="grid-item">
+				<div class="hover pic_holder">
+					<div class="front">
+						<img src="img/map.png">
+					</div>
+					<a class="back" href="http://www.gps.gundb.io" target="blank"><div>
+						<h3>Geolocation app</h3>
+						<p>Using GUN's location awareness, is able to track other devices and tell the user where this device in relation to their position, the updates happen in real time.</p>
+					</div></a>
+				</div>
+			</div>
+			<div class="grid-item">
+				<div class="hover pic_holder">
+					<div class="front">
+						<img src="img/trace.png">
+					</div>
+					<a class="back" href="http://wwwtrace.gundb.io" target="blank"><div>
+						<h3>Trace game</h3>
+						<p>Fun game where up to 4 users try to eliminate each other by blocking the path.</p>
+					</div></a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="narrative">
+		<div class="wrapper"><h1>Resources</h1></div>
+		<div class="swiper-container">
+			<div class="swiper-wrapper">
+				<div class="swiper_nav">
+					<iframe src="https://www.youtube.com/embed/-i-11T5ZI9o?list=PL9EMvPaQlrL8VQuSsZ-_DqX0AevgmVokx" allowfullscreen></iframe>
+					<iframe src="https://www.youtube.com/embed/kzrmAdBAnn4?rel=0" allowfullscreen></iframe>
+					<iframe src="https://www.youtube.com/embed/nG3yz1FsAxc?rel=0" allowfullscreen></iframe>
+					<iframe src="https://www.youtube.com/embed/qJNDplwJ8aQ?list=PL9EMvPaQlrL9mgmihQNcKdqmZTcmxFG__" allowfullscreen></iframe>
+					<iframe src="https://www.youtube.com/embed/cOO6wz1rZVY?list=PL9EMvPaQlrL9ocZQaKBvEPXpx_Msdo7Vv" allowfullscreen></iframe>
+					<iframe src="https://www.youtube.com/embed/i7jEntJXgKw?list=PL9EMvPaQlrL8VQuSsZ-_DqX0AevgmVokx" allowfullscreen></iframe>
+				</div>
+			</div>
+			<div class="meetup grid blue">
+				<a href="http://www.meetup.com/GUN-User-Group/" target="blank"><div class="grid-item">
+					<img src="img/meetUplogo.gif">
+					<h3>We invite you to come to our meetups to collaborate and eat!</h3>
+				</div></a>
+			</div>
+		</div>
+	</div>
+	<!-- FOOTER -->
+	<div id="footer">
+		<div class="container" class="page">
+			<div class="footer_social">
+				<div class="grid">
+					<a href="http://www.github.com/amark/gun" target="_blank"><img src="img/icons/github.svg"></a>
+					<a href="https://gitter.im/amark/gun" target="_blank"><img src="img/icons/gitter.svg"></a>
+					<a href="https://twitter.com/databasegun" target="_blank"><img src="img/icons/twitter.svg"></a>
+					<a href="https://www.linkedin.com/company/gun-inc" target="_blank"><img src="img/icons/linkedin.svg"></a>
+				</div>
+			</div>
+		</div>
+		<nav>
+			<a href="http://gun.js.org/" target="_blank">Get Started</a>
+			<a href="https://github.com/amark/gun/wiki/JS-API" target="_blank">Documentation</a>
+			<a href="http://gun.js.org/think.html">Tutorials</a>
+			<a href="https://github.com/amark/gun">Download</a>
+		</nav>
+	</div>
+	<footer>
+		<div class="container">
+			<p>Designed with ♥ by Mark Nadal, the gun team, and many very awesome contributors. Liberally licensed under  <a href="https://github.com/amark/gun/wiki/package.json"> Zlib or MIT or Apache 2.0.</a></p>
+		</div>
+	</footer>
+	<script>
+	  ((window.gitter = {}).chat = {}).options = {
+	    room: 'amark/gun',
+	    activationElement: false,
+	    useStyles: true
+	  };
+	</script>
+	<script>
+   AdobeEdge.loadComposition('dev_ani', 'gitter_animation', {
+	    scaleToFit: "width",
+	    centerGitter: "none",
+	    minW: "320px",
+	    maxW: "2560px",
+	    width: "1280px",
+	    height: "400px"
+	}, {"dom":{}}, {"dom":{}});
+    AdobeEdge.loadComposition('realtime', 'realtime', {
+	    scaleToFit: "width",
+	    centerRealTime: "none",
+	    minW: "320px",
+	    maxW: "2560px",
+	    width: "1280px",
+	    height: "800px"
+	}, {"dom":{}}, {"dom":{}});
+   AdobeEdge.loadComposition('distributed', 'distributed', {
+	    scaleToFit: "width",
+	    centerStage: "none",
+	    minW: "320px",
+	    maxW: "2560px",
+	    width: "1280px",
+	    height: "800px"
+	}, {"dom":{}}, {"dom":{}});
+    AdobeEdge.loadComposition('offline', 'offline', {
+	    scaleToFit: "width",
+	    centerOffline: "none",
+	    minW: "320px",
+	    maxW: "2560px",
+	    width: "1280px",
+	    height: "800px"
+	}, {"dom":{}}, {"dom":{}});
+	AdobeEdge.loadComposition('graph', 'graph', {
+	    scaleToFit: "width",
+	    centerGraph: "none",
+	    minW: "320px",
+	    maxW: "2560px",
+	    width: "1280px",
+	    height: "800px"
+	}, {"dom":{}}, {"dom":{}});
+	</script>
+	<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+	<script type="text/javascript" src="gun_dev.js"></script>
+</body>
+</html>

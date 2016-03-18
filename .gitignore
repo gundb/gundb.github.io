@@ -1,0 +1,6 @@
+MARK_TEST_DELETE_THIS.html
+*.psd
+*.ai
+bower_components/
+node_modules/
+server.js
