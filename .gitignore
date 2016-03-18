@@ -53,3 +53,11 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+
+MARK_TEST_DELETE_THIS.html
+*.ai
+*.psd
+bower_components/
+node_modules/
+
