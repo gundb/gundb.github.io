@@ -559,12 +559,12 @@ iframe{
 #footer nav{
 	float: none;
     padding: 0;
-    margin: 0 10%;
+    margin: 0 7%;
     text-align: center;
 }
 
 #footer nav a{
-	padding: 0 .5em;
+	padding: 0 1em;
     color: #6D6E70;
     font-size: .7em;
 }
@@ -622,6 +622,10 @@ footer a{
 		height: 30em;
 	}
 
+	.forkMe{
+		width:20%;
+	}
+
 	.developed .grid-item{
 		height: 86vh;
 	}
@@ -631,7 +635,7 @@ footer a{
 	}
 
 	#footer nav a{
-		font-size:1em;
+		font-size:.9em;
 	}
 }
 
@@ -804,7 +808,7 @@ footer a{
 
 	#footer nav a 
 	{
-	    padding: 0 1.8em;
+	    padding: 0 0.8em;
 	    color: #6D6E70;
 	    font-size: 1.2em;
 	}
