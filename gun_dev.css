@@ -247,7 +247,7 @@ img{
 }
 
 .red{
-	background-color: rgb(236,104,89);
+	background-color: #ea3224;
 }
 
 .blue{
@@ -255,11 +255,11 @@ img{
 }
 
 .green{
-	background-color: rgb(122,216,133);
+	background-color: #33cc33;
 }
 
 .yellow{
-	background-color: rgba(255,211,72,.9);
+	background-color: #f2b919;
 }
 
 .content{
