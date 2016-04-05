@@ -127,11 +127,13 @@ var code = $('.edit').load('./editor.html', function(){setTimeout(function(){
 
 <div id="step-3" class="step">
 	<p>Oops, our current code is handling the data incorrectly. We need to fix that, adjust the commented line in the editor to this:</p>
-		<textarea style="height: 1em;">gun.map().val(function(message, id){</textarea>
+		<textarea style="height: 1em;">gun.map().val(function(message, id){
+				if(!message){ return }</textarea>
 	<p>Why?</p>
 	<ul>
 		<li>Because we do not expect <u>message</u>s to change, therefore we just get the <u>val</u>ue instead of reacting <u>on</u> updates.</li>
 		<li>We also swap the order, placing <u>map</u> in front because we want to get each message item in the set (or that will be in the set) once rather than every item in the set every time it changes. Kinda confusing, but just reread that a couple of times and think about it.</li>
+		<li>Because this is a live app that everybody is coding, if we get bad data we need to cancel by returning.</li>
 	</ul>
 	<button class="none">Got it.</button>
 </div>
