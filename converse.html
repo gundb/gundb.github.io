@@ -127,13 +127,11 @@ var code = $('.edit').load('./editor.html', function(){setTimeout(function(){
 
 <div id="step-3" class="step">
 	<p>Oops, our current code is handling the data incorrectly. We need to fix that, adjust the commented line in the editor to this:</p>
-		<textarea style="height: 2em;">gun.map().val(function(message, id){
-				if(!message){ return; }</textarea>
+		<textarea style="height: 2em;">gun.map().val(function(message, id){</textarea>
 	<p>Why?</p>
 	<ul>
 		<li>Because we do not expect <u>message</u>s to change, therefore we just get the <u>val</u>ue instead of reacting <u>on</u> updates.</li>
 		<li>We also swap the order, placing <u>map</u> in front because we want to get each message item in the set (or that will be in the set) once rather than every item in the set every time it changes. Kinda confusing, but just reread that a couple of times and think about it.</li>
-		<li>Because this is a live app that everybody is coding, if we get bad data we need to cancel by returning.</li>
 	</ul>
 	<button class="none">Got it.</button>
 </div>
@@ -141,6 +139,7 @@ var code = $('.edit').load('./editor.html', function(){setTimeout(function(){
 <div id="step-4" class="step">
 	<p>We still have breaking changes, we need to revamp the inside of the val function with the following:</p>
 		<textarea style="height: 8em;">
+				if(!message){ return; }
 				var $li = $(
 					$('#' + id).get(0) || 
 					$('.model').find('.message').clone(true).attr('id', id).appendTo('ul')
@@ -150,6 +149,7 @@ var code = $('.edit').load('./editor.html', function(){setTimeout(function(){
 				$li.find('.when').text(message.when);</textarea>
 	<p>What does this do?</p>
 	<ul>
+		<li>Because this is a live app that everybody is coding, if we get bad data we need to cancel by returning.</li>
 		<li>As before, if the list item already exists, use it.</li>
 		<li><u>||</u> or find a model message, <u>clone</u> it, set its <u>id</u> so we can reuse it later, and <u>append</u> it to the list.</li>
 		<li>Then fill in the model with the specific pieces of data from our message.</li>
