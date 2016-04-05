@@ -127,8 +127,8 @@ var code = $('.edit').load('./editor.html', function(){setTimeout(function(){
 
 <div id="step-3" class="step">
 	<p>Oops, our current code is handling the data incorrectly. We need to fix that, adjust the commented line in the editor to this:</p>
-		<textarea style="height: 1em;">gun.map().val(function(message, id){
-				if(!message){ return }</textarea>
+		<textarea style="height: 2em;">			gun.map().val(function(message, id){
+				if(!message){ return; }</textarea>
 	<p>Why?</p>
 	<ul>
 		<li>Because we do not expect <u>message</u>s to change, therefore we just get the <u>val</u>ue instead of reacting <u>on</u> updates.</li>
