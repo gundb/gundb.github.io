@@ -139,6 +139,7 @@ var code = $('.edit').load('./editor.html', function(){setTimeout(function(){
 <div id="step-4" class="step">
 	<p>We still have breaking changes, we need to revamp the inside of the val function with the following:</p>
 		<textarea style="height: 8em;">
+				if(!message){ return; }
 				var $li = $(
 					$('#' + id).get(0) || 
 					$('.model').find('.message').clone(true).attr('id', id).appendTo('ul')
@@ -148,6 +149,7 @@ var code = $('.edit').load('./editor.html', function(){setTimeout(function(){
 				$li.find('.when').text(message.when);</textarea>
 	<p>What does this do?</p>
 	<ul>
+		<li>Because this is a live app that everybody is coding, if we get bad data we need to cancel by returning.</li>
 		<li>As before, if the list item already exists, use it.</li>
 		<li><u>||</u> or find a model message, <u>clone</u> it, set its <u>id</u> so we can reuse it later, and <u>append</u> it to the list.</li>
 		<li>Then fill in the model with the specific pieces of data from our message.</li>
