@@ -5,15 +5,19 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<script src="./dep/jquery.js"></script>
 	<script src="dep/rsc/analytics.js"></script>
+	<link href='https://fonts.googleapis.com/css?family=Anonymous+Pro:700,400' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" href="styles/typography.css">
+
 </head>
 <body>
 
-<p>Before we can start building anything interesting, we should have a way to jot down our thoughts. Therefore the first thing we will build is a tool to keep track of what needs to be done. The infamous To-Do app, allowing us to keep temporary notes.</p>
+<p class="oxygen">Before we can start building anything interesting, we should have a way to jot down our thoughts. Therefore the first thing we will build is a tool to keep track of what needs to be done. The infamous To-Do app, allowing us to keep temporary notes.</p>
 
-<p>So what are the requirements? The ability to add a note, read our notes, and to clear them off. We will also need a space to keep these notes in, and a web page to access them through. Let's start with the page! You can edit the code below, which will update the live preview.</p>
+<p class="oxygen">So what are the requirements? The ability to add a note, read our notes, and to clear them off. We will also need a space to keep these notes in, and a web page to access them through. Let's start with the page! You can edit the code below, which will update the live preview.</p>
 
-<div class="edit">... loading editor and preview ...
-	<textarea style="height: 13em"><html>
+<div class="edit oxygen">... loading editor and preview ...
+	<textarea style="height: 13em" class="anonymous"><html>
 	<body>
 		<h1>Title</h1>
 
@@ -26,13 +30,13 @@
 </html></textarea>
 </div>
 <script>
-var code = $('.edit').load('./editor.html', function(){setTimeout(function(){
-	var editor = $('.CodeMirror')[0].CodeMirror;
-	editor.live(function(frame){
-		$('body', frame).on('submit', 'form', function(e){e.preventDefault()});
-	});
-	editor.setValue(code);
-},1)}).find('textarea').text();
+	var code = $('.edit').load('./editor.html', function(){setTimeout(function(){
+		var editor = $('.CodeMirror')[0].CodeMirror;
+		editor.live(function(frame){
+			$('body', frame).on('submit', 'form', function(e){e.preventDefault()});
+		});
+		editor.setValue(code);
+	},1)}).find('textarea').text();
 </script>
 
 <style>
@@ -41,7 +45,7 @@ var code = $('.edit').load('./editor.html', function(){setTimeout(function(){
 	textarea { border: none; width: 100%; }
 </style>
 
-<div id="step-1" class="step">
+<div id="step-1" class="step oxygen">
 	<p>What does this do? HTML is how we code the layout of a web page.</p>
 	<ul>
 		<li>We first must wrap all our code in an open and closing <u>html</u> tag so our computer knows it is a web page.</li>
@@ -55,7 +59,7 @@ var code = $('.edit').load('./editor.html', function(){setTimeout(function(){
 	<p>Now, try changing the <u>h1</u> text in the editor from "Title" to the name of our app, "Thoughts".</p>
 	<button class="none">I've done it!</button>
 	
-<textarea id="code-1" class="none" style="height: 14em"><html>
+<textarea id="code-1" class="none oxygen" style="height: 14em"><html>
 	<body>
 		<h2>Thoughts</h2>
 
@@ -69,10 +73,10 @@ var code = $('.edit').load('./editor.html', function(){setTimeout(function(){
 </html></textarea>
 </div>
 
-<div id="step-2" class="step">
+<div id="step-2" class="step oxygen">
 	<p>HTML controls the layout, but how do we control what happens when a user presses the 'add' button? This is done with javascript. But using raw javascript quickly becomes verbose, so to keep things concise we will use a popular tool called jQuery. We also need a tool to store data, so we will include GUN as well.</p>
 	<p>Insert the following between the ending <u>ul</u> tag and the ending <u>body</u> tag, replacing the comment line:</p>
-	<textarea style="height: 6em;">
+	<textarea style="height: 6em;" class="anonymous">
 		<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 		<script src="https://rawgit.com/amark/gun/e9e8804de8249f58340e3810721cd5c2a0f78fcd/gun.js"></script>
 		<script>
@@ -88,7 +92,7 @@ var code = $('.edit').load('./editor.html', function(){setTimeout(function(){
 	</ul>
 	<button class="none">It worked.</button>
 	
-<textarea id="code-2" class="none" style="height: 14em"><html>
+<textarea id="code-2" class="none oxygen" style="height: 14em"><html>
 	<body>
 		<h2>Thoughts</h2>
 
@@ -106,9 +110,9 @@ var code = $('.edit').load('./editor.html', function(){setTimeout(function(){
 </html></textarea>
 </div>
 
-<div id="step-3" class="step">
+<div id="step-3" class="step oxygen">
 	<p>Wonderful! You should have gotten the alert message, this means writing code works! Let's replace the alert line entirely with code that responds to user input.</p>
-	<textarea style="height: 5em;">
+	<textarea style="height: 5em;" class="anonymous">
 			$('form').on('submit', function(event){
 				event.preventDefault();
 				alert("We got your thought! " + $('input').val());
@@ -128,7 +132,7 @@ var code = $('.edit').load('./editor.html', function(){setTimeout(function(){
 	</ul>
 	<button class="none">Got it.</button>
 	
-<textarea id="code-3" class="none" style="height: 14em"><html>
+<textarea id="code-3" class="none anonymous" style="height: 14em"><html>
 	<body>
 		<h2>Thoughts</h2>
 
@@ -149,9 +153,9 @@ var code = $('.edit').load('./editor.html', function(){setTimeout(function(){
 </html></textarea>
 </div>
 
-<div id="step-4" class="step">
+<div id="step-4" class="step oxygen">
 	<p>Now that users can jot down their thoughts, we need a place to save them. Let's start using GUN for just that.</p>
-	<textarea style="height: 1em;">
+	<textarea style="height: 1em;" class="anonymous">
 			var gun = Gun().get('thoughts');</textarea>
 	<ul>
 		<li>The <u>var</u>iable keyword tells javascript that we want to create a reference named <u>gun</u> that we can reuse.</li>
@@ -160,7 +164,7 @@ var code = $('.edit').load('./editor.html', function(){setTimeout(function(){
 		<li>However, no data has been saved to <u>'thoughts'</u> yet! Let's fix that in the next step by using <u>gun</u>.</li>
 	</ul>
 	<button class="none">Let's do it!</button>
-<textarea id="code-4" class="none" style="height: 14em"><html>
+<textarea id="code-4" class="none anonymous" style="height: 14em"><html>
 	<body>
 		<h2>Thoughts</h2>
 
@@ -182,7 +186,7 @@ var code = $('.edit').load('./editor.html', function(){setTimeout(function(){
 </html></textarea>
 </div>
 
-<div id="step-5" class="step">
+<div id="step-5" class="step oxygen">
 	<p>Replace the alert line in the submit function with the following:</p>
 	<textarea style="height: 2.5em;">
 				gun.set($('input').val());
@@ -192,7 +196,7 @@ var code = $('.edit').load('./editor.html', function(){setTimeout(function(){
 		<li>Then we also want the input's <u>val</u>ue to become empty text, so we can add new thoughts later.</li>
 	</ul>
 	<button class="none">Show me the data!</button>
-<textarea id="code-5" class="none" style="height: 14em"><html>
+<textarea id="code-5" class="none anonymous" style="height: 14em"><html>
 	<body>
 		<h2>Thoughts</h2>
 
@@ -215,9 +219,9 @@ var code = $('.edit').load('./editor.html', function(){setTimeout(function(){
 </html></textarea>
 </div>
 
-<div id="step-6" class="step">
+<div id="step-6" class="step oxygen">
 	<p>Fantastic! Now that we can successfully store data, we want show the data! Replace the comment line in the editor with the following:</p>
-	<textarea style="height: 9em;">
+	<textarea style="height: 9em;" class="anonymous">
 			gun.on().map(function(thought, id){
 				var li = $('#' + id).get(0) || $('<li>').attr('id', id).appendTo('ul');
 				if(thought){
@@ -240,7 +244,7 @@ var code = $('.edit').load('./editor.html', function(){setTimeout(function(){
 		<li>Altogether it says "Create or reuse the HTML list item and make sure it is in the HTML list, then update the text or hide the item if there is no text".</li>
 	</ul>
 	<button class="none">I've tried adding a thought!</button>
-<textarea id="code-6" class="none" style="height: 14em"><html>
+<textarea id="code-6" class="none anonymous" style="height: 14em"><html>
 	<body>
 		<h2>Thoughts</h2>
 
@@ -271,9 +275,9 @@ var code = $('.edit').load('./editor.html', function(){setTimeout(function(){
 </html></textarea>
 </div>
 
-<div id="step-7" class="step">
+<div id="step-7" class="step oxygen">
 	<p>Finally we want to be able to clear off our thoughts when we are done with them. The interface for this could be done in many different ways, but for simplicity we will use a double tap as the gesture to clear it off. Replace the comment line in the editor with this code.</p>
-	<textarea style="height: 4em;">
+	<textarea style="height: 4em;" class="anonymous">
 			$('body').on('dblclick', 'li', function(event){
 				gun.path(this.id).put(null);
 			});</textarea>
@@ -286,7 +290,7 @@ var code = $('.edit').load('./editor.html', function(){setTimeout(function(){
 		<li>And whenever an update happens, <u>gun</u>'s <u>on</u> function from the previous step gets called again, which then hides the corresponding HTML list item.</u>
 	</ul>
 	<button class="none">Done!</button>
-<textarea id="code-7" class="none" style="height: 14em"><html>
+<textarea id="code-7" class="none anonymous" style="height: 14em"><html>
 	<body>
 		<h2>Thoughts</h2>
 
@@ -321,7 +325,7 @@ var code = $('.edit').load('./editor.html', function(){setTimeout(function(){
 </html></textarea>
 </div>
 
-<div id="step-8" class="step">
+<div id="step-8" class="step oxygen">
 	<p>Congratulations! You are all done, you have built your first GUN app!</p>
 	<p>In the next tutorial we will use GUN to synchronize data in realtime across multiple devices. We'll start by copying the app we made here and modifying it to become a chat app.</p>
 	<a href="./converse.html">Next Tutorial: Converse</a>
