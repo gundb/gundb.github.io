@@ -63,8 +63,68 @@ img{
 /*==================================*/
 /*           TOP GRAPHIC            */
 /*==================================*/
+.hero{
+	width: 100%;
+	height: auto;
+}
 
-.wide{
+.heroImg{
+	width: 20%;
+	margin:1em 40% .5em;
+}
+
+.hero h1{
+	font-family: 'Oxygen';
+	font-style: italic;
+	font-size: 2.5em;
+	text-align: center;
+	margin-bottom: 2em;
+}
+
+.devices{
+	width: 100%;
+	height: auto;
+	margin-bottom: 1em;
+	position: relative;
+}
+
+.device{
+	position: relative;
+	display: inline-block;
+}
+
+#phone{
+	left:5%;
+	bottom: 0;
+	width: 5%;
+}
+
+#tablet{
+	left:13%;
+	bottom: 0;
+	width: 10%;
+}
+
+#desktop{
+	bottom: 0;
+	width: 31%;
+	left:20%;
+}
+
+#laptop{
+	bottom: 0;
+	right: -24%;
+	width: 25%;
+}
+
+#phoneScreen{
+	background-color: pink;
+	width: 4.5%;
+	height: 20px;
+	bottom: 0;
+	left: 5%;
+}
+/*.wide{
 	display: none;
 }
 
@@ -150,7 +210,7 @@ img{
 	-webkit-transition: background-color 600ms linear;
 	-moz-transition: background-color 600ms linear;
 	transition: background-color 600ms linear;
-}
+}*/
 
 /*END OF GRAPHIC*/
 
