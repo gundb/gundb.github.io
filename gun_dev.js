@@ -38,7 +38,7 @@ $(document).ready(function(){
     $(this).toggleClass('flip');
   });
   $(function(){
-    var c = ['dull', 'blue', 'green'], a = 'dull blue red green', n = 0, to;
+    var c = ['dull', 'blue', 'green', 'yellow' , 'red'], a = 'dull blue red green yellow', n = 0, to;
     $(".screen").click(function(){
       c.push(c.shift());
       to = to || c[0];
@@ -91,11 +91,11 @@ $(document).ready(function(){
       } else {
         to(); 
       }
-    }; 
+    } 
     mouse.delay(1200).animate({top: "70%", left: "20%"}, {
       duration: 400, 
       specialEasing: {top: 'easeOutQuad', left: 'easeInQuad'}, 
-      complete: function(){ show(true) }
+      complete: function(){ show(true);}
     });
   });
   // $(window).scroll(function(){
