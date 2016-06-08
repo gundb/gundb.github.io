@@ -315,6 +315,7 @@ img{
 	text-align: left;
 	width: 90%;
 	margin:0 auto;
+	line-height: 1.7;
 }
 
 .js-gitter-toggle-chat-button{
@@ -356,9 +357,14 @@ img{
 	margin-top: .2em;
 }
 
+.developed .grid{
+	padding-bottom: 3em;
+}
+
 .grid{
 	width: 100%;
 	text-align: center;
+	margin-bottom: 3em;
 }
 
 .grid-item{
@@ -386,7 +392,7 @@ img{
 	text-align: left;
 }
 
-.grid-item a{
+.grid-item .tile a{
 	color: white;
 	font-size: .8em;
 	position: absolute;
@@ -442,7 +448,7 @@ img{
 .front{
 	z-index:900;
 	width:95%;
-	height: 34vh;
+	height: auto;
 	margin: 0 auto;
 	overflow: hidden;
 	-webkit-transform:rotateX(0deg) rotateY(0deg);
@@ -470,11 +476,13 @@ img{
 .back{
 	z-index: 800;
     background-color: #2C2C2C;
-    height: 34vh;
+    height: auto;
     margin:0 auto;
     position: absolute;
+    padding-bottom: 1em;
     top: 0;
     left: 1em;
+    overflow: 
 	-webkit-transform: rotateY(180deg);
 	-moz-transform: rotateY(180deg);
 	transform: rotateY(180deg);
@@ -518,29 +526,24 @@ img{
 
 .narrative .swiper-wrapper{
 	width:100%;
-	overflow: auto
-}
-
-.swiper_nav{
-	width: 280%;
-	white-space: nowrap;
 	overflow: auto;
-	position: relative;
-	display: visible;
-	margin-bottom:3em;
+	text-align: center;
+	margin-bottom: 3em;
 }
 
 .swiper_nav{
-	overflow-x:auto;
-	overflow-y:hidden; 
+	margin-bottom:.7em;
 }
 
-iframe{
-	width: 280px;
-	height: 158px;
-	float: left;
-	display: inline-block;
-	padding:.5em 2em;
+.swiper_nav.grid-item{
+	width: 304px;
+	min-width: 214px;
+	height: 170px;
+}
+
+iframe, .iframe{
+	width: 100%;
+	height: 170px;
 	border: 0;
 }
 
