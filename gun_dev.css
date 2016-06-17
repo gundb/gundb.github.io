@@ -364,7 +364,6 @@ img{
 .grid{
 	width: 100%;
 	text-align: center;
-	margin-bottom: 3em;
 }
 
 .grid-item{
@@ -442,7 +441,6 @@ img{
 
 .pic_holder{
 	position: relative;
-	overflow: hidden;
 }
 
 .front{
