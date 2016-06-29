@@ -64,7 +64,7 @@ img{
 }
 
 .green{
-	background-color: rgba(51,204,51, .75);
+	background-color: rgba(51,204,51, .8);
 }
 
 .top{
@@ -96,6 +96,10 @@ p, ul, .quote, h4{
     font-size: 3.5em;
     line-height: 1;
     margin-right: 0.2em;
+}
+
+.blue_first::first-letter{
+	color: rgba(77, 121, 216, .8);
 }
 
 .green_first::first-letter{
