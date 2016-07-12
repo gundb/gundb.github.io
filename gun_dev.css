@@ -515,6 +515,12 @@ img{
 /*==================================*/
 /*         SWIPER CONTAINER         */
 /*==================================*/
+.iframeVid{
+	width: 47%;
+	height:48vh;
+	border:0;
+	margin:0 26.5%;
+}
 
 .narrative{
 	width: 100%;
