@@ -59,6 +59,12 @@ img{
 	z-index: 12;
 }
 
+.edgePhotos{
+	position: absolute;
+	bottom: 0;
+	display:none;
+}
+
 
 /*==================================*/
 /*           TOP GRAPHIC            */
@@ -78,13 +84,13 @@ img{
 	font-style: italic;
 	font-size: 2.5em;
 	text-align: center;
-	margin-bottom: 2em;
+	margin-bottom: .75em;
 }
 
 .devices{
-	width: 100%;
+	width: 90%;
 	height: auto;
-	margin-bottom: 1em;
+	margin:0 auto 1em;
 	position: relative;
 }
 
@@ -642,6 +648,11 @@ footer a{
 	.forkMe{
 		width: 15%;
 	}
+
+	.iframeVid{
+		width: 90%;
+		margin:0 5%;
+	}
 }
 
 @media (max-width: 736px) and (min-width: 320px) and (orientation:landscape){
@@ -665,6 +676,11 @@ footer a{
 
 	.front, .back{
 		height: 85vh;
+	}
+
+	.iframeVid{
+		width: 90%;
+		margin:0 5%;
 	}
 
 	#footer nav a{
@@ -877,10 +893,3 @@ footer a{
 		height: 65em;
 	}
 }
-
-
-
-
-
-
-

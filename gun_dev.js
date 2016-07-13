@@ -98,20 +98,11 @@ $(document).ready(function(){
       complete: function(){ show(true);}
     });
   });
-  // $(window).scroll(function(){
-  //    var $iMacScreen= $('#RealTime_iMac2_Pasted2');
-  //    var $gitterBtn = $('.open');
-  //    var $gitterBtnClose = $('.close')
-  //    var $iMacOffset = $iMacScreen.offset().top;
-  //    var $gitterOffset  = $gitterBtnClose.offset().top;
-  //    var $iMacTrack = $iMacOffset - $(window).scrollTop();
-  //    var $gitterTrack = $gitterOffset - $(window).scrollTop();
-  //    if($iMacTrack < 0 && $gitterTrack > 0){
-  //       $gitterBtn.trigger('click');
-  //    }
-
-  //    if($gitterTrack < 0){
-  //       $gitterBtnClose.trigger('click');
-  //    }
-  // });
+  var windowSize = $(window).width();
+  if(windowSize < 1025){
+    $.browser.chrome = /chrome/.test(navigator.userAgent.toLowerCase());
+    if($.browswer.chrome || $.browser.safari){
+      $('.aniHolder').remove();
+    }
+  }
 });
