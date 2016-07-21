@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>gun.get</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href='https://fonts.googleapis.com/css?family=Oxygen:400,700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" href="../gun_dev.css">
+	<!-- HIGHLIGHT JS -->
+	<link rel="stylesheet" href="../styles/tomorrow-night.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.5.0/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body class="cd-about">
+	<main class="gun_api">
+		<div class="wrapper_api oxygen cd-index cd-main-content">
+			<div class="content_api blue_api oxygen">
+				<!-- FROM GITHUB STARTS -->
+<h1 class="api_title"><a></a>gun.get(name)</h1>
+
+<p>Load all data under a <a href="#key">key</a> into the context.</p>
+
+<p>It takes three parameters:</p>
+
+<ul>
+<li><code>keyName</code></li>
+<li><code>callback</code></li>
+<li><code>options</code></li>
+</ul>
+
+<p>You’ll almost never need to use the <code>callback</code> or <code>options</code> parameters, unless you’re building bare-metal extensions.</p>
+
+<blockquote>
+  <p>No options are currently available for this method.</p>
+</blockquote>
+
+
+
+<h2 class="api_title">Name</h2>
+
+<p>The <a href="#key"><code>keyName</code></a> string is the name of the data you want to retrieve.</p>
+
+<blockquote>
+  <p>Note that if you use <code>.put</code> at any depth after retrieving a key that doesn’t exist, the key is implicitly initialized as an empty object.</p>
+</blockquote>
+
+
+
+<pre class="prettyprint"><code class="language-javascript hljs ">gun.get(existingData).put({ property: <span class="hljs-string">'value'</span> })
+<span class="hljs-comment">/*
+  {
+    data: ...,
+    property: 'value',
+    data: ...
+  }
+*/</span>
+
+gun.get(nonExistentKey).put({ property: <span class="hljs-string">'value'</span> })
+<span class="hljs-comment">// { property: 'value' }</span></code></pre>
+
+
+
+<h2 class="api_title">Callback(error, node)</h2>
+
+<p>The callback is a listener for errors and raw node data. It may be called multiple times for a single request, since gun uses a streaming architecture. If you need to listen for incoming data, use <a href="#not"><code>.not</code></a> or <a href="#val"><code>.val</code></a>.</p>
+
+<blockquote>
+  <p>The callback is exposed for bare-metal extensions. Most developers will never need it.</p>
+</blockquote>
+
+
+
+<pre class="prettyprint"><code class="language-javascript hljs ">gun.get(key, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(error, node)</span> {</span>
+  <span class="hljs-comment">// called many times</span>
+})</code></pre>
+
+
+
+<h2 class="api_title">Examples</h2>
+
+<p>Retrieving a key</p>
+
+
+
+<pre class="prettyprint"><code class="language-javascript hljs "><span class="hljs-comment">// retrieve all available seats</span>
+gun.get(<span class="hljs-string">'seats/available'</span>).map(ui.show.seats)</code></pre>
+
+<p>Using the callback</p>
+
+
+
+<pre class="prettyprint"><code class="language-javascript hljs ">gun.get(key, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(error, node)</span> {</span>
+  <span class="hljs-keyword">if</span> (error) {
+    server.log(error)
+  }
+})</code></pre>
+
+
+
+<h2 class="api_title">Chain context</h2>
+
+<p>After calling <code>gun.get</code>, the chain context refers to the data you requested, regardless of what happened before calling <code>gun.get</code>.</p>
+
+
+
+<pre class="prettyprint"><code class="language-javascript hljs ">gun.get(<span class="hljs-string">'materials'</span>).get(<span class="hljs-string">'users'</span>) <span class="hljs-comment">/* same context as */</span> gun.get(<span class="hljs-string">'users'</span>)</code></pre>
+				<!-- FROM GITHUB ENDS -->
+			</div>
+		</div>
+		<div class="api_menu">
+			<ul>
+				<li><a href="../index.html">Home</a></li>
+				<li><a href="gun_constructor.html" data-type="page-transition">Gun constructor</a></li>
+				<li><a href="gun_put.html" data-type="page-transition">gun.put</a></li>
+				<li><a href="gun_key.html" data-type="page-transition">gun.key</a></li>
+				<li><a href="gun_get.html" data-type="page-transition">gun.get</a></li>
+				<li><a href="gun_path.html" data-type="page-transition">gun.path</a></li>
+				<li><a href="gun_back.html" data-type="page-transition">gun.back</a></li>
+				<li><a href="gun_on.html" data-type="page-transition">gun.on</a></li>
+				<li><a href="gun_map.html" data-type="page-transition">gun.map</a></li>
+				<li><a href="gun_val.html" data-type="page-transition">gun.val</a></li>
+				<li><a href="gun_not.html" data-type="page-transition">gun.not</a></li>
+			</ul>
+		</div>
+	</main>
+	<div class="cd-cover-layer"></div>
+	<div class="cd-loading-bar"></div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	<script type="text/javascript" src="../gun_dev.js"></script>
+</body>
+</html>	

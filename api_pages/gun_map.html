@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>gun.map</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href='https://fonts.googleapis.com/css?family=Oxygen:400,700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" href="../gun_dev.css">
+	<!-- HIGHLIGHT JS -->
+	<link rel="stylesheet" href="../styles/tomorrow-night.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.5.0/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body class="cd-about">
+	<main class="gun_api">
+		<div class="wrapper_api oxygen cd-index cd-main-content">
+			<div class="content_api yellow_api oxygen">
+				<!-- FROM GITHUB STARTS -->
+<h1 class="api_title"><a></a>gun.map(callback)</h1>
+
+<p>Loop over each property in a node, and subscribe to future changes. It’s essentially performing a <a href="#path"><code>.path</code></a> on each field.</p>
+
+<p>If you don’t know the property names to <a href="#path"><code>.path</code></a> into, or need to <code>"forEach"</code> over a group of data, the <code>.map</code> function is usually your best choice. It accepts two arguments:</p>
+
+<ul>
+<li>a <code>Callback</code> function</li>
+<li>an <code>Options</code> object</li>
+</ul>
+
+
+
+<h2 class="api_title">Callback(value, property)</h2>
+
+<p>The callback is invoked as new data becomes available, and is subscribed to subsequent changes like <a href="#on"><code>.on</code></a>. Since there may be multiple peers and several layers of data, the callback may be invoked with the same data multiple times, but it will always be the latest at that point in time. It’s given both the value and the field it was placed under.</p>
+
+
+
+<h2 class="api_title">Options</h2>
+
+<p>Currently, there is just one option. By passing an object with <code>node</code> set to true, you can skip primitive values and only iterate over nested objects. That option is so handy that it’s found it’s own shorthand…</p>
+
+<p><strong>Longhand syntax</strong></p>
+
+
+
+<pre class="prettyprint"><code class="language-javascript hljs ">gun.map(callback, {
+  node: <span class="hljs-literal">true</span>
+})</code></pre>
+
+<p><strong>Shorthand syntax</strong></p>
+
+
+
+<pre class="prettyprint"><code class="language-javascript hljs ">gun.map(callback, <span class="hljs-literal">true</span>)</code></pre>
+
+
+
+<h2 class="api_title">Examples</h2>
+
+<p>Loop over a collection of objects</p>
+
+
+
+<pre class="prettyprint"><code class="language-javascript hljs "><span class="hljs-comment">// for each status update</span>
+gun.get(userID + <span class="hljs-string">'/feed/tweets'</span>).map(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(tweet, ID)</span> {</span>
+  <span class="hljs-comment">// render it to the view</span>
+  view.show.tweet(tweet, ID)
+}, <span class="hljs-literal">true</span>)
+<span class="hljs-comment">// `true` filters primitives, ensuring only objects are shown.</span></code></pre>
+
+<p>Iterate over an object</p>
+
+
+
+<pre class="prettyprint"><code class="language-javascript hljs "><span class="hljs-comment">/*
+  where `visitor/stats` are {
+    'new customers': 35,
+    'returning': 65
+  }
+*/</span>
+gun.get(<span class="hljs-string">'visitor/stats'</span>).map(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(percent, category)</span> {</span>
+  pie.chart(category, percent)
+})</code></pre>
+
+
+
+<h2 class="api_title">Chain context</h2>
+
+<p>The context for <code>.map</code> is a bit tricky. All <a href="Chaining#chaining-dependency-table">dependent</a> methods will treat a <code>.map</code> context as though it were split into every possible <a href="#path"><code>.path</code></a> from that object. Stay with me.</p>
+
+<p>If you run a <a href="#put"><code>.put(null)</code></a> directly after a <code>.map</code>, every field will be changed to null. Effectively, the <code>.map</code> statement applied the <code>.put</code> operation to every property on the object.</p>
+
+
+
+<pre class="prettyprint"><code class="language-javascript hljs "><span class="hljs-comment">/*
+  where `object` is {
+    field1: 'one',
+    field2: 'two'
+  }
+*/</span>
+gun.get(<span class="hljs-string">'object'</span>).map().put(<span class="hljs-literal">null</span>)
+<span class="hljs-comment">/*
+  now `object` is {
+    field1: null,
+    field2: null
+  }
+*/</span></code></pre>
+
+<p>Hopefully this demonstrates some of <code>.map</code>s expressive power. But to summarize and stick with the <code>Chain Context</code> tradition, here’s the gist:</p>
+
+
+
+<pre class="prettyprint"><code class="language-javascript hljs ">gun.get(keyName).map() <span class="hljs-comment">/* is not the same as */</span> gun.get(keyName)</code></pre>
+				<!-- FROM GITHUB ENDS -->
+			</div>
+		</div>
+		<div class="api_menu">
+			<ul>
+				<li><a href="../index.html">Home</a></li>
+				<li><a href="gun_constructor.html" data-type="page-transition">Gun constructor</a></li>
+				<li><a href="gun_put.html" data-type="page-transition">gun.put</a></li>
+				<li><a href="gun_key.html" data-type="page-transition">gun.key</a></li>
+				<li><a href="gun_get.html" data-type="page-transition">gun.get</a></li>
+				<li><a href="gun_path.html" data-type="page-transition">gun.path</a></li>
+				<li><a href="gun_back.html" data-type="page-transition">gun.back</a></li>
+				<li><a href="gun_on.html" data-type="page-transition">gun.on</a></li>
+				<li><a href="gun_map.html" data-type="page-transition">gun.map</a></li>
+				<li><a href="gun_val.html" data-type="page-transition">gun.val</a></li>
+				<li><a href="gun_not.html" data-type="page-transition">gun.not</a></li>
+			</ul>
+		</div>
+	</main>
+	<div class="cd-cover-layer"></div>
+	<div class="cd-loading-bar"></div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	<script type="text/javascript" src="../gun_dev.js"></script>
+</body>
+</html>	

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>gun.not</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href='https://fonts.googleapis.com/css?family=Oxygen:400,700' rel='stylesheet' type='text/css'>
+	<!-- HIGHLIGHT JS -->
+	<link rel="stylesheet" href="../styles/tomorrow-night.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.5.0/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+	<link rel="stylesheet" type="text/css" href="../gun_dev.css">
+</head>
+<body class="cd-about">
+	<main class="gun_api">
+		<div class="wrapper_api oxygen cd-index cd-main-content">
+			<div class="content_api yellow_api oxygen">
+				<!-- FROM GITHUB STARTS -->
+<h1 class="api_title"><a></a> gun.not(callback)</h1>
+
+<p>Handle cases where data can’t be found.</p>
+
+<p>If you need to know whether a property or key exists, you can check with <code>.not</code>. It will consult the connected peers and invoke the callback if there’s reasonable certainty that none of them have the data available.</p>
+
+<p>No options are currently available for this method.</p>
+
+<blockquote>
+  <p><strong>Warning:</strong> <code>.not</code> is dangerous, since there is no guarantee that the data doesn’t exist elsewhere. Always consider that you may be overwriting other data.</p>
+</blockquote>
+
+
+
+<h2 class="api_title">Callback(key, kick)</h2>
+
+<p>If there’s reason to believe the data doesn’t exist, the callback will be invoked. It’s purpose is to allow you to handle those cases intelligently. For example, you could check to see if a property doesn’t exist, setting it to a default value. As mentioned previously, that can be dangerous, and should only be done if your app seriously depends on it.</p>
+
+<p>The callback takes two arguments, <code>key</code> and <code>kick</code>.</p>
+
+<blockquote>
+  <p><strong>Note:</strong> returning inside a callback is the same as calling <code>kick</code>.</p>
+</blockquote>
+
+
+
+<h3 class="api_title">Key/Property</h3>
+
+<p>The name of the property or key that could not be found.</p>
+
+
+
+<h3 class="api_title">Kick</h3>
+
+<p><code>kick</code> is a function that accepts a chain context. It can be a bit tricky to wrap your head around. Essentially, gun uses your argument as it’s new chain context, so no matter what context you were at previously, you can overwrite it using <code>kick</code>, sending it out to methods chained after. This is also discouraged, because it makes your code difficult to follow, and also may cause chain divergence. Let’s go for something more concrete:</p>
+
+
+
+<pre class="prettyprint"><code class="language-javascript hljs ">gun.get(original).not(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(key, kick)</span> {</span>
+  kick(gun.get(otherKeyName))
+}).map(backup)</code></pre>
+
+<p>In that example, <code>.not</code> might have been called if the connected peers could find the data, meaning that <code>.get(backup)</code> was used instead. The problem arises when new data is received on <code>original</code>, meaning that the original chain finally has data to work from. <code>.map</code> is now running on two keys, <code>original</code> and <code>backup</code>.</p>
+
+
+
+<h2 class="api_title">Examples</h2>
+
+<p>Providing defaults if they aren’t found</p>
+
+
+
+<pre class="prettyprint"><code class="language-javascript hljs "><span class="hljs-comment">// if not found</span>
+gun.get(<span class="hljs-string">'players/3'</span>).not(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(key)</span> {</span>
+  <span class="hljs-comment">// put in an object and key it</span>
+  gun.put({
+    active: <span class="hljs-literal">false</span>
+  }).key(key)
+}).on(handler)
+<span class="hljs-comment">// listen for changes on that key</span></code></pre>
+
+<p>Setting a property if it isn’t found</p>
+
+
+
+<pre class="prettyprint"><code class="language-javascript hljs ">gun.path(<span class="hljs-string">'chat.enabled'</span>).not(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(path)</span> {</span>
+  gun.path(path).put(<span class="hljs-literal">false</span>)
+})</code></pre>
+
+<p>Those examples demonstrate the power and drama from <code>.not</code>. If a peer with the data you’re looking for (client or server) goes offline, you change the value of something, then they eventually rejoin, that information will converge, overwriting their data with yours. <code>.not</code> is a powerful tool, but should be used wisely.</p>
+
+
+
+<h2 class="api_title">Chain Context</h2>
+
+<p><code>.not</code> may or may not change the context, depending on how it’s used. It has developer-facing methods for manually changing the context, depending on whether or not data was found.</p>
+
+
+
+<pre class="prettyprint"><code class="language-javascript hljs ">gun.get(keyName).not(handler) <span class="hljs-comment">/* _might_ be the same as */</span> gun.get(keyName)</code></pre>
+				<!-- FROM GITHUB ENDS -->
+			</div>
+		</div>
+		<div class="api_menu">
+			<ul>
+				<li><a href="../index.html">Home</a></li>
+				<li><a href="gun_constructor.html" data-type="page-transition">Gun constructor</a></li>
+				<li><a href="gun_put.html" data-type="page-transition">gun.put</a></li>
+				<li><a href="gun_key.html" data-type="page-transition">gun.key</a></li>
+				<li><a href="gun_get.html" data-type="page-transition">gun.get</a></li>
+				<li><a href="gun_path.html" data-type="page-transition">gun.path</a></li>
+				<li><a href="gun_back.html" data-type="page-transition">gun.back</a></li>
+				<li><a href="gun_on.html" data-type="page-transition">gun.on</a></li>
+				<li><a href="gun_map.html" data-type="page-transition">gun.map</a></li>
+				<li><a href="gun_val.html" data-type="page-transition">gun.val</a></li>
+				<li><a href="gun_not.html" data-type="page-transition">gun.not</a></li>
+			</ul>
+		</div>
+	</main>
+	<div class="cd-cover-layer"></div>
+	<div class="cd-loading-bar"></div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	<script type="text/javascript" src="../gun_dev.js"></script>
+</body>
+</html>	

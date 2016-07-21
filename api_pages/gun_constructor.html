@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Gun Constructor</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href='https://fonts.googleapis.com/css?family=Oxygen:400,700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" href="../gun_dev.css">
+	<!-- HIGHLIGHT JS -->
+	<link rel="stylesheet" href="../styles/tomorrow-night.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.5.0/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body class="cd-about">
+	<main class="gun_api">
+		<div class="wrapper_api oxygen cd-index cd-main-content">
+			<div class="content_api red_api oxygen">
+
+
+
+
+
+
+
+
+
+
+<h1 class="api_title"><a></a>Gun(options)</h1>
+
+<p>Used to creates a new gun database instance.</p>
+
+
+
+<pre class="prettyprint"><code class="language-javascript hljs "><span class="hljs-keyword">var</span> gun = Gun(options)</code></pre>
+
+<blockquote>
+  <p><strong>note:</strong> <code>Gun</code> works with or without the <code>new</code> operator.</p>
+</blockquote>
+
+
+
+<h2 id="options" class="api_title">Options</h2>
+
+<ul>
+<li><p>no parameters <code>undefined</code> creates a local datastore using the default persistence layer, either localStorage or a JSON file.</p></li>
+<li><p>passing a URL <code>string</code> creates the above local datastore that also tries to sync with the URL.</p>
+
+<ul><li>or you can pass in an <code>array</code> of URLs to sync with multiple peers.</li></ul></li>
+<li><p>the previous options are actually aggregated into an <code>object</code>, which you can pass in yourself.</p>
+
+<ul><li><p><code>options.peers</code> is an object, where the URLs are properties, and the value is an empty object.</p></li>
+<li><p><code>options.wire</code> allows you to manually override module hooks for <code>put</code> and <code>get</code> <br>
+(however, gun exposes a more streamlined approach for building extensions and modules). <strong>Note</strong>: This will be deprecated, future versions of GUN will use a different better approach.</p></li>
+<li><p><code>options.uuid</code> allows you to override the default 24 random alphanumeric soul generator with <br>
+your own function.</p></li>
+<li><p><code>options['module name']</code> allows you to pass options to a 3rd party module. Their project README <br>
+will likely list the exposed options. <br>
+<a href="Modules">Here is a list of such modules…</a></p></li>
+<li><p><code>options.init</code> is a boolean that tells the system that you want to explicitly create <br>
+data if it doesn’t exist.</p></li></ul></li>
+</ul>
+
+
+
+<h3 id="examples" class="api_title">Examples</h3>
+
+<p>Sync with one peer</p>
+
+
+
+<pre class="prettyprint"><code class="language-javascript hljs ">Gun(<span class="hljs-string">'http://yourdomain.com/gun'</span>)</code></pre>
+
+<p>Sync with many peers</p>
+
+
+
+<pre class="prettyprint"><code class="language-javascript hljs ">Gun([<span class="hljs-string">'http://server1.com/gun'</span>, <span class="hljs-string">'http://server2.com/gun'</span>])</code></pre>
+
+<p>Working with modules</p>
+
+
+
+<pre class="prettyprint"><code class="language-javascript hljs ">Gun({
+  <span class="hljs-comment">// Amazon S3 (comes bundled)</span>
+  s3: {
+    key: <span class="hljs-string">''</span>,
+    secret: <span class="hljs-string">''</span>,
+    bucket: <span class="hljs-string">''</span>
+  },
+
+  <span class="hljs-comment">// simple JSON persistence (bundled)</span>
+  <span class="hljs-comment">// meant for ease of getting started</span>
+  <span class="hljs-comment">// NOT meant for production</span>
+  file: <span class="hljs-string">'file/path.json'</span>
+})</code></pre>
+
+<p>Advanced options</p>
+
+
+
+<pre class="prettyprint"><code class="language-javascript hljs ">Gun({
+  <span class="hljs-comment">// set your own UUID function</span>
+  uuid: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> {</span>...},
+
+  <span class="hljs-comment">// set your own get/put handlers</span>
+  wire: {
+    get: getHandler,
+    put: putHandler
+  },
+
+  <span class="hljs-comment">// disable implicit object saves</span>
+  init: <span class="hljs-literal">true</span>
+})</code></pre>
+
+
+
+
+
+
+
+
+
+			</div>
+		</div>
+		<div class="api_menu">
+			<ul>
+				<li><a href="../index.html">Home</a></li>
+				<li><a href="gun_constructor.html" data-type="page-transition">Gun constructor</a></li>
+				<li><a href="gun_put.html" data-type="page-transition">gun.put</a></li>
+				<li><a href="gun_key.html" data-type="page-transition">gun.key</a></li>
+				<li><a href="gun_get.html" data-type="page-transition">gun.get</a></li>
+				<li><a href="gun_path.html" data-type="page-transition">gun.path</a></li>
+				<li><a href="gun_back.html" data-type="page-transition">gun.back</a></li>
+				<li><a href="gun_on.html" data-type="page-transition">gun.on</a></li>
+				<li><a href="gun_map.html" data-type="page-transition">gun.map</a></li>
+				<li><a href="gun_val.html" data-type="page-transition">gun.val</a></li>
+				<li><a href="gun_not.html" data-type="page-transition">gun.not</a></li>
+			</ul>
+		</div>
+	</main>
+	<div class="cd-cover-layer"></div>
+	<div class="cd-loading-bar"></div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	<script type="text/javascript" src="../gun_dev.js"></script>
+</body>
+</html>	

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>gun.back</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href='https://fonts.googleapis.com/css?family=Oxygen:400,700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" href="../gun_dev.css">
+	<!-- HIGHLIGHT JS -->
+	<link rel="stylesheet" href="../styles/tomorrow-night.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.5.0/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body class="cd-about">
+	<main class="gun_api">
+		<div class="wrapper_api oxygen cd-index cd-main-content">
+			<div class="content_api green_api oxygen">
+				<!-- FROM GITHUB STARTS -->
+<h1 class="api_title"><a></a>gun.back</h1>
+
+<p>Move up to the parent context on the chain.</p>
+
+<p>Every time a new chain is created, a reference to the old context is kept in the <code>back</code> property. It’s not a function, but a reference to the <code>this</code> value you had <em>before</em> it was changed. For example, when calling <a href="#path"><code>.path</code></a>, a new context is assigned to the <code>this</code> value, allowing you to chain directly off your context in jQuery style. If you want to return to your old context, just use <code>gun.back</code>.</p>
+
+
+
+<h2 class="api_title">Examples</h2>
+
+<p>Moving to a parent context</p>
+
+
+
+<pre class="prettyprint"><code class="language-javascript hljs ">gun.get(<span class="hljs-string">'peers'</span>)
+  <span class="hljs-comment">/* change the context to my peer */</span>
+  .path(myself)
+  .put(me)
+  <span class="hljs-comment">/* go back to the "get" statement */</span>
+  .back.map(...)</code></pre>
+
+<p>Another example</p>
+
+
+
+<pre class="prettyprint"><code class="language-javascript hljs ">gun.get(<span class="hljs-string">'players'</span>).get(<span class="hljs-string">'game/history'</span>).back
+<span class="hljs-comment">// is the same as...</span>
+gun.get(<span class="hljs-string">'players'</span>)</code></pre>
+
+
+
+<h2 class="api_title">Chain Context</h2>
+
+<p>The context will always be different, since <code>.back</code>’s only purpose is to change it.</p>
+
+
+
+<pre class="prettyprint"><code class="language-javascript hljs ">gun.path(<span class="hljs-string">'property'</span>) <span class="hljs-comment">/* is not the same as */</span> gun.path(<span class="hljs-string">'property'</span>).back</code></pre>
+				<!-- FROM GITHUB ENDS -->
+			</div>
+		</div>
+		<div class="api_menu">
+			<ul>
+				<li><a href="../index.html">Home</a></li>
+				<li><a href="gun_constructor.html" data-type="page-transition">Gun constructor</a></li>
+				<li><a href="gun_put.html" data-type="page-transition">gun.put</a></li>
+				<li><a href="gun_key.html" data-type="page-transition">gun.key</a></li>
+				<li><a href="gun_get.html" data-type="page-transition">gun.get</a></li>
+				<li><a href="gun_path.html" data-type="page-transition">gun.path</a></li>
+				<li><a href="gun_back.html" data-type="page-transition">gun.back</a></li>
+				<li><a href="gun_on.html" data-type="page-transition">gun.on</a></li>
+				<li><a href="gun_map.html" data-type="page-transition">gun.map</a></li>
+				<li><a href="gun_val.html" data-type="page-transition">gun.val</a></li>
+				<li><a href="gun_not.html" data-type="page-transition">gun.not</a></li>
+			</ul>
+		</div>
+	</main>
+	<div class="cd-cover-layer"></div>
+	<div class="cd-loading-bar"></div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	<script type="text/javascript" src="../gun_dev.js"></script>
+</body>
+</html>	

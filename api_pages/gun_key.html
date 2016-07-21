@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>gun.key</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href='https://fonts.googleapis.com/css?family=Oxygen:400,700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" href="../gun_dev.css">
+	<!-- HIGHLIGHT JS -->
+	<link rel="stylesheet" href="../styles/tomorrow-night.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.5.0/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body class="cd-about">
+	<main class="gun_api">
+		<div class="wrapper_api oxygen cd-index cd-main-content">
+			<div class="content_api blue_api oxygen">
+				<!-- FROM GITHUB STARTS -->
+<h1 class="api_title"><a></a>gun.key(name)</h1>
+
+<p>Index your data, so you can find it later, faster.</p>
+
+<p>We can think of keys as variables pointing to an object, and a node can have more than one name.</p>
+
+<p>The <code>.key</code> method takes 3 arguments, and only the first is required: <br>
+ - the <code>name</code> of the category to join under <br>
+ - the <code>callback</code> to invoke on each acknowledgment <br>
+ - <code>options</code> for configuration</p>
+
+
+
+<h2 class="api_title">Name</h2>
+
+<p>A string representing the name of a group to attach a node to. Common practice is to namespace your keys into routes: <code>.key('users/cities/Provo')</code></p>
+
+<blockquote>
+  <p><strong>note:</strong> keys are case sensitive</p>
+</blockquote>
+
+
+
+<h2 class="api_title">Callback(error, ok)</h2>
+
+<p>The same behavior as the callback in <a href="#put">gun.put</a>.</p>
+
+
+
+<h2 class="api_title">Options</h2>
+
+<p>Ignore the chain context, tagging a node directly by it’s soul.</p>
+
+
+
+<pre class="prettyprint"><code class="language-javascript hljs "><span class="hljs-comment">// find node by soul "Zwl6..." and tag it under "examples"</span>
+gun.key(<span class="hljs-string">'examples'</span>, <span class="hljs-literal">null</span>, <span class="hljs-string">'Zwl6PaS4oo7Ivt21X5bU0nds'</span>)</code></pre>
+
+
+
+<h2 class="api_title">Examples</h2>
+
+<p>Aggregating fragmented data into a named object</p>
+
+
+
+<pre class="prettyprint"><code class="language-javascript hljs "><span class="hljs-comment">// each member of the chatroom</span>
+gun.get(<span class="hljs-string">'trace'</span>).path([userID, <span class="hljs-string">'profile'</span>]).key(userID + <span class="hljs-string">'/profile'</span>)
+gun.get(<span class="hljs-string">'battlefleet'</span>).path([userID, <span class="hljs-string">'profile'</span>]).key(userID + <span class="hljs-string">'/profile'</span>)
+
+gun.get(userID + <span class="hljs-string">'/profile'</span>)
+<span class="hljs-comment">// contains the merged sum of all profile information</span></code></pre>
+
+<p>This is especially useful since the intermediate objects might be large, and by putting a key on the data you’re looking for, you won’t need to perform the costly lookup in the future.</p>
+
+<p>Tagging data on insertion</p>
+
+
+
+<pre class="prettyprint"><code class="language-javascript hljs ">gun.get(group).path([memberID, <span class="hljs-string">'contact'</span>]).put({
+  twitter: <span class="hljs-string">'@databaseGun'</span>,
+  gitter: <span class="hljs-string">'gitter.im/amark/gun'</span>
+}).key(group + <span class="hljs-string">'/'</span> + memberID + <span class="hljs-string">'/contact'</span>)</code></pre>
+
+<p>By putting a name on the data, the operation will be faster in the future since it won’t need to request the potentially large <code>group</code> object, or even the member object. We can skip straight to the data we need. This functionality pairs nicely with <a href="#not"><code>.not</code></a>.</p>
+
+
+
+<h2 class="api_title">Chain context</h2>
+
+<p><code>gun.key</code> does not change the context.</p>
+
+
+
+<pre class="prettyprint"><code class="language-javascript hljs ">gun.path(<span class="hljs-string">'node'</span>).key(<span class="hljs-string">'nodes'</span>) <span class="hljs-comment">/* same context as */</span> gun.path(<span class="hljs-string">'node'</span>)</code></pre>
+				<!-- FROM GITHUB ENDS -->
+			</div>
+		</div>
+		<div class="api_menu">
+			<ul>
+				<li><a href="../index.html">Home</a></li>
+				<li><a href="gun_constructor.html" data-type="page-transition">Gun constructor</a></li>
+				<li><a href="gun_put.html" data-type="page-transition">gun.put</a></li>
+				<li><a href="gun_key.html" data-type="page-transition">gun.key</a></li>
+				<li><a href="gun_get.html" data-type="page-transition">gun.get</a></li>
+				<li><a href="gun_path.html" data-type="page-transition">gun.path</a></li>
+				<li><a href="gun_back.html" data-type="page-transition">gun.back</a></li>
+				<li><a href="gun_on.html" data-type="page-transition">gun.on</a></li>
+				<li><a href="gun_map.html" data-type="page-transition">gun.map</a></li>
+				<li><a href="gun_val.html" data-type="page-transition">gun.val</a></li>
+				<li><a href="gun_not.html" data-type="page-transition">gun.not</a></li>
+			</ul>
+		</div>
+	</main>
+	<div class="cd-cover-layer"></div>
+	<div class="cd-loading-bar"></div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	<script type="text/javascript" src="../gun_dev.js"></script>
+</body>
+</html>	

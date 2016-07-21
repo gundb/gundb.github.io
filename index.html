@@ -7,12 +7,14 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" type="text/css" href="gun_dev.css">
 	<link href='https://fonts.googleapis.com/css?family=Oxygen:400,700' rel='stylesheet' type='text/css'>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 	<link href='https://fonts.googleapis.com/css?family=Alegreya+Sans+SC:800italic' rel='stylesheet' type='text/css'>
+	<!-- <script type="text/javascript" src="modernizr.js"></script> -->
 	<script src="dep/rsc/analytics.js"></script>
 
 </head>
 <body>
+	<div class="cd-index cd-main-content">
 	<a href="https://github.com/amark/gun" target="blank"><img class="forkMe" src="img/forkMe.png"></a>
 	<!-- NEW HERO IMAGE -->
 	<div class="hero">
@@ -546,70 +548,70 @@ ref.on(function(data){
 					<div class="red tile">
 						<h2>Gun constructor</h2>
 						<p>Used to creates a new gun database instance.</p>
-						<a href="https://github.com/amark/gun/wiki/API-(v0.3.x)#Gun" target="_blank">Read more</a>
+						<a href="api_pages/gun_constructor.html">Read more</a>
 					</div>
 				</div>
 				<div class="grid-item">
 					<div class="blue tile">
 						<h2>gun.put</h2>
 						<p>Save data into gun, syncing it with your connected peers.</p>
-						<a href="https://github.com/amark/gun/wiki/API-(v0.3.x)#put" target="_blank">Read more</a>
+						<a href="api_pages/gun_put.html">Read more</a>
 					</div>
 				</div>
 				<div class="grid-item">
 					<div class="blue tile">
 						<h2>gun.key</h2>
 						<p>Index your data, so you can find it later, faster.</p>
-						<a href="https://github.com/amark/gun/wiki/API-(v0.3.x)#key" target="_blank">Read more</a>
+						<a href="api_pages/gun_key.html">Read more</a>
 					</div>
 				</div>
 				<div class="grid-item">
 					<div class="blue tile">
 						<h2>gun.get</h2>
 						<p>Load all data under a key into the context.</p>
-						<a href="https://github.com/amark/gun/wiki/API-(v0.3.x)#get" target="_blank">Read more</a>
+						<a href="api_pages/gun_get.html">Read more</a>
 					</div>
 				</div>
 				<div class="grid-item">
 					<div class="green tile">
 						<h2>gun.path</h2>
 						<p>Navigate through a node's properties</p>
-						<a href="https://github.com/amark/gun/wiki/API-(v0.3.x)#path" target="_blank">Read more</a>
+						<a href="api_pages/gun_path.html">Read more</a>
 					</div>
 				</div>
 				<div class="grid-item">
 					<div class="green tile">
 						<h2>gun.back</h2>
 						<p>Move up to the parent context on the chain.</p>
-						<a href="https://github.com/amark/gun/wiki/API-(v0.3.x)#back" target="_blank">Read more</a>
+						<a href="api_pages/gun_back.html">Read more</a>
 					</div>
 				</div>
 				<div class="grid-item">
 					<div class="green tile">
 						<h2>gun.on</h2>
 						<p>Subscribe to realtime updated changes on a node or property.</p>
-						<a href="https://github.com/amark/gun/wiki/API-(v0.3.x)#on" target="_blank">Read more</a>
+						<a href="api_pages/gun_on.html">Read more</a>
 					</div>
 				</div>
 				<div class="grid-item">
 					<div class="yellow tile">
 						<h2>gun.map</h2>
 						<p>Loop over each property in a node, and subscribe to future changes. It's essentially performing a .path on each field.</p>
-						<a href="https://github.com/amark/gun/wiki/API-(v0.3.x)#map" target="_blank">Read more</a>
+						<a href="api_pages/gun_map.html">Read more</a>
 					</div>
 				</div>
 				<div class="grid-item">
 					<div class="yellow tile">
 						<h2>gun.val</h2>
 						<p>Read a full object without subscribing updates.</p>
-						<a href="https://github.com/amark/gun/wiki/API-(v0.3.x)#val" target="_blank">Read more</a>
+						<a href="api_pages/gun_val.html">Read more</a>
 					</div>
 				</div>
 				<div class="grid-item">
 					<div class="yellow tile">
 						<h2>gun.not</h2>
 						<p>Handle cases where data can't be found.</p>
-						<a href="https://github.com/amark/gun/wiki/API-(v0.3.x)#not" target="_blank">Read more</a>
+						<a href="api_pages/gun_not.html">Read more</a>
 					</div>
 				</div>
 			</div>
@@ -736,6 +738,7 @@ ref.on(function(data){
 			<p>Designed with &hearts; by Mark Nadal, the gun team, and many very awesome contributors. Liberally licensed under  <a href="https://github.com/amark/gun/wiki/package.json"> Zlib or MIT or Apache 2.0.</a></p>
 		</div>
 	</footer>
+	</div>
 	<script type="text/javascript">
 		var stopAdobe = false;
 		if(-1 < navigator.userAgent.toLowerCase().indexOf('iphone') || -1 < navigator.userAgent.indexOf('iOS')){

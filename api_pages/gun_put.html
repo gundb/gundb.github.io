@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>gun.put</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href='https://fonts.googleapis.com/css?family=Oxygen:400,700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" href="../gun_dev.css">
+	<!-- HIGHLIGHT JS -->
+	<link rel="stylesheet" href="../styles/tomorrow-night.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.5.0/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body class="cd-about">
+	<main class="gun_api">
+		<div class="wrapper_api oxygen cd-index cd-main-content">
+			<div class="content_api blue_api oxygen">
+				<!-- FROM GITHUB STARTS -->
+<h1 class="api_title"><a></a>gun.put(data, callback)</h1>
+
+<p>Save data into gun, syncing it with your connected peers.</p>
+
+<p>It has three parameters, and only the first is required:</p>
+
+<ol>
+<li>the <code>data</code> to save</li>
+<li>an optional <code>callback</code>, invoked on each acknowledgment</li>
+<li>an <code>options</code> object, though no options are available yet</li>
+</ol>
+
+<p><code>gun.put(data, callback)</code></p>
+
+<blockquote>
+  <p><strong>Note:</strong> when using <code>.put</code>, if any part of the chain is undefined, it is implicitly set as an empty object.</p>
+</blockquote>
+
+
+
+<pre class="prettyprint"><code class="language-javascript hljs ">gun.get(<span class="hljs-string">'undefined key'</span>).path(<span class="hljs-string">'undefined.properties'</span>).put(<span class="hljs-literal">true</span>)
+<span class="hljs-comment">// `.put` creates an empty object on each undefined path/key,</span>
+<span class="hljs-comment">// and places the value at the last point.</span></code></pre>
+
+
+
+<h2 class="api_title">Allowed types</h2>
+
+<p><code>.put</code> restricts the input to a specific subset:</p>
+
+<ul>
+<li><code>objects</code>: <br>
+<a href="Partials-and-Circular-References-%28v0.2.x%29">partial</a>, <br>
+<a href="Partials-and-Circular-References-%28v0.2.x%29#circular-references">circular</a>, and nested</li>
+<li><code>strings</code></li>
+<li><code>numbers</code></li>
+<li><code>booleans</code></li>
+<li><code>null</code></li>
+</ul>
+
+<p>Gun will refuse <code>undefined</code>, <code>NaN</code>, <code>Infinity</code>, and <code>arrays</code>.</p>
+
+<blockquote>
+  <p>Traditional arrays are dangerous in real-time apps</p>
+</blockquote>
+
+
+
+<h2 class="api_title">Callback(error, ok)</h2>
+
+<p>The <code>callback</code> is fired each time a peer responds with an error or successful persistence message, including the local cache. Acknowledgement can be slow, but the write propagates across networks as fast as the pipes connecting them.</p>
+
+<p>If the error argument is undefined, then the operation succeeded, although the exact values are left up to the module developer.</p>
+
+
+
+<h2 class="api_title">Examples</h2>
+
+<p>Saving objects</p>
+
+
+
+<pre class="prettyprint"><code class="language-javascript hljs ">gun.path(<span class="hljs-string">'propertyName'</span>).put({
+  property: <span class="hljs-string">'value'</span>,
+  object: {
+    nested: <span class="hljs-literal">true</span>
+  }
+})</code></pre>
+
+<p>Saving primitives</p>
+
+
+
+<pre class="prettyprint"><code class="language-javascript hljs "><span class="hljs-comment">// strings</span>
+gun.path(<span class="hljs-string">'name.first'</span>).put(<span class="hljs-string">'Dave'</span>)
+
+<span class="hljs-comment">// numbers</span>
+gun.path(<span class="hljs-string">'temperature'</span>).put(<span class="hljs-number">58.6</span>)
+
+<span class="hljs-comment">// booleans</span>
+gun.path(<span class="hljs-string">'enabled'</span>).put(<span class="hljs-literal">true</span>)</code></pre>
+
+<p>Using the callback</p>
+
+
+
+<pre class="prettyprint"><code class="language-javascript hljs ">gun.path(<span class="hljs-string">'survey.submission'</span>).put(submission, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(err)</span> {</span>
+  <span class="hljs-keyword">if</span> (err) {
+    <span class="hljs-keyword">return</span> ui.show.error(err)
+  }
+  ui.show.success(<span class="hljs-literal">true</span>)
+})</code></pre>
+
+
+
+<h2 class="api_title">Chain context</h2>
+
+<p><code>gun.put</code> does not change the gun context.</p>
+
+
+
+<pre class="prettyprint"><code class="language-javascript hljs ">gun.path(<span class="hljs-string">'key'</span>).put(value) <span class="hljs-comment">/* same context as */</span> gun.path(<span class="hljs-string">'key'</span>)</code></pre>
+
+
+
+<h2 class="api_title">Unexpected behavior</h2>
+
+<p>While nodes can be placed directly into gun by its reference:</p>
+
+
+
+<pre class="prettyprint"><code class="language-javascript hljs "><span class="hljs-keyword">var</span> msg = Gun().put({ text: <span class="hljs-string">'Hello world!'</span> })
+Gun().get(<span class="hljs-string">'messages'</span>).set(msg)</code></pre>
+
+<p>Nodes with nested nodes can <strong>NOT</strong> successfully be placed directly into gun by its reference:</p>
+
+
+
+<pre class="prettyprint"><code class="language-javascript hljs "><span class="hljs-keyword">var</span> sender = Gun().put({ name: <span class="hljs-string">'Tom'</span> })
+<span class="hljs-keyword">var</span> msg = Gun().put({
+  text: <span class="hljs-string">'Hello world!'</span>,
+  sender: sender <span class="hljs-comment">// this will fail</span>
+})
+<span class="hljs-comment">// however</span>
+msg.path(<span class="hljs-string">'sender'</span>).put(sender) <span class="hljs-comment">// this will succeed</span></code></pre>
+				<!-- FROM GITHUB ENDS -->
+			</div>
+		</div>
+		<div class="api_menu">
+			<ul>
+				<li><a href="../index.html">Home</a></li>
+				<li><a href="gun_constructor.html" data-type="page-transition">Gun constructor</a></li>
+				<li><a href="gun_put.html" data-type="page-transition">gun.put</a></li>
+				<li><a href="gun_key.html" data-type="page-transition">gun.key</a></li>
+				<li><a href="gun_get.html" data-type="page-transition">gun.get</a></li>
+				<li><a href="gun_path.html" data-type="page-transition">gun.path</a></li>
+				<li><a href="gun_back.html" data-type="page-transition">gun.back</a></li>
+				<li><a href="gun_on.html" data-type="page-transition">gun.on</a></li>
+				<li><a href="gun_map.html" data-type="page-transition">gun.map</a></li>
+				<li><a href="gun_val.html" data-type="page-transition">gun.val</a></li>
+				<li><a href="gun_not.html" data-type="page-transition">gun.not</a></li>
+			</ul>
+		</div>
+	</main>
+	<div class="cd-cover-layer"></div>
+	<div class="cd-loading-bar"></div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	<script type="text/javascript" src="../gun_dev.js"></script>
+</body>
+</html>	
