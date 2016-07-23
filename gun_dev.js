@@ -37,6 +37,7 @@ $(document).ready(function(){
   $('.hover').hover(function(){
     $(this).toggleClass('flip');
   });
+  
   $(function(){
     var c = ['dull', 'blue', 'green', 'yellow' , 'red'], a = 'dull blue red green yellow', n = 0, to;
     $(".screen").click(function(){
