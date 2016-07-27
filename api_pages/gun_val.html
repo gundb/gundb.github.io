@@ -17,6 +17,9 @@
 				<!-- FROM GITHUB STARTS -->
 <h1 class="api_title"><a></a> gun.val(callback)</h1>
 
+<!-- VIDEO -->
+<p><a href="https://youtu.be/k-CkP43-uJo" title="GUN val" target="_blank"><img src="http://img.youtube.com/vi/k-CkP43-uJo/0.jpg" width="425px"></a><br></p>
+
 <p>Read a full object without subscribing updates.</p>
 
 <p><code>.val</code> will send a request for the node, and read out the value from the first peer that finishes their response. Since <code>.val</code> has to wait for a termination, it cannot stream data, slowing down the transmission of large objects considerably. If you simply want to read out an object without subscribing to changes, <code>.val</code> is your best option. Note that <code>.val</code> will subscribe for every new item of an object, but not for changes on those items.</p>

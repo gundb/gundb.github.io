@@ -433,6 +433,10 @@ a{
 	font-size: 2.5em;
 }
 
+.content_api img{
+	width:358px;
+}
+
 .api_title{
 	color: white;
 	text-align: left;
