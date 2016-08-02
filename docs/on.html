@@ -15,16 +15,15 @@
 		<div class="wrapper_api oxygen cd-index cd-main-content">
 			<div class="content_api green_api oxygen">
 				<!-- FROM GITHUB STARTS -->
-<h1 class="api_title"><a></a> gun.on(callback)</h1>
+<h1 id="gunoncallback"><a></a> gun.on(callback)</h1>
 
-<!-- VIDEO -->
-<p><a href="https://youtu.be/SEneRvDQysE" title="GUN on" target="_blank"><img src="http://img.youtube.com/vi/SEneRvDQysE/0.jpg" width="425px"></a><br></p>
+<p><a href="https://youtu.be/SEneRvDQysE" title="GUN on"><img src="http://img.youtube.com/vi/SEneRvDQysE/0.jpg" width="425px"></a><br></p>
 
 <p>Subscribe to updates changes on a node or property real-time.</p>
 
 
 
-<h2 class="api_title">Callback(value, property)</h2>
+<h2 id="callbackvalue-property">Callback(value, property)</h2>
 
 <p>When the property or node you’re focused on is changed, the callback is immediately fired and given the value as it is at that point in time.</p>
 
@@ -32,7 +31,7 @@
 
 
 
-<h2 class="api_title">Options</h2>
+<h2 id="options">Options</h2>
 
 <p>Currently, the only option is to filter old data, and be given the changes, but nothing more. If you’re listening to a node with 100 fields, and just one changes, you’ll be passed a node with a single property representing that change. Since it’s often useful, there’s a shorthand for it…</p>
 
@@ -41,7 +40,7 @@
 
 
 <pre class="prettyprint"><code class="language-javascript hljs ">gun.on(callback, {
-  delta: <span class="hljs-literal">true</span>
+  change: <span class="hljs-literal">true</span>
 })</code></pre>
 
 <p><strong>Shorthand syntax</strong></p>
@@ -78,7 +77,7 @@
 
 
 
-<h2 class="api_title">Chain Context</h2>
+<h2 id="chain-context">Chain Context</h2>
 
 <p><code>gun.on</code> does not change the chain context.</p>
 
@@ -88,7 +87,7 @@
 
 
 
-<h2 class="api_title">Unexpected behavior</h2>
+<h2 id="unexpected-behavior">Unexpected behavior</h2>
 
 <p>On <em>any</em> update —even if a property is only updated with the same value— <code>gun.on(cb,true)</code> fires.  Even if the value does not change, the <a href="GUN’s-Data-Format-%28JSON%29#hypothetical-amnesia-machine-ham-state">HAM state</a> will still be updated.</p>
 				<!-- FROM GITHUB ENDS -->

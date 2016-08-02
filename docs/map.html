@@ -15,9 +15,9 @@
 		<div class="wrapper_api oxygen cd-index cd-main-content">
 			<div class="content_api yellow_api oxygen">
 				<!-- FROM GITHUB STARTS -->
-<h1 class="api_title"><a></a>gun.map(callback)</h1>
-<!-- VIDEO -->
-<p><a href="https://youtu.be/F2FSMsxMSic" title="GUN map" target="_blank"><img src="http://img.youtube.com/vi/F2FSMsxMSic/0.jpg" width="425px"></a><br></p>
+<h1 id="gunmapcallback"><a></a>gun.map(callback)</h1>
+
+<p><a href="https://youtu.be/F2FSMsxMSic" title="GUN map"><img src="http://img.youtube.com/vi/F2FSMsxMSic/0.jpg" width="425px"></a><br></p>
 
 <p>Loop over each property in a node, and subscribe to future changes. It’s essentially performing a <a href="#path"><code>.path</code></a> on each field.</p>
 
@@ -30,22 +30,22 @@
 
 
 
-<h2 class="api_title">Callback(value, property)</h2>
+<h2 id="callbackvalue-property">Callback(value, property)</h2>
 
 <p>The callback is invoked as new data becomes available, and is subscribed to subsequent changes like <a href="#on"><code>.on</code></a>. Since there may be multiple peers and several layers of data, the callback may be invoked with the same data multiple times, but it will always be the latest at that point in time. It’s given both the value and the field it was placed under.</p>
 
 
 
-<h2 class="api_title">Options</h2>
+<h2 id="options">Options</h2>
 
-<p>Currently, there is just one option. By passing an object with <code>node</code> set to true, you can skip primitive values and only iterate over nested objects. That option is so handy that it’s found it’s own shorthand…</p>
+<p>Currently, there is just one option. By passing an object with <code>change</code> set to true, it will be have like <code>.on</code>’s <code>true</code>. It has its own shorthand…</p>
 
 <p><strong>Longhand syntax</strong></p>
 
 
 
 <pre class="prettyprint"><code class="language-javascript hljs ">gun.map(callback, {
-  node: <span class="hljs-literal">true</span>
+  change: <span class="hljs-literal">true</span>
 })</code></pre>
 
 <p><strong>Shorthand syntax</strong></p>
@@ -56,18 +56,7 @@
 
 
 
-<h2 class="api_title">Examples</h2>
-
-<p>Loop over a collection of objects</p>
-
-
-
-<pre class="prettyprint"><code class="language-javascript hljs "><span class="hljs-comment">// for each status update</span>
-gun.get(userID + <span class="hljs-string">'/feed/tweets'</span>).map(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(tweet, ID)</span> {</span>
-  <span class="hljs-comment">// render it to the view</span>
-  view.show.tweet(tweet, ID)
-}, <span class="hljs-literal">true</span>)
-<span class="hljs-comment">// `true` filters primitives, ensuring only objects are shown.</span></code></pre>
+<h2 id="examples">Examples</h2>
 
 <p>Iterate over an object</p>
 
@@ -85,7 +74,7 @@ gun.get(<span class="hljs-string">'visitor/stats'</span>).map(<span class="hljs-
 
 
 
-<h2 class="api_title">Chain context</h2>
+<h2 id="chain-context">Chain context</h2>
 
 <p>The context for <code>.map</code> is a bit tricky. All <a href="Chaining#chaining-dependency-table">dependent</a> methods will treat a <code>.map</code> context as though it were split into every possible <a href="#path"><code>.path</code></a> from that object. Stay with me.</p>
 
