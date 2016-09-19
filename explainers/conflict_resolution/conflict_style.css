@@ -78,6 +78,18 @@ html, body{
 	background-color: rgba(77, 121, 216, .8);
 }
 
+.red{
+	background-color: rgba(234, 50, 36, .8);
+}
+
+.green{
+	background-color: rgba(51, 204, 51, .8);
+}
+
+.yellow{
+	background-color: rgba(242, 185, 25, .8);
+}
+
 .play_btn{
     position: absolute;
     width: 40%;
@@ -105,8 +117,23 @@ html, body{
 	line-height: 1.8;
 }
 
+.blueArt::first-letter{
+	color:#4d79d8;
+}
+
+.redArt::first-letter{
+	color: #ea3224;
+}
+
+.yellowArt::first-letter{
+	color: #f2b919;
+}
+
+.greenArt::first-letter{
+	color: #33cc33;
+}
+
 .article::first-letter{
-	color: #4D79D8;
     float: left;
     font-size: 3.5em;
     line-height: 1;
