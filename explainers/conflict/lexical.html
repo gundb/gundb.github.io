@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title></title>
+	<title>Lexical Sort</title>
 	<link rel="stylesheet" type="text/css" href="conflict_style.css">
 </head>
 <body>
@@ -13,8 +13,8 @@
 		</div>
 		<div class="header">
 			<div class="title">
-				<h1 class="oxygen top">Lexical Sorting</h1>
 				<a href="../../index.html"><img src="../../img/gun_logo_white.svg"></a>
+				<h1 class="oxygen top">Lexical Sort</h1>
 			</div>
 			<div class="panelbg blue"></div>
 		</div>
@@ -37,6 +37,13 @@
 		<p>When clients reserve seats, they put their names on them. Gun can resolve the merge conflict using string comparison, taking the names “Bob” and “Carl”, and choosing the larger of the two. To figure out which is greater, we start with the first characters, “B” and “C”. If one is larger, we know who gets the seat, otherwise we continue until we don’t have any characters left. In this case, “C” comes after “B”, meaning Carl’s the winner, he gets the seat.</p>
 
 		<p>So why string comparison? Because when merge conflicts happen, it’s critical that everyone agrees on a value, otherwise your database will never reach a consistent state, and any hope of accuracy goes out the window. String comparison guarantees that every merge conflict always has a clear winner.</p>
+
+		<div class="nav">
+			<div class="navNext">
+				<a href="chronological.html"><img src="img/next.png">
+				<h4>Next article</h4></a>
+			</div>
+		</div>
 	</div>
 
 	<div id="footer">

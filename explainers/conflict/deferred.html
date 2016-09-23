@@ -2,29 +2,27 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title></title>
+	<title>Deferred Sort</title>
 	<link rel="stylesheet" type="text/css" href="conflict_style.css">
 </head>
 <body>
 	<div class="wrapper_header">
-		<div class="black_screen">
 			<img class="close" src="../../img/close.svg">
 			<iframe class="iframeVid" style="display: none;"></iframe>
 		</div>
 		<div class="header">
 			<div class="title">
-				<h1 class="oxygen top">Relative Time</h1>
 				<a href="../../index.html"><img src="../../img/gun_logo_white.svg"></a>
+				<h1 class="oxygen top">Deferred Sort</h1>
 			</div>
 			<div class="panelbg red"></div>
 		</div>
 	</div>
 	<div class="wrapper oxygen">
-		<iframe width="100%" height="400px" src="https://www.youtube.com/embed/kEJv-vG6Z18" frameborder="0" allowfullscreen></iframe>
+		<iframe width="100%" height="400px" src="https://www.youtube.com/embed/gRoJqzko_mE" frameborder="0" allowfullscreen></iframe>
 
 		<p class="article redArt">
-			Our last video showed how gun uses timestamps to figure out the correct order of updates. In our concert app, we needed to establish a timeline of updates (and in the correct order), otherwise we might end up saving the wrong data. In our case, it was the agreements between us and our concert sponsors.
-		</p>
+		Our last video showed how gun uses timestamps to figure out the correct order of updates. In our concert app, we needed to establish a timeline of updates (and in the correct order), otherwise we might end up saving the wrong data. In our case, it was the agreements between us and our concert sponsors.</p>
 
 		<p>When an update is created, the computer attaches it’s timestamp, which is then used by the database to determine if your update is more recent than what it already has. However, this opens a vulnerability. There’s an employee at your sponsor’s company who really hates concerts, and he’s trying to sabotage the agreement. Knowing gun uses timestamps, he cleverly sets his own clock two years into the future and submits his devious update.</p>
 
@@ -32,6 +30,12 @@
 
 		<p>While the concert-hating attacker is left waiting for his update to be recognized, others reading from the database will still see the old agreements, and if anything happens to the database process, the malicious update will be lost from memory, needing to be re-sent by a peer that trusts it.</p>
 
+		<div class="nav">
+			<div class="navPrev">
+				<a href="chronological.html"><img src="img/prev.png">
+				<h4>Previous article</h4></a>
+			</div>
+		</div>
 		
 	</div>
 
