@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Cryptography</title>
+	<title>Proof of work</title>
 	<link rel="stylesheet" type="text/css" href="conflict_style.css">
 </head>
 <body>
@@ -14,37 +14,43 @@
 		<div class="header">
 			<div class="title">
 				<a href="../../index.html"><img src="../../img/gun_logo_white.svg"></a>
-				<h1 class="oxygen top">Cryptography</h1>
+				<h1 class="oxygen top">proof of work</h1>
 			</div>
-			<div class="panelbg yellow"></div>
+			<div class="panelbg green"></div>
 		</div>
 	</div>
 	<div class="wrapper oxygen">
-		<iframe width="100%" height="400px" src="https://www.youtube.com/embed/Zl0nk_ZZV6Q" frameborder="0" allowfullscreen></iframe>
+		<iframe width="100%" height="400px" src="https://www.youtube.com/embed/jXni0KDQNsc" frameborder="0" allowfullscreen></iframe>
 
-		<p class="article yellowArt">
-			To build a web application, we need to... create a user, sign into that user, save private data, publish content, send private messages, and have group conversations. Phew! That is a lot.
+		<p class="article greenArt">
+			I have a secret recipe for a delicious pie. How hard would it be for you to make that pie without knowing the recipe?
 		</p>
 
-		<p>The most important piece is first creating user accounts. Unfortunately, a username/password combo is not very secure. We need something better.</p>
+		<p>I will even give you a hint. One of the ingredients is salt.</p>
 
-		<p>During the Cold War a new type of security was invented. It is similar to a username/password, but imagine instead having to memorize the first thousand digits of PI! Having a password that long would take a hacker one hundred years to break. This is why it is secure and it is called public/private key cryptography.</p>
+		<p>It might be easy for you to guess what the other ingredients are. But you would still have to bake a pie for each guess. That is a lot of extra work.</p>
 
-		<p>However, your users would probably get really confused with that. So how can we let them keep their own password... but still have real security? Well, we take their normal password and mix with other information. The end result is long and complicated, creating a secure account for our users to sign into.</p>
+		<p>And that is exactly why mixing our password with some salt* keeps our account secure. This recipe is called Password Based Key Derivation Function number Two or PBKDF2 for short.</p>
 
-		<p>We'll go into more details on how this works in our next video.</p>
+		<p>If you know the password, it is easy to bake the same pie again and again. If you don't know the password, guessing is easy, but baking is hard.</p>
+
+		<p>This idea is called "proof of work" and is important for creating and signing into a user account.</p>
+
+		<p>We have one last step. With public/private key cryptography, the proof of work and the private key are different, even though they are both long and complicated. Instead, we use the proof of work to encrypt and decrypt the private key.</p>
+
+		<p>What's encryption? Well, that is in the next video!</p>
 
 		<div class="nav">
 
 			<div class="navPrev">
-				<a href="security.html"><img src="../conflict/img/prev.png">
+				<a href="cryptography.html"><img src="../conflict/img/prev.png">
 				<h4>Previous article</h4></a>
 			</div>
 
-			<div class="navNext">
-				<a href="proof.html"><img src="../conflict/img/next.png">
+			<!-- <div class="navNext">
+				<a href="cryptography.html"><img src="../conflict/img/next.png">
 				<h4>Next article</h4></a>
-			</div>
+			</div> -->
 
 		</div>
 	</div>
