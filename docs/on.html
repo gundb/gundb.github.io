@@ -15,7 +15,7 @@
 		<div class="wrapper_api oxygen cd-index cd-main-content">
 			<div class="content_api green_api oxygen">
 				<!-- FROM GITHUB STARTS -->
-<h1 id="gunoncallback"><a></a> gun.on(callback)</h1>
+<h1 class="api_title" id="gunoncallback"><a></a> gun.on(callback)</h1>
 
 <p><a href="https://youtu.be/SEneRvDQysE" title="GUN on"><img src="http://img.youtube.com/vi/SEneRvDQysE/0.jpg" width="425px"></a><br></p>
 
@@ -31,7 +31,7 @@
 
 
 
-<h2 id="options">Options</h2>
+<h2 class="api_title" id="options">Options</h2>
 
 <p>Currently, the only option is to filter old data, and be given the changes, but nothing more. If you’re listening to a node with 100 fields, and just one changes, you’ll be passed a node with a single property representing that change. Since it’s often useful, there’s a shorthand for it…</p>
 
@@ -77,7 +77,7 @@
 
 
 
-<h2 id="chain-context">Chain Context</h2>
+<h2 class="api_title" id="chain-context">Chain Context</h2>
 
 <p><code>gun.on</code> does not change the chain context.</p>
 
@@ -87,7 +87,7 @@
 
 
 
-<h2 id="unexpected-behavior">Unexpected behavior</h2>
+<h2 class="api_title" id="unexpected-behavior">Unexpected behavior</h2>
 
 <p>On <em>any</em> update —even if a property is only updated with the same value— <code>gun.on(cb,true)</code> fires.  Even if the value does not change, the <a href="GUN’s-Data-Format-%28JSON%29#hypothetical-amnesia-machine-ham-state">HAM state</a> will still be updated.</p>
 				<!-- FROM GITHUB ENDS -->
@@ -106,6 +106,7 @@
 				<li><a href="map.html" data-type="page-transition">gun.map</a></li>
 				<li><a href="val.html" data-type="page-transition">gun.val</a></li>
 				<li><a href="not.html" data-type="page-transition">gun.not</a></li>
+				<li><a href="set.html" data-type="page-transition">gun.set</a></li>
 			</ul>
 		</div>
 	</main>

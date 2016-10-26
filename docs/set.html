@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>gun.set</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href='https://fonts.googleapis.com/css?family=Oxygen:400,700' rel='stylesheet' type='text/css'>
+	<!-- HIGHLIGHT JS -->
+	<link rel="stylesheet" href="../styles/tomorrow-night.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.5.0/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+	<link rel="stylesheet" type="text/css" href="../gun_dev.css">
+</head>
+<body class="cd-about">
+	<main class="gun_api">
+		<div class="wrapper_api oxygen cd-index cd-main-content">
+			<div class="content_api yellow_api oxygen">
+				<!-- FROM GITHUB STARTS -->
+<h1 class="api_title" id="gunsetinstance-callback"><a></a>gun.set(instance, callback)</h1>
+
+<p>Add a unique item to an unordered list.</p>
+
+<p><code>gun.set</code> works in the sense of a mathematical set, where each item in the list is unique. If the same object is added twice, it’s simply merged. The main distinction is that sets can only contain objects, not primitives.</p>
+
+<blockquote>
+  <p><strong>Note:</strong> we may allow primitives in the future.</p>
+</blockquote>
+
+
+
+<h2 class="api_title" id="instance">Instance</h2>
+
+<p><code>gun.set</code> takes a node to add to the set in the form of a gun instance. For example:</p>
+
+
+
+<pre class="prettyprint"><code class="language-javascript hljs "><span class="hljs-keyword">var</span> data = gun.get(<span class="hljs-string">'data'</span>)
+<span class="hljs-keyword">var</span> parent = gun.get(<span class="hljs-string">'parent'</span>)
+parent.set(data)</code></pre>
+
+<p>The data must always evaluate to a node, since the soul is needed to create a unique field name. You can pass a reference to any node in gun.</p>
+
+
+
+<h2 class="api_title" id="callback">Callback</h2>
+
+<p>The callback is invoked exactly the same as <code>.put</code>, with <code>(error, okay)</code> parameters. The <code>okay</code> parameter may be undefined if underlying layers chose not to provide more information.</p>
+
+
+
+<h2 class="api_title" id="previous-api">Previous API</h2>
+
+<p><code>v0.2.x</code> had a method called <code>.set</code> that works somewhat similar to the new method. The main distinctions:</p>
+
+<p>The old version… <br>
+ - Wasn’t a true set <br>
+   It was basically “pushing” to a list <br>
+ - Was becoming an API catchall <br>
+   The method was becoming bloated with features</p>
+
+<p>In <code>v0.3.x</code> we decided to clean up the API and move the <code>.not/.put</code> behavior into a dedicated method called <a href="#init"><code>.init</code></a>. To prevent too much confusion, we waited until <code>v0.3.4</code> before publishing the new <code>.set</code> method. Since some of the functionality was moved into the <a href="#init"><code>.init</code></a> method, we wanted an obvious distinction between this version and last version’s <code>.set</code> method, so we chose not to allow primitive types (although they will be supported in the future).</p>
+
+
+
+<h2 class="api_title" id="examples">Examples</h2>
+
+
+
+<pre class="prettyprint"><code class="language-javascript hljs "><span class="hljs-keyword">var</span> gun = Gun()
+<span class="hljs-keyword">var</span> bob = gun.get(<span class="hljs-string">'bob'</span>)
+<span class="hljs-keyword">var</span> dave = gun.get(<span class="hljs-string">'dave'</span>)
+
+dave.path(<span class="hljs-string">'friends'</span>).set(bob)
+bob.path(<span class="hljs-string">'friends'</span>).set(dave)</code></pre>
+
+<p>The “friends” example is perfect, since the set guarantees that you won’t have duplicates in your list.</p>
+
+
+
+<pre class="prettyprint"><code class="language-javascript hljs "><span class="hljs-keyword">var</span> gun = Gun()
+<span class="hljs-keyword">var</span> book1 = gun.get(<span class="hljs-string">'book1'</span>)
+<span class="hljs-keyword">var</span> book2 = gun.get(<span class="hljs-string">'book2'</span>)
+<span class="hljs-keyword">var</span> book3 = gun.put({ title: title })
+
+<span class="hljs-keyword">var</span> books = gun.get(<span class="hljs-string">'books'</span>)
+books.set(book1)
+books.set(book2)
+books.set(book3)</code></pre>
+
+
+
+<h2 class="api_title" id="chain-context">Chain Context</h2>
+
+<p><code>gun.set</code> changes the chain context.</p>
+
+
+
+<pre class="prettyprint"><code class="language-javascript hljs ">gun.path(<span class="hljs-string">'friends'</span>) <span class="hljs-comment">/* is not the same as */</span> gun.path(<span class="hljs-string">'friends'</span>).set(friend)</code></pre>
+				<!-- FROM GITHUB ENDS -->
+			</div>
+		</div>
+		<div class="api_menu">
+			<ul>
+				<li><a href="../index.html">Home</a></li>
+				<li><a href="gun.html" data-type="page-transition">Gun constructor</a></li>
+				<li><a href="put.html" data-type="page-transition">gun.put</a></li>
+				<li><a href="key.html" data-type="page-transition">gun.key</a></li>
+				<li><a href="get.html" data-type="page-transition">gun.get</a></li>
+				<li><a href="path.html" data-type="page-transition">gun.path</a></li>
+				<li><a href="back.html" data-type="page-transition">gun.back</a></li>
+				<li><a href="on.html" data-type="page-transition">gun.on</a></li>
+				<li><a href="map.html" data-type="page-transition">gun.map</a></li>
+				<li><a href="val.html" data-type="page-transition">gun.val</a></li>
+				<li><a href="not.html" data-type="page-transition">gun.not</a></li>
+				<li><a href="set.html" data-type="page-transition">gun.set</a></li>
+			</ul>
+		</div>
+	</main>
+	<div class="cd-cover-layer"></div>
+	<div class="cd-loading-bar"></div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	<script type="text/javascript" src="../gun_dev.js"></script>
+</body>
+</html>	
