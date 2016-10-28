@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Proof of work</title>
+	<title>Encryption</title>
 	<link rel="stylesheet" type="text/css" href="conflict_style.css">
 </head>
 <body>
@@ -14,43 +14,37 @@
 		<div class="header">
 			<div class="title">
 				<a href="../../index.html"><img src="../../img/gun_logo_white.svg"></a>
-				<h1 class="oxygen top">proof of work</h1>
+				<h1 class="oxygen top">Encryption</h1>
 			</div>
-			<div class="panelbg green"></div>
+			<div class="panelbg blue"></div>
 		</div>
 	</div>
 	<div class="wrapper oxygen">
-		<iframe width="100%" height="400px" src="https://www.youtube.com/embed/jXni0KDQNsc" frameborder="0" allowfullscreen></iframe>
+		<iframe width="100%" height="400px" src="https://www.youtube.com/embed/6NDBNk2L0PY" frameborder="0" allowfullscreen></iframe>
 
-		<p class="article greenArt">
-			I have a secret recipe for a delicious pie. How hard would it be for you to make that pie without knowing the recipe?
+		<p class="article blueArt">
+			Let's summarize. So far, we created a user account with public/private key cryptography. This way, it is secure, unlike passwords. We then used PBKDF2 to extend the user's password into a "proof of work". That way, if a hacker tries to guess the password, they have to do hours of extra work for every guess.
 		</p>
 
-		<p>I will even give you a hint. One of the ingredients is salt.</p>
+		<p>Now, we use the proof of work to decrypt the private key. This private key is used to lock and unlock our private data, in the same way you lock your house or car to stop other people from getting at your stuff. But, how does a lock work?</p>
 
-		<p>It might be easy for you to guess what the other ingredients are. But you would still have to bake a pie for each guess. That is a lot of extra work.</p>
+		<p>Well, take a minute to stare at this animation and replay it again and again while listening to my epic voice. This is how a lock works.</p>
 
-		<p>And that is exactly why mixing our password with some salt* keeps our account secure. This recipe is called Password Based Key Derivation Function number Two or PBKDF2 for short.</p>
+		<p>Encryption is the same thing, it rotates each letter by a different distance, thus scrambling the message. You can only unscramble the message if you have a key that perfectly restores every letter in the message. This is called Advanced Encryption Standard, or AES for short.</p>
 
-		<p>If you know the password, it is easy to bake the same pie again and again. If you don't know the password, guessing is easy, but baking is hard.</p>
-
-		<p>This idea is called "proof of work" and is important for creating and signing into a user account.</p>
-
-		<p>We have one last step. With public/private key cryptography, the proof of work and the private key are different, even though they are both long and complicated. Instead, we use the proof of work to encrypt and decrypt the private key.</p>
-
-		<p>What's encryption? Well, that is in the next video!</p>
+		<p>But wait. If we use the private key to keep our things safe, how do we then protect the private key itself? That is where the proof of work comes in. And answers why we encrypt the private key with the proof of work. Keeping our accounts secure and our users happy.</p>
 
 		<div class="nav">
 
 			<div class="navPrev">
-				<a href="cryptography.html"><img src="../conflict/img/prev.png">
+				<a href="proof.html"><img src="../conflict/img/prev.png">
 				<h4>Previous article</h4></a>
 			</div>
 
-			<div class="navNext">
-				<a href="encryption.html"><img src="../conflict/img/next.png">
+			<!-- <div class="navNext">
+				<a href="proof.html"><img src="../conflict/img/next.png">
 				<h4>Next article</h4></a>
-			</div>
+			</div> -->
 
 		</div>
 	</div>
