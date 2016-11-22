@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Encryption</title>
+	<title>Public private key</title>
 	<link rel="stylesheet" type="text/css" href="conflict_style.css">
 </head>
 <body>
@@ -14,37 +14,35 @@
 		<div class="header">
 			<div class="title">
 				<a href="../../index.html"><img src="../../img/gun_logo_white.svg"></a>
-				<h1 class="oxygen top">Encryption</h1>
+				<h1 class="oxygen top">public private key</h1>
 			</div>
-			<div class="panelbg blue"></div>
+			<div class="panelbg red"></div>
 		</div>
 	</div>
 	<div class="wrapper oxygen">
-		<iframe width="100%" height="400px" src="https://www.youtube.com/embed/6NDBNk2L0PY" frameborder="0" allowfullscreen></iframe>
+		<iframe width="100%" height="400px" src="https://www.youtube.com/embed/BJUhINDrDTo" frameborder="0" allowfullscreen></iframe>
 
-		<p class="article blueArt">
-			Let's summarize. So far, we created a user account with public/private key cryptography. This way, it is secure, unlike passwords. We then used PBKDF2 to extend the user's password into a "proof of work". That way, if a hacker tries to guess the password, they have to do hours of extra work for every guess.
+		<p class="article redArt">
+			It is easy to confuse encryption keys and public/private keys. One is like a door knob, you need a key to both lock and unlock it. While public/private keys are like a padlock, the public key can close the lock but only the private key can open it.
 		</p>
 
-		<p>Now, we use the proof of work to decrypt the private key. This private key is used to lock and unlock our private data, in the same way you lock your house or car to stop other people from getting at your stuff. But, how does a lock work?</p>
+		<p>This becomes useful when we want to have a private conversation. Alice and Bob exchange padlocks. Now Alice can write a message that only Bob can open. When Bob replies to Alice, he uses her padlock so only she can open his message.</p>
 
-		<p>Well, take a minute to stare at this animation and replay it again and again while listening to my epic voice. This is how a lock works.</p>
+		<p>Simple enough, but what if we want to have a group conversation? Alice creates 4 copies of an encryption key, which will let everybody in the group both lock and unlock. She now can invite Bob, Carl, and Dave to the group by sending them the key by using their individual padlocks.</p>
 
-		<p>Encryption is the same thing, it rotates each letter by a different distance, thus scrambling the message. You can only unscramble the message if you have a key that perfectly restores every letter in the message. This is called Advanced Encryption Standard, or AES for short.</p>
-
-		<p>But wait. If we use the private key to keep our things safe, how do we then protect the private key itself? That is where the proof of work comes in. And answers why we encrypt the private key with the proof of work. Keeping our accounts secure and our users happy.</p>
+		<p>Once everybody has the same shared key, they can now write and lock a message to the group that only the group can see. Allowing everybody to pass messages around. </p>
 
 		<div class="nav">
 
 			<div class="navPrev">
-				<a href="proof.html"><img src="../conflict/img/prev.png">
+				<a href="encryption.html"><img src="../conflict/img/prev.png">
 				<h4>Previous article</h4></a>
 			</div>
 
-			<div class="navNext">
-				<a href="private.html"><img src="../conflict/img/next.png">
+			<!-- <div class="navNext">
+				<a href="cryptography.html"><img src="../conflict/img/next.png">
 				<h4>Next article</h4></a>
-			</div>
+			</div> -->
 
 		</div>
 	</div>
