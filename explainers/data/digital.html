@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Public private key</title>
+	<title>Digital signature</title>
 	<link rel="stylesheet" type="text/css" href="conflict_style.css">
 </head>
 <body>
@@ -14,35 +14,37 @@
 		<div class="header">
 			<div class="title">
 				<a href="../../index.html"><img src="../../img/gun_logo_white.svg"></a>
-				<h1 class="oxygen top">public private key</h1>
+				<h1 class="oxygen top">Digital signature</h1>
 			</div>
-			<div class="panelbg red"></div>
+			<div class="panelbg green"></div>
 		</div>
 	</div>
 	<div class="wrapper oxygen">
-		<iframe width="100%" height="400px" src="https://www.youtube.com/embed/BJUhINDrDTo" frameborder="0" allowfullscreen></iframe>
+		<iframe width="100%" height="400px" src="https://www.youtube.com/embed/tg06mdcGs5k" frameborder="0" allowfullscreen></iframe>
 
-		<p class="article redArt">
-			It is easy to confuse encryption keys and public/private keys. One is like a door knob, you need a key to both lock and unlock it. While public/private keys are like a padlock, the public key can close the lock but only the private key can open it.
+		<p class="article greenArt">
+			We have used public/private key cryptography for everything from creating user accounts to having private conversations. But there is one final use case we have yet to explore.
 		</p>
 
-		<p>This becomes useful when we want to have a private conversation. Alice and Bob exchange padlocks. Now Alice can write a message that only Bob can open. When Bob replies to Alice, he uses her padlock so only she can open his message.</p>
+		<p>Imagine that the police are doing an investigation, they can look for fingerprints in a room to prove that somebody was there.</p>
 
-		<p>Simple enough, but what if we want to have a group conversation? Alice creates 4 copies of an encryption key, which will let everybody in the group both lock and unlock. She now can invite Bob, Carl, and Dave to the group by sending them the key by using their individual padlocks.</p>
+		<p>This is how Digital Signatures work. A user can leave their fingerprint on a blog post or message, which then allows others to verify who sent it.</p>
 
-		<p>Once everybody has the same shared key, they can now write and lock a message to the group that only the group can see. Allowing everybody to pass messages around. </p>
+		<p>This is useful because the internet is full of fake users, who may try to steal your information. But once you trust somebody, you can then use their Digital Signature to prove they are the author and ignore any imposters.</p>
+
+		<p>We'll go into more details on how this works in our next video.</p>
 
 		<div class="nav">
 
 			<div class="navPrev">
-				<a href="encryption.html"><img src="../conflict/img/prev.png">
+				<a href="private.html"><img src="../conflict/img/prev.png">
 				<h4>Previous article</h4></a>
 			</div>
 
-			<div class="navNext">
-				<a href="digital.html"><img src="../conflict/img/next.png">
+			<!-- <div class="navNext">
+				<a href="proof.html"><img src="../conflict/img/next.png">
 				<h4>Next article</h4></a>
-			</div>
+			</div> -->
 
 		</div>
 	</div>
