@@ -20,28 +20,25 @@
 		</div>
 	</div>
 	<div class="wrapper oxygen">
-		<iframe width="100%" height="400px" src="https://www.youtube.com/embed/-SiLnaSDkh4" frameborder="0" allowfullscreen></iframe>
+		<iframe width="100%" height="400px" src="https://www.youtube.com/embed/gBp_vA6D9PI" frameborder="0" allowfullscreen></iframe>
 
 		<p class="article redArt">
-			It is easy to confuse encryption keys and public/private keys. One is like a door knob, you need a key to both lock and unlock it. While public/private keys are like a padlock, the public key can close the lock but only the private key can open it.
+			Let's take what we have learned and put it into technical terms:
 		</p>
 
-		<p>This becomes useful when we want to have a private conversation. Alice and Bob exchange padlocks. Now Alice can write a message that only Bob can open. When Bob replies to Alice, he uses her padlock so only she can open his message.</p>
+		<p>To create a new user account, we first generate a public/private key pair. We then add the ability to login to the account by hashing the password and a salt with PBKDF2. This produces a proof of work that is used to encrypt and decrypt the private key with AES.</p>
 
-		<p>Simple enough, but what if we want to have a group conversation? Alice creates 4 copies of an encryption key, which will let everybody in the group both lock and unlock. She now can invite Bob, Carl, and Dave to the group by sending them the key by using their individual padlocks.</p>
+		<p>Once we have the private key, we can then read and write our own personal data using the private key as an AES encryption key. We can also have private conversations with others by sending them our public key padlock.</p>
 
-		<p>Once everybody has the same shared key, they can now write and lock a message to the group that only the group can see. Allowing everybody to pass messages around. </p>
+		<p>Finally, we can prove to others we said something by adding a digital signature to our published content, which the public key can then verify.</p>
+
+    <p>This covers some of the most advanced security possible. And is why GUN pushes the standard of true security. Covering all of your application's needs.</p>
 
 		<div class="nav">
 
 			<div class="navPrev">
-				<a href="encryption.html"><img src="../conflict/img/prev.png">
+				<a href="signature.html"><img src="../conflict/img/prev.png">
 				<h4>Previous article</h4></a>
-			</div>
-
-			<div class="navNext">
-				<a href="signature.html"><img src="../conflict/img/next.png">
-				<h4>Next article</h4></a>
 			</div>
 
 		</div>
