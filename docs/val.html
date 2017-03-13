@@ -15,76 +15,6 @@
 		<div class="wrapper_api oxygen cd-index cd-main-content">
 			<div class="content_api yellow_api oxygen">
 				<!-- FROM GITHUB STARTS -->
-<h1 class="api_title"><a></a> gun.val(callback)</h1>
-
-<!-- VIDEO -->
-<p><a href="https://youtu.be/k-CkP43-uJo" title="GUN val" target="_blank"><img src="http://img.youtube.com/vi/k-CkP43-uJo/0.jpg" width="425px"></a><br></p>
-
-<p>Read a full object without subscribing updates.</p>
-
-<p><code>.val</code> will send a request for the node, and read out the value from the first peer that finishes their response. Since <code>.val</code> has to wait for a termination, it cannot stream data, slowing down the transmission of large objects considerably. If you simply want to read out an object without subscribing to changes, <code>.val</code> is your best option. Note that <code>.val</code> will subscribe for every new item of an object, but not for changes on those items.</p>
-
-<blockquote>
-  <p>This method is excellent for learning and debugging, but should be avoided in production applications. Instead, use <a href="#on"><code>.on</code></a>.</p>
-</blockquote>
-
-<p><code>.val</code> takes two arguments:</p>
-
-<ul>
-<li>a <code>callback</code> function</li>
-<li>an <code>options</code> object</li>
-</ul>
-
-<blockquote>
-  <p><strong>Tip:</strong> If no callback is given, it will automatically log the result to the console.</p>
-</blockquote>
-
-<p>No options are currently available for this method.</p>
-
-
-
-<h2 class="api_title">Callback(value, property)</h2>
-
-<p>The value is the fully-loaded object/primitive, and the property is the field it belongs under.</p>
-
-
-
-<h2 class="api_title">Examples</h2>
-
-<p>Reading a full object</p>
-
-
-
-<pre class="prettyprint"><code class="language-javascript hljs "><span class="hljs-comment">// load in the full profile object</span>
-gun.get(<span class="hljs-string">'peers/'</span> + userID).path(<span class="hljs-string">'profile'</span>).val(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(profile)</span> {</span>
-  <span class="hljs-comment">// render it, but only once. No updates.</span>
-  view.show.user(profile)
-})</code></pre>
-
-<p>Reading a property</p>
-
-
-
-<pre class="prettyprint"><code class="language-javascript hljs ">gun.path(<span class="hljs-string">'temperature'</span>).val(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(number)</span> {</span>
-  view.show.temp(number)
-})</code></pre>
-
-<p>Printing a value to the console</p>
-
-
-
-<pre class="prettyprint"><code class="language-javascript hljs ">gun.path(<span class="hljs-string">'property'</span>).val()
-<span class="hljs-comment">// `console.log` is automatically called</span></code></pre>
-
-
-
-<h2 class="api_title">Chain Context</h2>
-
-<p><code>gun.val</code> does not change the chain context.</p>
-
-
-
-<pre class="prettyprint"><code class="language-javascript hljs ">gun.get(keyName).val() <span class="hljs-comment">/* is the same as */</span> gun.get(keyName)</code></pre>
 				<!-- FROM GITHUB ENDS -->
 			</div>
 		</div>
@@ -93,15 +23,15 @@ gun.get(<span class="hljs-string">'peers/'</span> + userID).path(<span class="hl
 				<li><a href="../index.html">Home</a></li>
 				<li><a href="gun.html" data-type="page-transition">Gun constructor</a></li>
 				<li><a href="put.html" data-type="page-transition">gun.put</a></li>
-				<li><a href="key.html" data-type="page-transition">gun.key</a></li>
 				<li><a href="get.html" data-type="page-transition">gun.get</a></li>
-				<li><a href="path.html" data-type="page-transition">gun.path</a></li>
 				<li><a href="back.html" data-type="page-transition">gun.back</a></li>
+				<li><a href="opt.html" data-type="page-transition">gun.opt</a></li>
+				<li><a href="path.html" data-type="page-transition">gun.path</a></li>
 				<li><a href="on.html" data-type="page-transition">gun.on</a></li>
-				<li><a href="map.html" data-type="page-transition">gun.map</a></li>
 				<li><a href="val.html" data-type="page-transition">gun.val</a></li>
-				<li><a href="not.html" data-type="page-transition">gun.not</a></li>
 				<li><a href="set.html" data-type="page-transition">gun.set</a></li>
+				<li><a href="map.html" data-type="page-transition">gun.map</a></li>
+				<li><a href="not.html" data-type="page-transition">gun.not</a></li>
 			</ul>
 		</div>
 	</main>
@@ -109,5 +39,20 @@ gun.get(<span class="hljs-string">'peers/'</span> + userID).path(<span class="hl
 	<div class="cd-loading-bar"></div>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 	<script type="text/javascript" src="../gun_dev.js"></script>
+	<script src="https://cdn.rawgit.com/showdownjs/showdown/1.6.4/dist/showdown.min.js"></script>
+	<script>
+		$.get('https://rawgit.com/wiki/amark/gun/API.md', function(md){
+			if(!md){ return }
+			var at = location.pathname.split("/").slice(-1)[0].replace('.html','');
+			var iat = md.indexOf('name="' + at);
+			while(iat && 0 < --iat && md[iat] != '#'){}
+			var sect = md.slice(iat);
+			sect = sect.slice(0, sect.indexOf("-----"));
+			$('.content_api').html(new showdown.Converter().makeHtml(sect));
+			$('pre code').each(function(i, block) {
+		    hljs.highlightBlock(block);
+		  });
+		});
+	</script>
 </body>
 </html>	

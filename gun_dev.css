@@ -428,16 +428,18 @@ a{
 	box-sizing: border-box;
 }
 
-.content_api h1{
+.content_api h1 {
 	margin-top: 0;
 	font-size: 2.5em;
+	color: white;
+	text-align: left;
 }
 
 .content_api img{
 	width:358px;
 }
 
-.api_title{
+.api_title, .content_api h2, .content_api h3, .content_api h4 {
 	color: white;
 	text-align: left;
 }

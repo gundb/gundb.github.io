@@ -15,81 +15,6 @@
 		<div class="wrapper_api oxygen cd-index cd-main-content">
 			<div class="content_api green_api oxygen">
 				<!-- FROM GITHUB STARTS -->
-<h1 class="api_title" id="gunoncallback"><a></a> gun.on(callback)</h1>
-
-<p><a href="https://youtu.be/SEneRvDQysE" title="GUN on"><img src="http://img.youtube.com/vi/SEneRvDQysE/0.jpg" width="425px"></a><br></p>
-
-<p>Subscribe to updates changes on a node or property real-time.</p>
-
-
-
-<h2 id="callbackvalue-property">Callback(value, property)</h2>
-
-<p>When the property or node you’re focused on is changed, the callback is immediately fired and given the value as it is at that point in time.</p>
-
-<p>Since gun uses data streams, the callback will probably be called multiple times as new chunk comes in.</p>
-
-
-
-<h2 class="api_title" id="options">Options</h2>
-
-<p>Currently, the only option is to filter old data, and be given the changes, but nothing more. If you’re listening to a node with 100 fields, and just one changes, you’ll be passed a node with a single property representing that change. Since it’s often useful, there’s a shorthand for it…</p>
-
-<p><strong>Longhand syntax</strong></p>
-
-
-
-<pre class="prettyprint"><code class="language-javascript hljs ">gun.on(callback, {
-  change: <span class="hljs-literal">true</span>
-})</code></pre>
-
-<p><strong>Shorthand syntax</strong></p>
-
-
-
-<pre class="prettyprint"><code class="language-javascript hljs ">gun.on(callback, <span class="hljs-literal">true</span>)</code></pre>
-
-
-
-<h2 id="examples">Examples</h2>
-
-<p>Listening for updates on a key</p>
-
-
-
-<pre class="prettyprint"><code class="language-javascript hljs ">gun.path(<span class="hljs-string">'users/'</span> + username).on(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(user)</span> {</span>
-  <span class="hljs-comment">// update in real-time</span>
-  <span class="hljs-keyword">if</span> (user.online) {
-    view.show.active(user.name)
-  } <span class="hljs-keyword">else</span> {
-    view.show.offline(user.name)
-  }
-})</code></pre>
-
-<p>Listening to updates on a field</p>
-
-
-
-<pre class="prettyprint"><code class="language-javascript hljs ">gun.get(<span class="hljs-string">'lights'</span>).path(<span class="hljs-string">'living room'</span>).on(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(state, room)</span> {</span>
-  <span class="hljs-comment">// update the UI when the living room lights change state</span>
-  view.lights[room].show(state)
-})</code></pre>
-
-
-
-<h2 class="api_title" id="chain-context">Chain Context</h2>
-
-<p><code>gun.on</code> does not change the chain context.</p>
-
-
-
-<pre class="prettyprint"><code class="language-javascript hljs ">gun.get(keyName).on(handler) <span class="hljs-comment">/* is the same as */</span> gun.get(keyName)</code></pre>
-
-
-
-<h2 class="api_title" id="unexpected-behavior">Unexpected behavior</h2>
-
-<p>On <em>any</em> update —even if a property is only updated with the same value— <code>gun.on(cb,true)</code> fires.  Even if the value does not change, the <a href="GUN’s-Data-Format-%28JSON%29#hypothetical-amnesia-machine-ham-state">HAM state</a> will still be updated.</p>
 				<!-- FROM GITHUB ENDS -->
 			</div>
 		</div>
@@ -98,15 +23,15 @@
 				<li><a href="../index.html">Home</a></li>
 				<li><a href="gun.html" data-type="page-transition">Gun constructor</a></li>
 				<li><a href="put.html" data-type="page-transition">gun.put</a></li>
-				<li><a href="key.html" data-type="page-transition">gun.key</a></li>
 				<li><a href="get.html" data-type="page-transition">gun.get</a></li>
-				<li><a href="path.html" data-type="page-transition">gun.path</a></li>
 				<li><a href="back.html" data-type="page-transition">gun.back</a></li>
+				<li><a href="opt.html" data-type="page-transition">gun.opt</a></li>
+				<li><a href="path.html" data-type="page-transition">gun.path</a></li>
 				<li><a href="on.html" data-type="page-transition">gun.on</a></li>
-				<li><a href="map.html" data-type="page-transition">gun.map</a></li>
 				<li><a href="val.html" data-type="page-transition">gun.val</a></li>
-				<li><a href="not.html" data-type="page-transition">gun.not</a></li>
 				<li><a href="set.html" data-type="page-transition">gun.set</a></li>
+				<li><a href="map.html" data-type="page-transition">gun.map</a></li>
+				<li><a href="not.html" data-type="page-transition">gun.not</a></li>
 			</ul>
 		</div>
 	</main>
@@ -114,5 +39,20 @@
 	<div class="cd-loading-bar"></div>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 	<script type="text/javascript" src="../gun_dev.js"></script>
+	<script src="https://cdn.rawgit.com/showdownjs/showdown/1.6.4/dist/showdown.min.js"></script>
+	<script>
+		$.get('https://rawgit.com/wiki/amark/gun/API.md', function(md){
+			if(!md){ return }
+			var at = location.pathname.split("/").slice(-1)[0].replace('.html','');
+			var iat = md.indexOf('name="' + at);
+			while(iat && 0 < --iat && md[iat] != '#'){}
+			var sect = md.slice(iat);
+			sect = sect.slice(0, sect.indexOf("-----"));
+			$('.content_api').html(new showdown.Converter().makeHtml(sect));
+			$('pre code').each(function(i, block) {
+		    hljs.highlightBlock(block);
+		  });
+		});
+	</script>
 </body>
 </html>	
