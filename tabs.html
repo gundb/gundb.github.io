@@ -14,6 +14,7 @@
 		var gun = Gun('https://gunjs.herokuapp.com/gun');
 		var ref = gun.get(key);
 		ref.on(function(data){
+			data = Gun.obj.copy(data);
 			delete data._;
 		  $('body').text(JSON.stringify(data,0,2));
 		});

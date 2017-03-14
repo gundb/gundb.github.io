@@ -158,7 +158,7 @@
 			<div class="full grid">
 				<div class="middle unit teft">
 	<pre style="max-width: 30.1em; margin: 0 1em 1em 0;">var gun = Gun('https://gunjs.herokuapp.com/gun');
-gun.put({hello: "world"}).key('<span class="your-key">example/tutorial</span>');</pre>
+gun.get('<span class="your-key">example/tutorial</span>').put({hello: "world"});</pre>
 				</div>
 				<div class="middle unit teft" style="min-width: 20em; max-width: 28em; margin-bottom: 1em;">
 					<a href="#step2"><button class="left" style="margin-right: 1em;"><big>Run!</big></button></a>
@@ -179,8 +179,8 @@ ref.on(function(data){
 				</div>
 				<div class="middle unit teft" style="min-width: 34em; max-width: 28em; margin-bottom: 1em;">
 					<a href="#step3"><button class="left" style="margin-right: 1em; background: MediumSpringGreen;"><big>Next</big></button></a>
-					Congratulations! You just made an object and saved a reference to it.
-					In two tabs, we'll load that key to open a shared reference.
+					Congratulations! You just referenced an object and saved data to it.
+					In two tabs, we'll load that reference and sync data between them.
 				</div>
 			</div>
 
@@ -254,12 +254,12 @@ ref.on(function(data){
 			</style>
 			<div class="grid">
 				<div class="middle unit teft">
-	<pre style="max-width: 40em; margin: 0 1em 1em 0;">ref.path('<input id="try-path" value="hello">').put("<input id="try-sync" value="sync">");</pre>
+	<pre style="max-width: 40em; margin: 0 1em 1em 0;">ref.get('<input id="try-path" value="hello">').put("<input id="try-sync" value="sync">");</pre>
 				</div>
 				<div class="middle unit teft" style="min-width: 20em; max-width: 30em; margin-bottom: 1em;">
 					<button type="submit" class="left" style="margin-right: 1em;"><big>Update!</big></button>
 					<span class="instruct">Let's update the "hello" field with a different value.
-					We can path into any field, and update it directly.</span>
+					We can get any field on the object, and update it directly.</span>
 				</div>
 			</div>
 			</form>
@@ -284,7 +284,7 @@ ref.on(function(data){
 				$(".step1").find('button').on('click', function(e){
 					if(gun){ return }
 					gun = Gun('https://gunjs.herokuapp.com/gun');
-					gun.put({hello: "world"}).key(key);
+					gun.get(key).put({hello: "world"});
 				});
 				$(".step2").find('button').on('click', function(e){
 					//$(".browser").find("iframe").attr("src", "./tabs.html?key=" + key);
@@ -293,7 +293,7 @@ ref.on(function(data){
 				$(".step3").find('form').on('submit', function(e){
 					var val = $("#try-sync").val() || null;
 					var path = $("#try-path").val();
-					gun.get(key).path(path).put(val);
+					gun.get(key).get(path).put(val);
 					if(!tut.sync){
 						//$(this).find('.instruct').html("Great job! That is it, <a href='./think.html'>click here</a> if you want a more advanced tutorial. Thanks for trying GUN!");
 						$(this).find('.instruct').html("Great job! That is it, <a href='http://gun.js.org/think.html'>click here</a> if you want a more advanced tutorial. Thanks for trying GUN!");
