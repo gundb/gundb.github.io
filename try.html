@@ -109,8 +109,8 @@ ref.on(function(data){
 			</div>
 			<div class="middle unit teft" style="min-width: 34em; max-width: 28em; margin-bottom: 1em;">
 				<a href="#step3"><button class="left" style="margin-right: 1em; background: MediumSpringGreen;"><big>Next</big></button></a>
-				Congratulations! You just made an object and saved a reference to it.
-				In two tabs, we'll load that key to open a shared reference.
+					Congratulations! You just referenced an object and saved data to it.
+					In two tabs, we'll load that reference and sync data between them.
 			</div>
 		</div>
 
@@ -184,12 +184,12 @@ ref.on(function(data){
 		</style>
 		<div class="grid">
 			<div class="middle unit teft">
-<pre style="max-width: 40em; margin: 0 1em 1em 0;">ref.path('<input id="try-path" value="hello">').put("<input id="try-sync" value="sync">");</pre>
+<pre style="max-width: 40em; margin: 0 1em 1em 0;">ref.get('<input id="try-path" value="hello">').put("<input id="try-sync" value="sync">");</pre>
 			</div>
 			<div class="middle unit teft" style="min-width: 20em; max-width: 30em; margin-bottom: 1em;">
 				<button type="submit" class="left" style="margin-right: 1em;"><big>Update!</big></button>
 				Let's update the "hello" field with a different value.
-				We can path into any field, and update it directly.
+				We can get any field on the object, and update it directly.
 			</div>
 		</div>
 		</form>
@@ -224,7 +224,7 @@ ref.on(function(data){
 			$(".step3").find('form').on('submit', function(e){
 				var val = $("#try-sync").val() || null;
 				var path = $("#try-path").val();
-				gun.get(key).path(path).put(val);
+				gun.get(key).get(path).put(val);
 			});
 		})
 	</script>
