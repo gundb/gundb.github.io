@@ -20,7 +20,7 @@
 	}
 </style>
 <textarea style="height: 15em"></textarea>
-<iframe></iframe>
+<div id="preview"></div>
 
 <script src="./dep/jquery.js"></script>
 <script src="./dep/jsquery.js"></script>
@@ -56,6 +56,8 @@ editor.on("change", function change() {
    
 function live(){
 	updateHints();
+	$('#preview').empty();
+	$('#preview').html("<iframe></iframe>");
 	var frame = $('iframe').height($('.CodeMirror').height() * .95)[0];
 	frame = frame.contentDocument ||  frame.contentWindow.document;
 	frame.open();
