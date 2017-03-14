@@ -88,7 +88,7 @@
 		<div class="full grid">
 			<div class="middle unit teft">
 <pre style="max-width: 30.1em; margin: 0 1em 1em 0;">var gun = Gun('https://gunjs.herokuapp.com/gun');
-gun.put({hello: "world"}).key('<span class="your-key">example/tutorial</span>');</pre>
+gun.get('<span class="your-key">example/tutorial</span>').put({hello: "world"});</pre>
 			</div>
 			<div class="middle unit teft" style="min-width: 20em; max-width: 28em; margin-bottom: 1em;">
 				<a href="#step2"><button class="left" style="margin-right: 1em;"><big>Run!</big></button></a>
@@ -216,7 +216,7 @@ ref.on(function(data){
 			$(".step1").find('button').on('click', function(e){
 				if(gun){ return }
 				gun = Gun('https://gunjs.herokuapp.com/gun');
-				gun.put({hello: "world"}).key(key);
+				gun.get(key).put({hello: "world"});
 			});
 			$(".step2").find('button').on('click', function(e){
 				$(".browser").find("iframe").attr("src", "./tabs.html?key=" + key);
