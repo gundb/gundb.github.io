@@ -86,7 +86,7 @@
 		<p>Insert the following between the ending <u>ul</u> tag and the ending <u>body</u> tag, replacing the comment line:</p>
 		<textarea style="height: 6em;" class="anonymous">
 			<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-			<script src="https://rawgit.com/amark/gun/e9e8804de8249f58340e3810721cd5c2a0f78fcd/gun.js"></script>
+			<script src="https://rawgit.com/amark/gun/master/gun.js"></script>
 			<script>
 				alert("Good job! You'll replace this line in the next step!");
 			</script></textarea>
@@ -110,7 +110,7 @@
 			
 			<ul></ul>
 			</script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-			</script src="https://rawgit.com/amark/gun/e9e8804de8249f58340e3810721cd5c2a0f78fcd/gun.js"></script>
+			</script src="https://rawgit.com/amark/gun/master/gun.js"></script>
 			</script>
 				alert("Good job! You'll replace this line in the next step!");
 			</script>
@@ -150,7 +150,7 @@
 			
 			<ul></ul>
 			</script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-			</script src="https://rawgit.com/amark/gun/e9e8804de8249f58340e3810721cd5c2a0f78fcd/gun.js"></script>
+			</script src="https://rawgit.com/amark/gun/master/gun.js"></script>
 			</script>
 				$('form').on('submit', function(event){
 					event.preventDefault();
@@ -182,7 +182,7 @@
 			
 			<ul></ul>
 			</script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-			</script src="https://rawgit.com/amark/gun/e9e8804de8249f58340e3810721cd5c2a0f78fcd/gun.js"></script>
+			</script src="https://rawgit.com/amark/gun/master/gun.js"></script>
 			</script>
 				var gun = Gun().get('thoughts').set();
 				$('form').on('submit', function(event){
@@ -214,7 +214,7 @@
 			
 			<ul></ul>
 			</script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-			</script src="https://rawgit.com/amark/gun/e9e8804de8249f58340e3810721cd5c2a0f78fcd/gun.js"></script>
+			</script src="https://rawgit.com/amark/gun/master/gun.js"></script>
 			</script>
 				var gun = Gun().get('thoughts').set();
 				$('form').on('submit', function(event){
@@ -230,7 +230,7 @@
 	<div id="step-6" class="wrapper step oxygen">
 		<p>Fantastic! Now that we can successfully store data, we want show the data! Replace the comment line in the editor with the following:</p>
 		<textarea style="height: 9em;" class="anonymous">
-				gun.on().map(function(thought, id){
+				gun.map().on(function(thought, id){
 					var li = $('#' + id).get(0) || $('<li>').attr('id', id).appendTo('ul');
 					if(thought){
 						$(li).text(thought);
@@ -239,8 +239,8 @@
 					}
 				});</textarea>
 		<ul>
-			<li>In the same way $'s <u>on</u> reacts to events, so does gun. It responds to any update on 'thoughts'.</li>
-			<li><u>map</u> calls the <u>function</u> you input into it for each item in the set, one at a time.</li>
+			<li><u>map</u> tells gun to get each item in the set, one at a time, to do something with it.</li>
+			<li>What we do is the same as $'s <u>on</u>, which reacts to events. So does gun, it responds to any update on 'thoughts'.</li>
 			<li>We get the <u>thought</u> value itself and a unique <u>id</u>entifier for the item in the set.</li>
 			<li>This next line looks scary, but read it like this, "make <u>var</u>iable <u>li</u> equal to X or Y".
 			<ul>
@@ -262,7 +262,7 @@
 			
 			<ul></ul>
 			</script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-			</script src="https://rawgit.com/amark/gun/e9e8804de8249f58340e3810721cd5c2a0f78fcd/gun.js"></script>
+			</script src="https://rawgit.com/amark/gun/master/gun.js"></script>
 			</script>
 				var gun = Gun().get('thoughts').set();
 				$('form').on('submit', function(event){
@@ -270,7 +270,7 @@
 					gun.set($('input').val());
 					$('input').val("");
 				});
-				gun.on().map(function(thought, id){
+				gun.map().on(function(thought, id){
 					var li = $('#' + id).get(0) || $('<li>').attr('id', id).appendTo('ul');
 					if(thought){
 						$(li).text(thought);
@@ -308,7 +308,7 @@
 			
 			<ul></ul>
 			</script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-			</script src="https://rawgit.com/amark/gun/e9e8804de8249f58340e3810721cd5c2a0f78fcd/gun.js"></script>
+			</script src="https://rawgit.com/amark/gun/master/gun.js"></script>
 			</script>
 				var gun = Gun().get('thoughts').set();
 				$('form').on('submit', function(event){
@@ -316,7 +316,7 @@
 					gun.set($('input').val());
 					$('input').val("");
 				});
-				gun.on().map(function(thought, id){
+				gun.map().on(function(thought, id){
 					var li = $('#' + id).get(0) || $('<li>').attr('id', id).appendTo('ul');
 					if(thought){
 						$(li).text(thought);
@@ -398,7 +398,7 @@ next.step = [null, null, function(){
 	code.contents().filter(function(){ return this.nodeType == 8 }).remove();
 	var ul = code.find('ul');
 	if(ctx.alert){ ul.after($('<script>').text('\n\t\t\talert("Good job! Our code will go in this script tag!");\n\t\t')) }
-	if(ctx.gun){ ul.after($('<script>').attr('src', 'https://rawgit.com/amark/gun/e9e8804de8249f58340e3810721cd5c2a0f78fcd/gun.js')) }
+	if(ctx.gun){ ul.after($('<script>').attr('src', 'https://rawgit.com/amark/gun/master/gun.js')) }
 	if(ctx.$){ ul.after($('<script>').attr('src','https://code.jquery.com/jquery-1.11.3.min.js')) }
 	if(ctx.alert || ctx.gun || ctx.$){ next.mir.setValue(next.wrap($.trim(code.html().replace(/<script/ig, '\n\t\t<script')))) }
 }, function(){
