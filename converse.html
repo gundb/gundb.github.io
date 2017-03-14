@@ -32,7 +32,7 @@
 			
 			<ul></ul>
 			<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-			<script src="https://rawgit.com/amark/gun/e9e8804de8249f58340e3810721cd5c2a0f78fcd/gun.js"></script>
+			<script src="https://rawgit.com/amark/gun/master/gun.js"></script>
 			<script>
 				var gun = Gun().get('thoughts');
 				$('form').on('submit', function(event){
@@ -40,7 +40,7 @@
 					gun.set($('input').val());
 					$('input').val("");
 				});
-				gun.on().map(function(thought, id){
+				gun.map().on(function(thought, id){
 					var li = $('#' + id).get(0) || $('<li>').attr('id', id).appendTo('ul');
 					if(thought){
 						$(li).text(thought);
@@ -293,13 +293,13 @@ next.step = [null, function(){
 			($('#step-2').find('textarea').first().text().match(/get\((.*?)\)/i)||[])[1]
 		));
 	}
-	script.text(script.text().replace(/gun\.on\(\)\.map(.*)\n/ig, "gun.on().map(function(thought, id){ // Edit this line!\n"));
+	script.text(script.text().replace(/gun\.map\(\)\.on(.*)\n/ig, "gun.map().on(function(thought, id){ // Edit this line!\n"));
 	next.mir.setValue(next.wrap($.trim(code.html())));
 }, function(){
 	var code = next.code();
 	var script = code.find('script').last();
-	if(script.text().indexOf('.on().map')){
-		script.text(script.text().replace(/gun\.on\(\)\.map(.*)\n/ig,
+	if(script.text().indexOf('.map().on')){
+		script.text(script.text().replace(/gun\.map\(\)\.on(.*)\n/ig,
 			$('#step-3').find('textarea').first().text() + '\n'
 		));
 	}
