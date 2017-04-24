@@ -4,7 +4,6 @@ body{
 }
 
 a{
-	text-decoration: none;
 	font-family: 'oxygen';
 }
 
@@ -420,10 +419,6 @@ html,body{
 	padding: 0;
 }
 
-a{
-	text-decoration: none;
-}
-
 *{
 	box-sizing: border-box;
 }
@@ -488,6 +483,7 @@ a{
 
 .api_menu a{
 	font-family: 'Oxygen';
+	text-decoration: none;
 	color: black;
 	-webkit-transition: all .3s ease-in;
 	-moz-transition: all .3s ease-in;
@@ -497,10 +493,12 @@ a{
 }
 
 .api_menu a:hover{
+	text-decoration: underline;
 	margin-left:.5em;
 }
 
 .api_menu a:active{
+	text-decoration: underline;
 	margin-left: .5em;
 }
 
