@@ -13,7 +13,7 @@
 		height: auto;
 		width: 49%;
 	}
-	iframe { 
+	.codeditor { 
 		float: left;
 		width: 49%;
 		border: none;
@@ -57,8 +57,8 @@ editor.on("change", function change() {
 function live(){
 	updateHints();
 	$('#preview').empty();
-	$('#preview').html("<iframe></iframe>");
-	var frame = $('iframe').height($('.CodeMirror').height() * .95)[0];
+	$('#preview').html("<iframe class='codeditor'></iframe>");
+	var frame = $('.codeditor').height($('.CodeMirror').height() * .95)[0];
 	frame = frame.contentDocument ||  frame.contentWindow.document;
 	frame.open();
 	frame.write(editor.getValue());
