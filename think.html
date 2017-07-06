@@ -287,13 +287,13 @@
 		<p>Finally we want to be able to clear off our thoughts when we are done with them. The interface for this could be done in many different ways, but for simplicity we will use a double tap as the gesture to clear it off. Replace the comment line in the editor with this code.</p>
 		<textarea style="height: 4em;" class="anonymous">
 				$('body').on('dblclick', 'li', function(event){
-					gun.path(this.id).put(null);
+					gun.get(this.id).put(null);
 				});</textarea>
 		<ul>
 			<li>In order to react to any <u>'dblclick'</u> event rather than a specific one, we call <u>on</u> on the page's <u>'body'</u> as a whole.</li>
 			<li>But we want to filter the events to ones that happened only on any <u>'li'</u> tag. Fortunately, we can call <u>on</u> with an optional second input of <u>'li'</u> which does just that.</li>
 			<li>Inside a <u>function</u> we get a special <u>this</u> keyword in javascript, which <u>$</u> uses as a reference to the original HTML tag that caused the event.</li>
-			<li>Calling <u>path</u> tells <u>gun</u> to filter its data to just the <u>id</u> of the thought we want to clear off.</li>
+			<li>Calling <u>get</u> tells <u>gun</u> to filter its data to just the <u>id</u> of the thought we want to clear off.</li>
 			<li>Then calling <u>put</u> on that tells gun to update that thought to <u>null</u>, so we no longer have the thought.</li>
 			<li>And whenever an update happens, <u>gun</u>'s <u>on</u> function from the previous step gets called again, which then hides the corresponding HTML list item.</u>
 		</ul>
@@ -326,7 +326,7 @@
 				});
 				$('body').on('dblclick', 'li', function(event){
 					$(this).remove();
-					gun.path(this.id).put(null);
+					gun.get(this.id).put(null);
 				});
 			</script>
 		</body>
@@ -431,12 +431,15 @@ next.step = [null, null, function(){
 	if(0 > script.text().indexOf('.map')){
 		script.text(script.text().replace(/\s*.*replace.*\n/i, '\n' + $('#step-6').find('textarea').first().text()));
 	}
+	
+	
+	
 	script.text(script.text() + '\n/* Replace this Comment Line with the Code in the Step below! */\n\t\t');
 	next.mir.setValue(next.wrap($.trim(code.html())));
 }, function(){
 	var code = next.code();
 	var script = code.find('script').last();
-	if(0 > script.text().indexOf('gun.path')){
+	if(0 > script.text().indexOf('gun.get')){
 		script.text(script.text().replace(/\s*.*replace.*\n/i, '\n' + $('#step-7').find('textarea').first().text() + '\n'));
 	}
 	next.mir.setValue(next.wrap($.trim(code.html())));
