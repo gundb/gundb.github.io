@@ -49,7 +49,7 @@
 					}
 				});
 				$('body').on('dblclick', 'li', function(event){
-					gun.path(this.id).put(null);
+					gun.get(this.id).put(null);
 				});
 			</script>
 		</body>
@@ -117,7 +117,7 @@
 		<p>Before we get started with writing any javascript, we need to clean up some code that no longer applies! Go ahead and remove the following 3 lines of code from the bottom of our script tag:</p>
 			<textarea style="height: 4em;">
 				$('body').on('dblclick', 'li', function(event){
-					gun.path(this.id).put(null);
+					gun.get(this.id).put(null);
 				});</textarea>
 		<button class="none green">I removed it!</button>
 	</div>
