@@ -88,7 +88,7 @@
 		<p>Insert the following between the ending <u>ul</u> tag and the ending <u>body</u> tag, replacing the comment line:</p>
 		<textarea style="height: 6em;" class="anonymous">
 			<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-			<script src="https://rawgit.com/amark/gun/master/gun.js"></script>
+			<script src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
 			<script>
 				alert("Good job! You'll replace this line in the next step!");
 			</script></textarea>
@@ -112,7 +112,7 @@
 			
 			<ul></ul>
 			</script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-			</script src="https://rawgit.com/amark/gun/master/gun.js"></script>
+			</script src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
 			</script>
 				alert("Good job! You'll replace this line in the next step!");
 			</script>
@@ -152,7 +152,7 @@
 			
 			<ul></ul>
 			</script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-			</script src="https://rawgit.com/amark/gun/master/gun.js"></script>
+			</script src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
 			</script>
 				$('form').on('submit', function(event){
 					event.preventDefault();
@@ -184,7 +184,7 @@
 			
 			<ul></ul>
 			</script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-			</script src="https://rawgit.com/amark/gun/master/gun.js"></script>
+			</script src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
 			</script>
 				var gun = Gun().get('thoughts').set();
 				$('form').on('submit', function(event){
@@ -216,7 +216,7 @@
 			
 			<ul></ul>
 			</script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-			</script src="https://rawgit.com/amark/gun/master/gun.js"></script>
+			</script src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
 			</script>
 				var gun = Gun().get('thoughts').set();
 				$('form').on('submit', function(event){
@@ -264,7 +264,7 @@
 			
 			<ul></ul>
 			</script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-			</script src="https://rawgit.com/amark/gun/master/gun.js"></script>
+			</script src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
 			</script>
 				var gun = Gun().get('thoughts').set();
 				$('form').on('submit', function(event){
@@ -310,7 +310,7 @@
 			
 			<ul></ul>
 			</script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-			</script src="https://rawgit.com/amark/gun/master/gun.js"></script>
+			</script src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
 			</script>
 				var gun = Gun().get('thoughts').set();
 				$('form').on('submit', function(event){
@@ -400,7 +400,7 @@ next.step = [null, null, function(){
 	code.contents().filter(function(){ return this.nodeType == 8 }).remove();
 	var ul = code.find('ul');
 	if(ctx.alert){ ul.after($('<script>').text('\n\t\t\talert("Good job! Our code will go in this script tag!");\n\t\t')) }
-	if(ctx.gun){ ul.after($('<script>').attr('src', 'https://rawgit.com/amark/gun/master/gun.js')) }
+	if(ctx.gun){ ul.after($('<script>').attr('src', 'https://cdn.jsdelivr.net/npm/gun/gun.js')) }
 	if(ctx.$){ ul.after($('<script>').attr('src','https://code.jquery.com/jquery-1.11.3.min.js')) }
 	if(ctx.alert || ctx.gun || ctx.$){ next.mir.setValue(next.wrap($.trim(code.html().replace(/<script/ig, '\n\t\t<script')))) }
 }, function(){
