@@ -1,0 +1,30 @@
+{
+  "name": "gun-docs",
+  "description": "Documentation for GunDB.",
+  "version": "0.1.0",
+  "author": "",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "dev": "parcel -p 8085 index.html",
+    "build": "parcel build index.html --public-url ./",
+    "clean": "rimraf .cache dist"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ],
+  "devDependencies": {
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-stage-3": "^6.24.1",
+    "cross-env": "^5.0.5",
+    "parcel-bundler": "parcel-bundler/parcel#vue",
+    "rimraf": "^2.6.2",
+    "vue": "^2.5.13",
+    "vue-router": "^3.0.1",
+    "vuex": "^3.0.1",
+    "vuex-router-sync": "^5.0.0",
+    "unique-id": "0.0.1"
+  }
+}
