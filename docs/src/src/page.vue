@@ -120,7 +120,7 @@ export default {
       document.title = `${this.$parent.page
         .split("-")
         .map(UIkit.util.ucfirst)
-        .join(" ")} - Gun`;
+        .join(" ")} - GUN`;
 
       html(this.$refs.container, page);
 

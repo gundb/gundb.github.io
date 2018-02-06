@@ -1,1 +1,1 @@
-Documentation system for GunDB.
+Documentation system for GUN.
