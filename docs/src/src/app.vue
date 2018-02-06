@@ -32,21 +32,8 @@
         </div>
 
         <div class="tm-sidebar-left uk-visible@m">
-
             <h3>Documentation</h3>
-
-            <ul class="uk-nav uk-nav-default tm-nav" :class="{ 'uk-margin-top': index }" v-for="(pages, category, index) in navigation">
-                <li class="qqquk-nav-header gn-menu-section">{{category}}</li>
-                <router-link class="gn-indent" tag="li" :to="p" :key="p" v-for="(p, label) in pages" qqqexact>
-                  <a>{{label}}</a>
-                  <ul class="uk-nav uk-nav-default tm-nav gn-indent" v-if="$route.params.page === decodeURIComponent(p)">
-                    <li class="gn-menu-bookmark-link" v-for="(id, subject) in ids">
-                        <a :href="'#'+id">{{ subject }}</a>
-                    </li>
-                  </ul>
-                </router-link>
-            </ul>
-
+            <navitems :items="navigation" :ids="ids" :showanch="true"></navitems>
         </div>
 
         <div class="tm-main uk-section uk-section-default">
@@ -96,7 +83,7 @@
 
         <div id="offcanvas" uk-offcanvas="mode: push; overlay: true">
             <div class="uk-offcanvas-bar">
-                <div class="uk-panel">
+                <div class="uk-panel tm-sidebar-left gn-left-panel">
 
                     <!-- <ul class="uk-nav uk-nav-default tm-nav">
                         <li class="uk-nav-header">General</li>
@@ -106,12 +93,7 @@
                         <li><a href="../download">Download</a></li>
                     </ul> -->
 
-                    <ul class="uk-nav uk-nav-default tm-nav uk-margin-top" v-for="(pages, category, index) in navigation">
-                        <li class="uk-nav-header">{{category}}</li>
-                        <li v-for="(p, label) in pages" exact>
-                          <a :href="'./'+p">{{label}}</a>
-                        </li>
-                    </ul>
+                  <navitems :items="navigation" :ids="ids" :showanch="false"></navitems>
                 </div>
             </div>
         </div>
@@ -122,9 +104,11 @@
 
 <script>
 var { $, $$, ajax, attr, offset, on, Promise, startsWith } = UIkit.util;
+import NavItems from './navitems.vue'
 
 export default {
   name: "app",
+
   data() {
     return {
       navigation: {},
@@ -135,21 +119,25 @@ export default {
     }
   },
 
+  components: {
+    navitems: NavItems
+  },
+
   watch: {
     $route: {
       handler() {
-        this.setPageTitle(this.$route.params.page)
+        this.setPageTitle(this.$route.params.page, this.navigation)
       }
     }
   },
 
   methods: {
-    setPageTitle(urlPart) {
-      for(let item in this.navigation) {
-        for(let itm in this.navigation[item]) {
-          if (urlPart === decodeURIComponent(this.navigation[item][itm])) {
-            this.pageTitle = itm
-          }
+    setPageTitle(urlPart, nav) {
+      for(let item in nav) {
+        if (typeof nav[item] === 'object') {
+          this.setPageTitle(urlPart, nav[item])
+        } else if (urlPart === decodeURIComponent(nav[item])) {
+          this.pageTitle = item
         }
       }
     }
@@ -158,15 +146,23 @@ export default {
   mounted() {
     // UIkit.offcanvas('#offcanvas', {}).show()
 
-    new Promise((resolve, reject) => {
+    if(window.location.host.indexOf('breasy.site') >= 0) {
+      const localNav = require("../../navigation.json")
+      this.navigation = localNav
+      this.setPageTitle(this.$route.params.page, this.navigation)
+    } else {
       ajax(`http://gun.js.org/docs/navigation.json?nc=${Math.random()}`).then(page => {
         try {
-          let json = JSON.parse(page.response)
+          let s = page.response
+          s = s.replace(/\/\*(.|[\r\n])*?\*\//g, '').replace(/\/\/.*/gm, '');
+          let json = JSON.parse(s)
           this.navigation = json
-          this.setPageTitle(this.$route.params.page)
-        } catch(e) {}
+          this.setPageTitle(this.$route.params.page, this.navigation)
+        } catch(e) {
+          // console.error(e)
+        }
       })
-    })
+    }
   }
 }
 </script>

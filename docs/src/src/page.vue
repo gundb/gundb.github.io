@@ -73,6 +73,11 @@ export default {
   watch: {
     $route: {
       handler() {
+        let oc = UIkit.offcanvas('#offcanvas', {})
+        if (oc) {
+          oc.hide()
+        }
+
         var page = this.$route.params.page;
 
         this.error = null;

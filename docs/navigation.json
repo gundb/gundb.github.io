@@ -1,31 +1,69 @@
 {
-  "Getting started": {
+  "Get Started": {
     "Introduction": "Introduction",
     "Installation": "Installation",
-    "Getting started": "Getting-Started-%28v0.3.x%29",
-    "Crash Course": "Graphs"
+    "Get started": "Getting-Started-%28v0.3.x%29", // Must be: Hello World
+    "Crash Course": "Graphs"//,
+    //"Next Steps"
   },
-  "Reference": {
-    "API": "API"
+  "Learn": {
+    // "Tutorials": {
+      // - - Todo app
+      // - - Chat app
+      // - - Users app
+    // },
+    "Guides": {
+      "Using Amazon S3 for storage": "Using-Amazon-S3-for-Storage"
+    },
+    // - Deploy
+    // - - Heroku
+    // - - Now
+    // - - Docker
+    "Who": {
+      // - - Contributors
+      // - - Community
+      "How to Help": "help"
+    },
+    // - What
+    // - - Philosophy
+    // - - Our Values
+    "How": {
+      "Terminology": "Glossary",
+      "Gun's data format": "GUN’s-Data-Format-%28JSON%29",
+      "How writes are handled": "Partials-and-Circular-References-%28v0.2.x%29",
+      "The mesh network protocol": "Mesh-Network-Messaging-Algorithm",
+      "Conflict resolution": "Conflict-Resolution-with-Guns",
+      "Position on the CAP theorem": "CAP-Theorem",
+      "Sharding": "Sharding",
+      "Security, Auth, ACL": "Auth",
+      "How to Port GUN": "Porting-GUN"
+      // - - Graph Data Structures
+      // - - CRDT Conflict Resolution
+      // - - Ad Hoc Mesh Network
+      // - - CAP Theorem
+      // - - Sharding
+    }
   },
-  "How to": {
-    "Using Amazon S3 for storage": "Using-Amazon-S3-for-Storage"
+  "API": {
+    "Complete List": "API"
+    // - Chaining
+    // - - Core
+    // - - Main
+    // - - Extended
+    // - Adapters
+    // - - Storage
+    // - - - Radix
+    // - - - S3
+    // - - Transport
+    // - - - Websockets
+    // - - - WebRTC
+    // - Utils
+    // - - Values
+    // - - Nodes
+    // - - Graphs
   },
   "Resources": {
     "Modules / Projects": "Awesome-GUN"
-  },
-  "Behind the scenes": {
-    "Terminology": "Glossary",
-    "Gun's data format": "GUNâ€™s-Data-Format-%28JSON%29",
-    "How writes are handled": "Partials-and-Circular-References-%28v0.2.x%29",
-    "The mesh network protocol": "Mesh-Network-Messaging-Algorithm",
-    "Conflict resolution": "Conflict-Resolution-with-Guns",
-    "Security, Auth, ACL": "Auth",
-    "Position on the CAP theorem": "CAP-Theorem",
-    "Sharding": "Sharding",
-    "How to Port GUN": "Porting-GUN"
-  },
-  "Contibute": {
-    "How to Help": "help"
   }
 }
+
