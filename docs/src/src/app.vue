@@ -32,6 +32,7 @@
         </div>
 
         <div class="tm-sidebar-left uk-visible@m">
+            <div class="gn-expnd" @click="clickExpand"><span v-if="allCollapsed">Expand all</span><span v-else>Collapse all</span></div>
             <h3>Documentation</h3>
             <navitems :items="navigation" :ids="ids" :showanch="true"></navitems>
         </div>
@@ -111,11 +112,12 @@ export default {
 
   data() {
     return {
-      navigation: {},
+      navigation: [],
       ids: {},
       page: false,
       // component: false
-      pageTitle: ''
+      pageTitle: '',
+      allCollapsed: true
     }
   },
 
@@ -140,7 +142,59 @@ export default {
           this.pageTitle = item
         }
       }
+    },
+
+    updateExpanded(nav, rout) {
+      let ret = false
+      for(let item in nav) {
+        if (typeof nav[item] === 'object' && nav[item].pages) {
+          let ue = this.updateExpanded(nav[item].pages, rout)
+          ue = ue || nav[item].expanded
+          ret = ret || ue
+          this.$set(nav[item], 'expanded', ue)
+        }  if(rout) {
+          for(let itm in nav[item]) {
+            if (this.$route.params.page === decodeURIComponent(nav[item][itm])) {
+              ret = true
+            }
+          }
+        }
+      }
+      return ret
+    },
+
+    allCollapse(nav, st) {
+      for(let item in nav) {
+        if (typeof nav[item] === 'object' && nav[item].pages) {
+          this.$set(nav[item], 'expanded', !st)
+          this.allCollapse(nav[item].pages, st)
+        }
+      }
+    },
+
+    clickExpand() {
+      this.allCollapsed = !this.allCollapsed
+      if (this.allCollapsed) {
+        this.allCollapse(this.navigation, true)
+        // this.updateExpanded(this.navigation, true)
+      } else {
+        this.allCollapse(this.navigation, false)
+      }
+    },
+
+    setNavigation(json) {
+      this.navigation = json
+      this.setPageTitle(this.$route.params.page, this.navigation)
+      this.updateExpanded(this.navigation, true)
     }
+  },
+
+  created() {
+    this.$root.$on('catClicked', (item) => {
+      this.allCollapse(this.navigation, true)
+      this.$set(item, 'expanded', true)
+      this.updateExpanded(this.navigation, false)
+    })
   },
 
   mounted() {
@@ -148,16 +202,14 @@ export default {
 
     if(window.location.host.indexOf('breasy.site') >= 0) {
       const localNav = require("../../navigation.json")
-      this.navigation = localNav
-      this.setPageTitle(this.$route.params.page, this.navigation)
+      this.setNavigation(localNav)
     } else {
       ajax(`http://gun.js.org/docs/navigation.json?nc=${Math.random()}`).then(page => {
         try {
           let s = page.response
           s = s.replace(/\/\*(.|[\r\n])*?\*\//g, '').replace(/\/\/.*/gm, '');
           let json = JSON.parse(s)
-          this.navigation = json
-          this.setPageTitle(this.$route.params.page, this.navigation)
+          this.setNavigation(json)
         } catch(e) {
           // console.error(e)
         }

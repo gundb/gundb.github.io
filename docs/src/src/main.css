@@ -268,3 +268,41 @@
   top: 0 !important;
   padding: 0 !important;
 }
+
+.gn-cat {
+  cursor: pointer;
+}
+
+.gn-cat:hover {
+  color: black;
+}
+
+.uk-offcanvas-bar .gn-cat:hover {
+  color: white;
+}
+
+.uk-active > a {
+  color: black !important;
+}
+
+.uk-offcanvas-bar .uk-active > a {
+  color: white !important;
+}
+
+.gn-expnd {
+  font-size: 10px;
+  right: 24px;
+  position: absolute;
+  margin-top: -16px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.gn-expnd:hover {
+  color: black;
+}
+
+.tm-sidebar-left h3 {
+  margin-top: 0;
+  margin-bottom: 16px;
+}
