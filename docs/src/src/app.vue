@@ -2,15 +2,14 @@
 
     <div class="uk-offcanvas-content">
 
-        <div class="uk-navbar-container tm-navbar-container" uk-sticky="media: 960">
+        <div class="uk-navbar-container tm-navbar-container" qqquk-sticky="media: 960">
             <div class="uk-container uk-container-expand">
                 <nav class="uk-navbar">
 
                     <div class="uk-navbar-left">
 
                         <a href="../" class="uk-navbar-item uk-logo">
-                            <img width="76" height="42" class="uk-margin-small-right" uk-svg :src="'http://gun.js.org/images/gun_logo-01.svg'" style="margin-top: 14px;">
-                            <span class="gn-head-title">&nbsp; A realtime, decentralized, offline-first, graph database engine.</span>
+                            <img width="76" height="42" class="uk-margin-small-right gn-logo" uk-svg :src="'http://gun.js.org/images/gun_logo-01.svg'">
                         </a>
 
                     </div>
@@ -31,7 +30,7 @@
             </div>
         </div>
 
-        <div class="tm-sidebar-left uk-visible@m">
+        <div id="gn-bar-left" class="tm-sidebar-left uk-visible@m">
             <div class="gn-expnd" @click="clickExpand"><span v-if="allCollapsed">Expand all</span><span v-else>Collapse all</span></div>
             <h3>Documentation</h3>
             <navitems :items="navigation" :ids="ids" :showanch="true"></navitems>
@@ -42,7 +41,7 @@
 
                 <router-view></router-view>
 
-                <div class="tm-sidebar-right uk-visible@l">
+                <div id="gn-bar-right" class="tm-sidebar-right uk-visible@l">
                     <div qqquk-sticky="offset: 60" class="gn-sideright">
 
                         <ul class="uk-nav uk-nav-default tm-nav uk-nav-parent-icon" uk-scrollspy-nav="closest: li; scroll: true; offset: 100">
@@ -215,6 +214,24 @@ export default {
         }
       })
     }
+
+    window.addEventListener('scroll', function(e) {
+      var doc = document.documentElement
+      var top = (window.pageYOffset || doc.scrollTop)  - (doc.clientTop || 0)
+      let el = document.getElementById('gn-bar-right')
+      let y = 112 - top
+      if (y < 0) {
+        y = 0
+      }
+      el.setAttribute('style', 'top:' + y + 'px')
+
+      el = document.getElementById('gn-bar-left')
+      y = 80 - top
+      if (y < 0) {
+        y = 0
+      }
+      el.setAttribute('style', 'top:' + y + 'px')
+    });
   }
 }
 </script>

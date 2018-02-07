@@ -20,7 +20,7 @@
     /* position: absolute; */
     position: fixed !important;
     /* top: 0; */
-    top: 112px !important;
+    top: 112px;
     /* left: calc(100% + 0px); */
     width: 170px !important;
     right: 0 !important;
@@ -305,4 +305,9 @@
 .tm-sidebar-left h3 {
   margin-top: 0;
   margin-bottom: 16px;
+}
+
+.gn-logo {
+  margin-top: 8px;
+  margin-left: -15px;
 }
