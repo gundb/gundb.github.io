@@ -195,27 +195,33 @@ export default {
   },
 
   created() {
+    let that = this
+
     this.$root.$on('catClicked', (item) => {
       this.allCollapse(this.navigation, true)
       this.$set(item, 'expanded', true)
       this.updateExpanded(this.navigation, false)
     })
 
-    if(window.location.host.indexOf('breasy.site') >= 0) {
-      const localNav = require("../../navigation.json")
-      this.setNavigation(localNav)
-    } else {
-      ajax(`http://gun.js.org/docs/navigation.json?nc=${Math.random()}`).then(page => {
-        try {
-          let s = page.response
-          s = s.replace(/\/\*(.|[\r\n])*?\*\//g, '').replace(/\/\/.*/gm, '');
-          let json = JSON.parse(s)
-          this.setNavigation(json)
-        } catch(e) {
-          // console.error(e)
-        }
-      })
-    }
+    this.menuPromise = new Promise((resolve, reject) => {
+      if(window.location.host.indexOf('breasy.site') >= 0) {
+        const localNav = require("../../navigation.json")
+        this.setNavigation(localNav)
+        resolve()
+      } else {
+        ajax(`http://gun.js.org/docs/navigation.json?nc=${Math.random()}`).then(page => {
+          try {
+            let s = page.response
+            s = s.replace(/\/\*(.|[\r\n])*?\*\//g, '').replace(/\/\/.*/gm, '');
+            let json = JSON.parse(s)
+            this.setNavigation(json)
+            resolve()
+          } catch(e) {
+            // console.error(e)
+          }
+        })
+      }
+    })
   },
 
   mounted() {
@@ -239,16 +245,18 @@ export default {
       el.setAttribute('style', 'top:' + y + 'px')
     })
 
-    // Google search
-    (function() {
-      var cx = "018061041148283299270:yzadbgjxtxu"
-      var gcse = document.createElement("script")
-      gcse.type = "text/javascript"
-      gcse.async = true
-      gcse.src = "https://cse.google.com/cse.js?cx=" + cx
-      var s = document.getElementsByTagName("script")[0]
-      s.parentNode.insertBefore(gcse, s)
-    })()
+    setTimeout(() => {
+      // Google search
+      (function() {
+        var cx = "018061041148283299270:yzadbgjxtxu"
+        var gcse = document.createElement("script")
+        gcse.type = "text/javascript"
+        gcse.async = true
+        gcse.src = "https://cse.google.com/cse.js?cx=" + cx
+        var s = document.getElementsByTagName("script")[0]
+        s.parentNode.insertBefore(gcse, s)
+      })()
+    }, 1000)
   }
 }
 </script>

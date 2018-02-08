@@ -84,72 +84,74 @@ export default {
 
         this.$parent.page = page
 
-        new Promise((resolve, reject) => {
-          if (this.cache[page]) {
-            resolve(this.cache[page])
-            return
-          }
-
-          for (let i in this.$parent.redirects) {
-            if (page === this.$parent.redirects[i].path) {
-              window.location.replace(this.$parent.redirects[i].redirect)
+        this.$parent.menuPromise.then(() => {
+          new Promise((resolve, reject) => {
+            if (this.cache[page]) {
+              resolve(this.cache[page])
               return
             }
-          }
 
-          if (page === 'Index') {
-            setTimeout(() => {
-              let el = document.getElementById('gn-site-index')
-              resolve(el.innerHTML)
-            }, 1)
-          } else {
-            ajax(`https://raw.githubusercontent.com/wiki/amark/gun/${page}.md?nc=${Math.random()}`).then(
-              ({ response }) => {
-                if (startsWith(response.trim(), "<!DOCTYPE html>")) {
-                  response = `<div class="uk-text-center">
-                                                  <h1>404</h1>
-                                                  <p class="uk-text-large">Page not found!</p>
-                                              </div>`
-                }
-
-                this.cache[page] = response
-                resolve(response)
-              },
-              err => reject(err)
-            )
-          }
-        }).then(page => {
-          parse(page, (err, content) => {
-            if (err) {
-              this.page = null
-              this.error = err
-            } else {
-              if ('scrollRestoration' in history) {
-                history.scrollRestoration = 'manual';
-              }
-              this.setPage(content)
-              
-              let waitCount = 0
-              function waitForAnchor() {
-                let el = document.getElementById(window.location.hash.substr(1))
-                if (!el) {
-                  el = document.getElementsByName(window.location.hash.substr(1))[0]
-                }
-                if (el) {
-                  let y = el.offsetTop /* + 112 */
-                  document.documentElement.scrollTop = document.body.scrollTop = y
-                } else {
-                  if ((waitCount += 100) < 3000) {
-                    setTimeout(waitForAnchor, 100)
-                  }
-                }
-              }
-              if (window.location.hash) {
-                waitForAnchor()
+            for (let i in this.$parent.redirects) {
+              if (page === this.$parent.redirects[i].path) {
+                window.location.replace(this.$parent.redirects[i].redirect)
+                return
               }
             }
-          })
-        }, () => (this.error = "Failed loading page"))
+
+            if (page === 'Index') {
+              setTimeout(() => {
+                let el = document.getElementById('gn-site-index')
+                resolve(el.innerHTML)
+              }, 1)
+            } else {
+              ajax(`https://raw.githubusercontent.com/wiki/amark/gun/${page}.md?nc=${Math.random()}`).then(
+                ({ response }) => {
+                  if (startsWith(response.trim(), "<!DOCTYPE html>")) {
+                    response = `<div class="uk-text-center">
+                                                    <h1>404</h1>
+                                                    <p class="uk-text-large">Page not found!</p>
+                                                </div>`
+                  }
+
+                  this.cache[page] = response
+                  resolve(response)
+                },
+                err => reject(err)
+              )
+            }
+          }).then(page => {
+            parse(page, (err, content) => {
+              if (err) {
+                this.page = null
+                this.error = err
+              } else {
+                if ('scrollRestoration' in history) {
+                  history.scrollRestoration = 'manual';
+                }
+                this.setPage(content)
+                
+                let waitCount = 0
+                function waitForAnchor() {
+                  let el = document.getElementById(window.location.hash.substr(1))
+                  if (!el) {
+                    el = document.getElementsByName(window.location.hash.substr(1))[0]
+                  }
+                  if (el) {
+                    let y = el.offsetTop /* + 112 */
+                    document.documentElement.scrollTop = document.body.scrollTop = y
+                  } else {
+                    if ((waitCount += 100) < 3000) {
+                      setTimeout(waitForAnchor, 100)
+                    }
+                  }
+                }
+                if (window.location.hash) {
+                  waitForAnchor()
+                }
+              }
+            })
+          }, () => (this.error = "Failed loading page"))
+        })
       },
 
       immediate: true
