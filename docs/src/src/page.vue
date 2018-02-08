@@ -8,13 +8,13 @@
 </template>
 
 <script>
-import { parse, openOnCodepen } from "./util";
+import { parse, openOnCodepen } from "./util"
 
-var { $, $$, ajax, attr, offset, on, Promise, startsWith } = UIkit.util;
+var { $, $$, ajax, attr, offset, on, Promise, startsWith } = UIkit.util
 
 // var components = Object.keys(navigation["Components"]).map(
 //   label => navigation["Components"][label]
-// );
+// )
 
 export default {
   data: () => ({
@@ -28,46 +28,46 @@ export default {
     })
 
       .on("success", _ => {
-        UIkit.notification({ message: "Copied!", pos: "bottom-right" });
+        UIkit.notification({ message: "Copied!", pos: "bottom-right" })
       })
       .on("error", _ => {
         UIkit.notification({
           message: "Copy failed!",
           status: "danger",
           pos: "bottom-right"
-        });
-      });
+        })
+      })
 
     on(this.$refs.container, "click", "a.js-codepen", e => {
-      e.preventDefault();
-      e.stopImmediatePropagation();
+      e.preventDefault()
+      e.stopImmediatePropagation()
 
-      openOnCodepen($(attr(e.current, "rel")).innerText, attr(e.current, "gn-lang"));
-    });
+      openOnCodepen($(attr(e.current, "rel")).innerText, attr(e.current, "gn-lang"))
+    })
 
-    on(this.$refs.container, "click", '[href="#"]', e => e.preventDefault());
+    on(this.$refs.container, "click", '[href="#"]', e => e.preventDefault())
 
     on(
       this.$refs.container,
       "click",
       'a:not([href^="http"]):not([href^="#"]):not([href^="/"]):not([href^="../"])',
       e => {
-        e.preventDefault();
-        // DocsApp.$router.replace(e.target.pathname + e.target.hash);
+        e.preventDefault()
+        // DocsApp.$router.replace(e.target.pathname + e.target.hash)
       }
-    );
+    )
 
     on(document, "click", 'a[href^="#"]:not([href="#"])', e =>
       history.pushState({}, "", e.target.href)
-    );
+    )
 
     on(window, "popstate", () => {
       setTimeout(() => {
         if (location.hash && $(location.hash)) {
-          scrollTo(0, offset($(location.hash)).top - 100);
+          scrollTo(0, offset($(location.hash)).top - 100)
         }
-      });
-    });
+      })
+    })
   },
 
   watch: {
@@ -78,42 +78,49 @@ export default {
           oc.hide()
         }
 
-        var page = this.$route.params.page;
+        var page = this.$route.params.page
 
-        this.error = null;
+        this.error = null
 
-        this.$parent.page = page;
+        this.$parent.page = page
 
         new Promise((resolve, reject) => {
           if (this.cache[page]) {
-            resolve(this.cache[page]);
-            return;
+            resolve(this.cache[page])
+            return
           }
 
-          ajax(`https://raw.githubusercontent.com/wiki/amark/gun/${page}.md?nc=${Math.random()}`).then(
-            ({ response }) => {
-              if (startsWith(response.trim(), "<!DOCTYPE html>")) {
-                response = `<div class="uk-text-center">
-                                                <h1>404</h1>
-                                                <p class="uk-text-large">Page not found!</p>
-                                            </div>`;
-              }
+          if (page === 'Index') {
+            setTimeout(() => {
+              let el = document.getElementById('gn-site-index')
+              resolve(el.innerHTML)
+            }, 1)
+          } else {
+            ajax(`https://raw.githubusercontent.com/wiki/amark/gun/${page}.md?nc=${Math.random()}`).then(
+              ({ response }) => {
+                if (startsWith(response.trim(), "<!DOCTYPE html>")) {
+                  response = `<div class="uk-text-center">
+                                                  <h1>404</h1>
+                                                  <p class="uk-text-large">Page not found!</p>
+                                              </div>`
+                }
 
-              this.cache[page] = response;
-              resolve(response);
-            },
-            err => reject(err)
-          );
+                this.cache[page] = response
+                resolve(response)
+              },
+              err => reject(err)
+            )
+          }
         }).then(page => {
           parse(page, (err, content) => {
             if (err) {
-              this.page = null;
-              this.error = err;
+              this.page = null
+              this.error = err
             } else {
-              this.setPage(content);
+              this.setPage(content)
             }
-          });
-        }, () => (this.error = "Failed loading page"));
+          })
+        }, () => (this.error = "Failed loading page"))
       },
 
       immediate: true
@@ -125,37 +132,37 @@ export default {
       document.title = `${this.$parent.page
         .split("-")
         .map(UIkit.util.ucfirst)
-        .join(" ")} - GUN`;
+        .join(" ")} - GUN`
 
-      html(this.$refs.container, page);
+      html(this.$refs.container, page)
 
       // this.$parent.component = ~components.indexOf(this.$route.params.page)
       //   ? this.$route.params.page
-      //   : false;
+      //   : false
 
       this.$parent.ids = $$('> h1 a[href^="#"],> h2 a[href^="#"]', this.$refs.container).reduce(
         (ids, el) => {
-          ids[el.parentNode.innerText] = attr(el, "href").substr(1);
-          return ids;
+          ids[el.parentNode.innerText] = attr(el, "href").substr(1)
+          return ids
         },
         {}
-      );
+      )
 
       if (location.hash && $(location.hash)) {
-        scrollTo(0, offset($(location.hash)).top - 100);
+        scrollTo(0, offset($(location.hash)).top - 100)
       } else {
-        scrollTo(0, 0);
+        scrollTo(0, 0)
       }
 
-      setTimeout(() => $$('pre code', this.$refs.container).forEach(block => hljs.highlightBlock(block)));
+      setTimeout(() => $$('pre code', this.$refs.container).forEach(block => hljs.highlightBlock(block)))
     }
   }
-};
+}
 
 function html(el, html) {
-  el.innerHTML = "";
-  var range = document.createRange();
-  range.selectNode(el);
-  el.appendChild(range.createContextualFragment(html));
+  el.innerHTML = ''
+  var range = document.createRange()
+  range.selectNode(el)
+  el.appendChild(range.createContextualFragment(html))
 }
 </script>

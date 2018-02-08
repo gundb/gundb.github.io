@@ -18,7 +18,7 @@
 
                         <ul class="uk-navbar-nav uk-visible@m">
                             <li><a href="http://gun.js.org/">Home</a></li>
-                            <li class="uk-active"><a href="/docs">Documentation</a></li>
+                            <li class="qqquk-active"><a href="Index">Index</a></li>
                             <li><a href="https://github.com/amark/gun">Github</a></li>
                         </ul>
 
@@ -55,6 +55,9 @@
                                     <span class="uk-text-middle">Open test</span>
                                 </a>
                             </li> -->
+
+                            <li id="gn-src"><a><gcse:search></gcse:search></a></li>
+
                             <li>
                                 <a :href="'https://github.com/amark/gun/wiki/'+page+'/_edit'" target="_blank">
                                     <span class="uk-margin-small-right" uk-icon="icon: pencil"></span>
@@ -98,13 +101,18 @@
             </div>
         </div>
 
+    <div id="gn-site-index">
+      <div class="gn-index">
+        <indexitems :items="navigation" :ids="ids" :showanch="false"></indexitems>
+      </div>
     </div>
-
+  </div>
 </template>
 
 <script>
 var { $, $$, ajax, attr, offset, on, Promise, startsWith } = UIkit.util;
 import NavItems from './navitems.vue'
+import IndexItems from './indexitems.vue'
 
 export default {
   name: "app",
@@ -121,7 +129,8 @@ export default {
   },
 
   components: {
-    navitems: NavItems
+    navitems: NavItems,
+    indexitems: IndexItems
   },
 
   watch: {
@@ -201,14 +210,14 @@ export default {
 
     if(window.location.host.indexOf('breasy.site') >= 0) {
       const localNav = require("../../navigation.json")
-      this.setNavigation(localNav)
+      this.setNavigation(localNav.navigation)
     } else {
       ajax(`http://gun.js.org/docs/navigation.json?nc=${Math.random()}`).then(page => {
         try {
           let s = page.response
           s = s.replace(/\/\*(.|[\r\n])*?\*\//g, '').replace(/\/\/.*/gm, '');
           let json = JSON.parse(s)
-          this.setNavigation(json)
+          this.setNavigation(json.navigation)
         } catch(e) {
           // console.error(e)
         }
@@ -232,6 +241,17 @@ export default {
       }
       el.setAttribute('style', 'top:' + y + 'px')
     });
+
+    // Google search
+    (function() {
+      var cx = "018061041148283299270:yzadbgjxtxu";
+      var gcse = document.createElement("script");
+      gcse.type = "text/javascript";
+      gcse.async = true;
+      gcse.src = "https://cse.google.com/cse.js?cx=" + cx;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(gcse, s);
+    })();
   }
 }
 </script>
