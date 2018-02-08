@@ -90,6 +90,13 @@ export default {
             return
           }
 
+          for (let i in this.$parent.redirects) {
+            if (page === this.$parent.redirects[i].path) {
+              window.location.replace(this.$parent.redirects[i].redirect)
+              return
+            }
+          }
+
           if (page === 'Index') {
             setTimeout(() => {
               let el = document.getElementById('gn-site-index')
@@ -117,7 +124,29 @@ export default {
               this.page = null
               this.error = err
             } else {
+              if ('scrollRestoration' in history) {
+                history.scrollRestoration = 'manual';
+              }
               this.setPage(content)
+              
+              let waitCount = 0
+              function waitForAnchor() {
+                let el = document.getElementById(window.location.hash.substr(1))
+                if (!el) {
+                  el = document.getElementsByName(window.location.hash.substr(1))[0]
+                }
+                if (el) {
+                  let y = el.offsetTop /* + 112 */
+                  document.documentElement.scrollTop = document.body.scrollTop = y
+                } else {
+                  if ((waitCount += 100) < 3000) {
+                    setTimeout(waitForAnchor, 100)
+                  }
+                }
+              }
+              if (window.location.hash) {
+                waitForAnchor()
+              }
             }
           })
         }, () => (this.error = "Failed loading page"))

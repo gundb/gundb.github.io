@@ -5,27 +5,19 @@
         <div class="uk-navbar-container tm-navbar-container" qqquk-sticky="media: 960">
             <div class="uk-container uk-container-expand">
                 <nav class="uk-navbar">
-
                     <div class="uk-navbar-left">
-
                         <a href="../" class="uk-navbar-item uk-logo">
                             <img width="76" height="42" class="uk-margin-small-right gn-logo" uk-svg :src="'http://gun.js.org/images/gun_logo-01.svg'">
                         </a>
-
                     </div>
-
                     <div class="uk-navbar-right">
-
                         <ul class="uk-navbar-nav uk-visible@m">
                             <li><a href="http://gun.js.org/">Home</a></li>
                             <li class="qqquk-active"><a href="Index">Index</a></li>
                             <li><a href="https://github.com/amark/gun">Github</a></li>
                         </ul>
-
                         <a class="uk-navbar-toggle uk-hidden@m" uk-navbar-toggle-icon href="#offcanvas" uk-toggle></a>
-
                     </div>
-
                 </nav>
             </div>
         </div>
@@ -120,6 +112,7 @@ export default {
   data() {
     return {
       navigation: [],
+      redirects: [],
       ids: {},
       page: false,
       // component: false
@@ -191,7 +184,11 @@ export default {
     },
 
     setNavigation(json) {
-      this.navigation = json
+      this.navigation = json.navigation
+      this.redirects = json.redirects
+
+      this.$router.addRoutes(this.redirects)
+
       this.setPageTitle(this.$route.params.page, this.navigation)
       this.updateExpanded(this.navigation, true)
     }
@@ -203,32 +200,32 @@ export default {
       this.$set(item, 'expanded', true)
       this.updateExpanded(this.navigation, false)
     })
-  },
-
-  mounted() {
-    // UIkit.offcanvas('#offcanvas', {}).show()
 
     if(window.location.host.indexOf('breasy.site') >= 0) {
       const localNav = require("../../navigation.json")
-      this.setNavigation(localNav.navigation)
+      this.setNavigation(localNav)
     } else {
       ajax(`http://gun.js.org/docs/navigation.json?nc=${Math.random()}`).then(page => {
         try {
           let s = page.response
           s = s.replace(/\/\*(.|[\r\n])*?\*\//g, '').replace(/\/\/.*/gm, '');
           let json = JSON.parse(s)
-          this.setNavigation(json.navigation)
+          this.setNavigation(json)
         } catch(e) {
           // console.error(e)
         }
       })
     }
+  },
+
+  mounted() {
+    // UIkit.offcanvas('#offcanvas', {}).show()
 
     window.addEventListener('scroll', function(e) {
       var doc = document.documentElement
       var top = (window.pageYOffset || doc.scrollTop)  - (doc.clientTop || 0)
       let el = document.getElementById('gn-bar-right')
-      let y = 112 - top
+      let y = 96 - top
       if (y < 0) {
         y = 0
       }
@@ -240,18 +237,18 @@ export default {
         y = 0
       }
       el.setAttribute('style', 'top:' + y + 'px')
-    });
+    })
 
     // Google search
     (function() {
-      var cx = "018061041148283299270:yzadbgjxtxu";
-      var gcse = document.createElement("script");
-      gcse.type = "text/javascript";
-      gcse.async = true;
-      gcse.src = "https://cse.google.com/cse.js?cx=" + cx;
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(gcse, s);
-    })();
+      var cx = "018061041148283299270:yzadbgjxtxu"
+      var gcse = document.createElement("script")
+      gcse.type = "text/javascript"
+      gcse.async = true
+      gcse.src = "https://cse.google.com/cse.js?cx=" + cx
+      var s = document.getElementsByTagName("script")[0]
+      s.parentNode.insertBefore(gcse, s)
+    })()
   }
 }
 </script>

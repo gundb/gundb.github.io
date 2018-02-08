@@ -81,5 +81,18 @@
       ]
     }
   ],
-  "redirects": []
+  "redirects": [
+    { "path": "map.html", "redirect": "API#map" },
+    { "path": "path.html", "redirect": "API#path" },
+    { "path": "not.html", "redirect": "API#not" },
+    { "path": "get.html", "redirect": "API#get" },
+    { "path": "on.html", "redirect": "API#on" },
+    { "path": "val.html", "redirect": "API#val" },
+    { "path": "gun.html", "redirect": "API#gun" },
+    { "path": "set.html", "redirect": "API#set" },
+    { "path": "put.html", "redirect": "API#put" },
+    { "path": "key.html", "redirect": "API#key" },
+    { "path": "back.html", "redirect": "API#back" },
+    { "path": "opt.html", "redirect": "API#opt" }
+  ]
 }

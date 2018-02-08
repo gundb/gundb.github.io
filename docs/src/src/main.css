@@ -20,7 +20,7 @@
     /* position: absolute; */
     position: fixed !important;
     /* top: 0; */
-    top: 112px;
+    top: 96px;
     /* left: calc(100% + 0px); */
     width: 200px !important;
     right: 0 !important;
@@ -96,6 +96,10 @@
 
 .hljs {
   background-color: inherit !important;
+}
+
+#gn-bar-right {
+  padding-top: 16px;
 }
 
 .gn-sideright {
