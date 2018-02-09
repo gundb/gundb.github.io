@@ -13,7 +13,7 @@
                     <div class="uk-navbar-right">
                         <ul class="uk-navbar-nav uk-visible@m">
                             <li><a href="http://gun.js.org/">Home</a></li>
-                            <li class="qqquk-active"><a href="Index">Index</a></li>
+                            <li class="qqquk-active"><a href="Site-Index">Index</a></li>
                             <li><a href="https://github.com/amark/gun">Github</a></li>
                         </ul>
                         <a class="uk-navbar-toggle uk-hidden@m" uk-navbar-toggle-icon href="#offcanvas" uk-toggle></a>

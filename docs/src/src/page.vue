@@ -98,7 +98,7 @@ export default {
               }
             }
 
-            if (page === 'Index') {
+            if (page === 'Site-Index') {
               setTimeout(() => {
                 let el = document.getElementById('gn-site-index')
                 resolve(el.innerHTML)

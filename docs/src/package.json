@@ -7,9 +7,8 @@
   "private": true,
   "scripts": {
     "dev": "parcel -p 8085 index.html",
-    "build": "parcel build index.html --public-url ./",
-    "clean": "rimraf .cache dist",
-    "buildrh": "rimraf .cache dist && parcel build index.html --no-cache --public-url ./ && find .. -maxdepth 1 -type f -not -name 'navigation.json' -delete && cp dist/* .. && cp 301/* .. && rsync -aP --delete --exclude='.git/' --exclude='.cache/' --exclude='dist/' --exclude node_modules /var/www/gundocs/gundb/docs/ /media/sf_gundocs/gundb/docs"
+    "build": "parcel build index.html --no-cache --public-url ./",
+    "clean": "rimraf .cache dist"
   },
   "browserslist": [
     "> 1%",
