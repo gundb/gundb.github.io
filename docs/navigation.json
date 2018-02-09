@@ -56,6 +56,7 @@
           "pages": [
             { "Terminology": "Glossary" },
             { "Delete Data": "Delete" },
+            { "Data Storage": "Storage-Engine" },
             { "Graph Data Structures Intro": "Simple-introduction-to-graph-data-structures" },
             { "Gun's data format": "GUN’s-Data-Format-%28JSON%29" },
             { "How writes are handled": "Partials-and-Circular-References-%28v0.2.x%29" },
