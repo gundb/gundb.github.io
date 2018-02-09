@@ -1,36 +1,56 @@
-{
+{ // by default it is safe to add a redirect notice at the top of all old pages. However, on some of them, it is VERY IMPORTANT to do this and NOT DELETE THEM.
   "navigation": [
-    { "name": "Get Started",
+    { "name": "Getting Started", // community agreed homepage button is "GET STARTED" but heading titles are "Getting Started"
       "pages": [
         { "Introduction": "Introduction" },
         {"Installation": "Installation"},
-        {"Get started": "Getting-Started-%28v0.3.x%29"}, // Must be: Hello World
-        {"Crash Course": "Graphs"}
+        {"Hello World": "Hello-World"},
+        {"Next Steps": "Next-Steps"},
+        {"Crash Course": "Crash-Course"}
         // Should add a page: Next Steps
-        // Exisiting wiki page: "Home" --> Merge into introduction --> Okay Mark?
-        // Exisiting wiki page: "0.1.x-Table-of-Contents" --> Delete permanenty --> Okay Mark?
-        // Exisiting wiki page: "0.2.x-Table-of-Contents" --> Delete permanenty --> Okay Mark?
-        // Exisiting wiki page: "0.3.x-Table-of-Contents" --> Delete permanenty --> Okay Mark?
+        // Exisiting wiki page: "Home" --> Merge into introduction --> Okay Mark? CAREFUL: GitHub auto-uses this as wiki default, so we need to... 
+        /// ... keep the page. I recommend: We keep it as GitHub-only, have it link to this new docs system, as well have a stale copy of intro/next-steps
+        // Exisiting wiki page: "0.1.x-Table-of-Contents" --> Delete permanenty --> Okay Mark? DELETE
+        // Exisiting wiki page: "0.2.x-Table-of-Contents" --> Delete permanenty --> Okay Mark? DELETE
+        // Exisiting wiki page: "0.3.x-Table-of-Contents" --> Delete permanenty --> Okay Mark? DELETE
       ]
     },
     { "name": "Learn",
       "pages": [
-        // "Tutorials": {
-          // - - Todo app
-          // - - Chat app
-          // - - Users app
-        // },
+        //{ "name": "Tutorials", "pages": [
+          // - - Todo app // gun.js.org/think.html // THESE ARE IMPORTANT! PRIORITIZE!
+          // - - Chat app // gun.js.org/converse.html
+          // - - Users app // hackernoon article, or wiki/auth (old name), or scrimba 
+        //] },
         { "name": "Guides",
+          "pages": [ // I'm glad you listed them, but yeah, need major clean up! New ones written, improved, etc.
+            { "Graph Databases 101": "Graph-Databases-101" }, // too similar to Crash Course, delete/merge/etc.
+            { "Blog Example": "Design-Examples" }, // probably should be retired / deleted, or revamped and renamed.
+            //{ "Migration Guide": "Migration-Guide" }, // should be deleted, or at least be the How to Port GUN page (which will probably be renamed as well?)
+            //{ "Running a GUN Server": "Running-a-GUN-Server-%28v0.3.x%29" }, // Outdated, delete. Install#Node will replaces it.
+            { "Using Amazon S3 for storage": "Using-Amazon-S3-for-Storage" }, // REMOVE, now linked in Adapter Storage section, as this is API info, not a guide. Would love a guide though for it though!
+            { "React": "React-Tutorial" }, // They did free promotional work, so let's keep it. HOWEVER, I do want a just "React" named page that is the super simple ToDo app + ideally GUN-React binding library in the future.
+            { "React Native GUN": "React-Native---GUN" }, // rename to "React-Native" please, and create redirect from old to new, needs revamp.
+            // Exisiting wiki page: "Getting-Data-%28v0.2.x%29" // YES: delete (no redirects).
+          ]
+        },
+        
+        { "name": "How",
+          "pages": [ 
+            { "Writes Work": "Partials-and-Circular-References-%28v0.2.x%29" } // rename to "Writes", redirect.
+            { "To Create Users": "Auth" }, // rename to "Users", redirect. Split into next pages?
+            { "To Add Security": "Auth" }, // rename to "Security".
+            //{ "To Manage Permissions": "Trust" }, // for when `trust` is out?
+            { "To Extend GUN": "Adding-Methods-to-the-Gun-Chain" }, // rename to "Extensions". revamp. Also duplicate into API Chaining section?
+            { "To Delete Data": "Delete" },
+            { "Functional Reactive Programming": "Functional-Reactive-Programming" }, // maybe rename to "FRP" for SEO? Need to coin term "Chain Reaction Programming"? Have a URL for it too?
+            { "To Help": "Help" }, // intentionally both here and Who!
+          ]
+        },
+        { "name": "Why", // COMPARISON pages against Firebase, Mongo, etc.
           "pages": [
-            { "Graph Databases 101": "Graph-Databases-101" },
-            { "Design Examples": "Design-Examples" },
-            { "Migration Guide": "Migration-Guide" },
-            { "Running a GUN Server": "Running-a-GUN-Server-%28v0.3.x%29" }, // --> Is this outdated? Delete? Update? --> Mark?
-            { "Using Amazon S3 for storage": "Using-Amazon-S3-for-Storage" },
-            { "React": "React-Tutorial" },
-            { "React Native GUN": "React-Native---GUN" },
-            { "Using AS UI Engine": "as" }
-            // Exisiting wiki page: "Getting-Data-%28v0.2.x%29" --> Delete permanenty? --> Okay Mark?
+            { "Performance Matters": "100000-ops-sec-in-IE6-on-2GB-Atom-CPU" } // rename to "Performance", redirect.
+            //{"GUN vs Firebase": "GUN-vs-Firebase"}
           ]
         },
         // - Deploy
@@ -41,95 +61,94 @@
           "pages": [
             // - - Contributors
             // - - Community
-            { "How to Help": "help" },
-            { "Why GUN Won't Shut Down": "Why-GUN-Won%27t-Shut-Down" }
+            { "How to Help": "help" }, // intentionally both here and How!
           ]
         },
         { "name": "What",
           "pages": [
             { "Roadmap": "Roadmap" }
+            { "Why GUN Won't Shut Down": "Why-GUN-Won%27t-Shut-Down" } // rename to ???, redirect.
             // - - Philosophy
             // - - Our Values
           ]
         },
-        { "name": "How",
+        { "name": "Architecture",
           "pages": [
-            { "Terminology": "Glossary" },
-            { "Delete Data": "Delete" },
-            { "Data Storage": "Storage-Engine" },
-            { "Graph Data Structures Intro": "Simple-introduction-to-graph-data-structures" },
-            { "Gun's data format": "GUN’s-Data-Format-%28JSON%29" },
-            { "How writes are handled": "Partials-and-Circular-References-%28v0.2.x%29" },
-            { "The mesh network protocol": "Mesh-Network-Messaging-Algorithm" },
-            { "Conflict resolution": "Conflict-Resolution-with-Guns" },
-            { "Position on the CAP theorem": "CAP-Theorem" },
-            { "DAP theorem": "DAP-Theorem" },
+            { "How to Port GUN": "Porting-GUN" }, // I want to rename, but I can't think of anything better.
+            { "Graph Data Structure": "Simple-introduction-to-graph-data-structures" }, // rename "Graphs", redirect, merge with next.
+            { "Graph Data Structure 2": "GUN’s-Data-Format-%28JSON%29" }, // rename "Graphs", redirect, merge with next.
+            { "Ad Hoc Mesh Network": "Mesh-Network-Messaging-Algorithm" }, // rename "Protocol", redirect, revamp.
+            { "Conflict Resolution": "Conflict-Resolution-with-Guns" }, // rename "CRDT", redirect.
+            { "Hypothetical Amnesia Machine": "Hypothetical-Amnesia-Machine" }, // is this even worth keeping? If so, merge with Conflict Resolution / CRDT page.
+            { "CAP Theorem Tradeoffs": "CAP-Theorem" },
             { "Sharding": "Sharding" },
-            { "Security, Auth, ACL": "Auth" },
-            { "Security, Authentication, Authorization": "Security%2C-Authentication%2C-Authorization" }, // --> Is this outdated? Delete? Update? --> Mark?
-            { "How to Port GUN": "Porting-GUN" },
-            { "Adding Methods to Gun Chain": "Adding-Methods-to-the-Gun-Chain" },
-            { "Building Modules for Gun": "Building-Modules-for-Gun" },
-            // Exisiting wiki page: "Building-Modules-for-Gun-%28v0.5.x%29" --> Delete permanenty? --> Okay Mark?
-            { "Building Storage Adapters": "Building-Storage-Adapters" },
-            { "Functional Reactive Programming": "Functional-Reactive-Programming" },
-            { "How GUN's Chaining System Works": "How-GUN%27s-Chaining-System-Works" }, // --> Is this outdated? Delete? Update? --> Mark?
-            { "Hypothetical Amnesia Machine": "Hypothetical-Amnesia-Machine" },
-            { "Porting GUN": "Porting-GUN" },
-            { "Shim": "shim.js" },
+            // Exisiting wiki page: "javascript" --> What do we do with this page? --> Mark? Very important page, I hope to improve it. Maybe keep lowercase though?
+            { "JavaScript": "javascript" } 
+            { "Terminology": "Glossary" }, // rename "Semantics", redirect. Delete or revamp. 
+            //{ "DAP theorem": "DAP-Theorem" }, // I remember coming up with something that violates it, maybe hide? Your call.
+            //{ "Data Storage": "Storage-Engine" }, // delete, now it is API Adapter Storage page
+            { "Authentication": "Security%2C-Authentication%2C-Authorization" }, // --> Is this outdated? Delete? Update? --> Mark?
+            // ^ This was a nice article somebody else wrote. You think it is worth keeping/cleaning up? Or just delete?
+            
+            //{ "Building Modules for Gun": "Building-Modules-for-Gun" }, // merge into API Adapter page.
+            // Exisiting wiki page: "Building-Modules-for-Gun-%28v0.5.x%29" --> Delete permanenty? --> Okay Mark? Not quite, content is MOSTLY good (`Gun` -> `gun`), should merge into API Adapter page.
+            //{ "Building Storage Adapters": "Building-Storage-Adapters" }, merge into API Adapter page.
+            { "Adapter Performance": "Adapter-Performance" } // Do we need a new menu for items like this, like docs>Learn>What? --> Mark? No. Also merge parts of this into API Adapter page, actual systems should report their own perf maybe on ecosystem page/whatever.
+            
+            { "Shim": "shim.js" }, // merge with awesome/community/ecosystem extensions/tooling, then have Why's "GUN vs Firebase" reference it.
+            //{ "How GUN's Chaining System Works": "How-GUN%27s-Chaining-System-Works" }, // --> Is this outdated? Delete? Update? --> Mark? YES, delete, wiki/javascript took its place.
             // - - Graph Data Structures
             // - - Ad Hoc Mesh Network
             // - - Sharding
-            { "100000 ops/s": "100000-ops-sec-in-IE6-on-2GB-Atom-CPU" }, // Do we need a new menu for items like this, like docs>Learn>What? --> Mark?
-            { "Adapter Performance": "Adapter-Performance" } // Do we need a new menu for items like this, like docs>Learn>What? --> Mark?
-            // Exisiting wiki page: "Adding-Storage-Services" --> Delete permanenty? --> Okay Mark?
-            // Exisiting wiki page: "Chaining-%28v0.3.x%29" --> Is this outdated? Delete? Update? --> Mark?
-            // Exisiting wiki page: "Chaining-%28v0.2.x%29" --> Is this outdated? Delete? Update? --> Mark?
-            // Exisiting wiki page: "GUN-3-import-utility" --> Is this outdated? Delete? Update? --> Mark?
-            // Exisiting wiki page: "javascript" --> What do we do with this page? --> Mark?
-            // Exisiting wiki page: "Migrating-from-Parse" --> What do we do with this page? --> Mark?
-            // Exisiting wiki page: "Modules" --> What do we do with this page? --> Mark?
-            // Exisiting wiki page: "Projects" --> What do we do with this page? --> Mark?
-            // Exisiting wiki page: "Partials-and-Circular-References-%28v0.1.x%29" --> What do we do with this page? --> Mark?
-            // Exisiting wiki page: "Partials-and-Circular-References-%28v0.2.x%29" --> What do we do with this page? --> Mark?
-            // Exisiting wiki page: "Putting-Data-%28v0.2.x%29" --> What do we do with this page? --> Mark?
-            // Exisiting wiki page: "Snippets-%28v0.2.x%29" --> What do we do with this page? --> Mark?
-            // Exisiting wiki page: "Snippets-%28v0.3.x%29" --> What do we do with this page? --> Mark?
-            // Exisiting wiki page: "Snippets-%28v0.6.x%29" --> What do we do with this page? --> Mark?
-            // Exisiting wiki page: "Tables" --> What do we do with this page? --> Mark?
-            // Exisiting wiki page: "Temporary-Notes" --> What do we do with this page? --> Mark?
-            // Exisiting wiki page: "Wire-API" --> What do we do with this page? --> Mark?
-            // Exisiting wiki page: "Wire-Protocols-%28v0.1.x%29" --> What do we do with this page? --> Mark?
-            // Exisiting wiki page: "Wire-specification-and-API-%28v0.2.x%29" --> What do we do with this page? --> Mark?
+            // Exisiting wiki page: "Adding-Storage-Services" --> Delete permanenty? --> Okay Mark? YES, DELETE.
+            // Exisiting wiki page: "Chaining-%28v0.3.x%29" --> Is this outdated? Delete? Update? --> Mark? YES, DELETE or update if you want.
+            // Exisiting wiki page: "Chaining-%28v0.2.x%29" --> Is this outdated? Delete? Update? --> Mark? SAME as above.
+            // Exisiting wiki page: "GUN-3-import-utility" --> Is this outdated? Delete? Update? --> Mark? YES/NO, add the rawgit link to ecosystem/module/stuff?
+            // Exisiting wiki page: "Migrating-from-Parse" --> What do we do with this page? --> Mark? YES, either into GUIDE section or Why GUN vs Parse ?
+            // Exisiting wiki page: "Modules" --> What do we do with this page? --> Mark? MERGE a cleaned version into ecosystem/community/awesome
+            // Exisiting wiki page: "Projects" --> What do we do with this page? --> Mark? MERGE a cleaned version into community/ecosystem/modules
+            // Exisiting wiki page: "Partials-and-Circular-References-%28v0.1.x%29" --> What do we do with this page? --> Mark? Latest is "How Writes Work", so delete this.
+            // Exisiting wiki page: "Partials-and-Circular-References-%28v0.2.x%29" --> What do we do with this page? --> Mark? SAME as above.
+            // Exisiting wiki page: "Putting-Data-%28v0.2.x%29" --> What do we do with this page? --> Mark? DELETE
+            // Exisiting wiki page: "Snippets-%28v0.2.x%29" --> What do we do with this page? --> Mark? MERGE a cleaned version into module/ecosystem/community
+            // Exisiting wiki page: "Snippets-%28v0.3.x%29" --> What do we do with this page? --> Mark? MERGE a cleaned version into module/ecosystem/community
+            // Exisiting wiki page: "Snippets-%28v0.6.x%29" --> What do we do with this page? --> Mark? MERGE a cleaned version into modules/ecosystem/community
+            // Exisiting wiki page: "Tables" --> What do we do with this page? --> Mark? MOSTLY got replaced by Crash-Course. Any useful content? Probably delete.
+            // Exisiting wiki page: "Temporary-Notes" --> What do we do with this page? --> Mark? DELETE, I've made wiki/javascript my main go to.
+            // Exisiting wiki page: "Wire-API" --> What do we do with this page? --> Mark? DELETE, Porting-GUN replaced this.
+            // Exisiting wiki page: "Wire-Protocols-%28v0.1.x%29" --> What do we do with this page? --> Mark? DELETE, same as above.
+            // Exisiting wiki page: "Wire-specification-and-API-%28v0.2.x%29" --> What do we do with this page? --> Mark? DELETE, is wrong now.
           ]
         }
       ]
     },
     { "name": "API",
       "pages": [
-        { "Complete List": "API" }
+        { "Complete List": "API" },
         // - Chaining
         // - - Core
         // - - Main
         // - - Extended
         // - Adapters
+        { "name": "Adapters", "pages": [
+          { "Storage": "Storage" }
+        ]}
         // - - Storage
         // - - - Radix
         // - - - S3
         // - - Transport
         // - - - Websockets
         // - - - WebRTC
-        // - Utils
-        // - - Values
-        // - - Nodes
-        // - - Graphs
-        // Exisiting wiki page: "API-%28v0.2.x%29" --> Delete permanenty --> Okay Mark?
-        // Exisiting wiki page: "API-%28v0.3.x%29" --> Delete permanenty --> Okay Mark?
-      ]
-    },
-    { "name": "Resources",
-      "pages": [
-        { "Modules / Projects": "Awesome-GUN" }
+        // - Utils    
+        //{ "name": "Utils", "pages": [
+          // - - Values
+          // - - Nodes
+          // - - Graphs
+          // ... etc.
+        //]}
+        // { "Using AS UI Engine": "as" }
+        // Exisiting wiki page: "API-%28v0.2.x%29" --> Delete permanenty --> Okay Mark? YES!
+        // Exisiting wiki page: "API-%28v0.3.x%29" --> Delete permanenty --> Okay Mark? YES!
       ]
     }
   ],
