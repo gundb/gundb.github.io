@@ -3,7 +3,7 @@
   top: 80px;
   bottom: 0;
   box-sizing: border-box;
-  /* width: 240px !important; */
+  width: 240px !important;
   padding: 32px 24px 32px 24px;
   border-right: 1px #e5e5e5 solid;
   overflow: auto;
