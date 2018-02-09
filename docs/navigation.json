@@ -5,8 +5,12 @@
         { "Introduction": "Introduction" },
         {"Installation": "Installation"},
         {"Get started": "Getting-Started-%28v0.3.x%29"}, // Must be: Hello World
-        {"Crash Course": "Graphs"}//,
-        //"Next Steps"
+        {"Crash Course": "Graphs"}
+        // Should add a page: Next Steps
+        // Exisiting wiki page: "Home" --> Merge into introduction --> Okay Mark?
+        // Exisiting wiki page: "0.1.x-Table-of-Contents" --> Delete permanenty --> Okay Mark?
+        // Exisiting wiki page: "0.2.x-Table-of-Contents" --> Delete permanenty --> Okay Mark?
+        // Exisiting wiki page: "0.3.x-Table-of-Contents" --> Delete permanenty --> Okay Mark?
       ]
     },
     { "name": "Learn",
@@ -18,7 +22,15 @@
         // },
         { "name": "Guides",
           "pages": [
-            { "Using Amazon S3 for storage": "Using-Amazon-S3-for-Storage" }
+            { "Graph Databases 101": "Graph-Databases-101" },
+            { "Design Examples": "Design-Examples" },
+            { "Migration Guide": "Migration-Guide" },
+            { "Running a GUN Server": "Running-a-GUN-Server-%28v0.3.x%29" }, // --> Is this outdated? Delete? Update? --> Mark?
+            { "Using Amazon S3 for storage": "Using-Amazon-S3-for-Storage" },
+            { "React": "React-Tutorial" },
+            { "React Native GUN": "React-Native---GUN" },
+            { "Using AS UI Engine": "as" }
+            // Exisiting wiki page: "Getting-Data-%28v0.2.x%29" --> Delete permanenty? --> Okay Mark?
           ]
         },
         // - Deploy
@@ -29,28 +41,65 @@
           "pages": [
             // - - Contributors
             // - - Community
-            { "How to Help": "help" }
+            { "How to Help": "help" },
+            { "Why GUN Won't Shut Down": "Why-GUN-Won%27t-Shut-Down" }
           ]
         },
-        // - What
-        // - - Philosophy
-        // - - Our Values
+        { "name": "What",
+          "pages": [
+            { "Roadmap": "Roadmap" }
+            // - - Philosophy
+            // - - Our Values
+          ]
+        },
         { "name": "How",
           "pages": [
             { "Terminology": "Glossary" },
+            { "Delete Data": "Delete" },
+            { "Graph Data Structures Intro": "Simple-introduction-to-graph-data-structures" },
             { "Gun's data format": "GUN’s-Data-Format-%28JSON%29" },
             { "How writes are handled": "Partials-and-Circular-References-%28v0.2.x%29" },
             { "The mesh network protocol": "Mesh-Network-Messaging-Algorithm" },
             { "Conflict resolution": "Conflict-Resolution-with-Guns" },
             { "Position on the CAP theorem": "CAP-Theorem" },
+            { "DAP theorem": "DAP-Theorem" },
             { "Sharding": "Sharding" },
             { "Security, Auth, ACL": "Auth" },
-            { "How to Port GUN": "Porting-GUN" }
+            { "Security, Authentication, Authorization": "Security%2C-Authentication%2C-Authorization" }, // --> Is this outdated? Delete? Update? --> Mark?
+            { "How to Port GUN": "Porting-GUN" },
+            { "Adding Methods to Gun Chain": "Adding-Methods-to-the-Gun-Chain" },
+            { "Building Modules for Gun": "Building-Modules-for-Gun" },
+            // Exisiting wiki page: "Building-Modules-for-Gun-%28v0.5.x%29" --> Delete permanenty? --> Okay Mark?
+            { "Building Storage Adapters": "Building-Storage-Adapters" },
+            { "Functional Reactive Programming": "Functional-Reactive-Programming" },
+            { "How GUN's Chaining System Works": "How-GUN%27s-Chaining-System-Works" }, // --> Is this outdated? Delete? Update? --> Mark?
+            { "Hypothetical Amnesia Machine": "Hypothetical-Amnesia-Machine" },
+            { "Porting GUN": "Porting-GUN" },
+            { "Shim": "shim.js" },
             // - - Graph Data Structures
-            // - - CRDT Conflict Resolution
             // - - Ad Hoc Mesh Network
-            // - - CAP Theorem
             // - - Sharding
+            { "100000 ops/s": "100000-ops-sec-in-IE6-on-2GB-Atom-CPU" }, // Do we need a new menu for items like this, like docs>Learn>What? --> Mark?
+            { "Adapter Performance": "Adapter-Performance" } // Do we need a new menu for items like this, like docs>Learn>What? --> Mark?
+            // Exisiting wiki page: "Adding-Storage-Services" --> Delete permanenty? --> Okay Mark?
+            // Exisiting wiki page: "Chaining-%28v0.3.x%29" --> Is this outdated? Delete? Update? --> Mark?
+            // Exisiting wiki page: "Chaining-%28v0.2.x%29" --> Is this outdated? Delete? Update? --> Mark?
+            // Exisiting wiki page: "GUN-3-import-utility" --> Is this outdated? Delete? Update? --> Mark?
+            // Exisiting wiki page: "javascript" --> What do we do with this page? --> Mark?
+            // Exisiting wiki page: "Migrating-from-Parse" --> What do we do with this page? --> Mark?
+            // Exisiting wiki page: "Modules" --> What do we do with this page? --> Mark?
+            // Exisiting wiki page: "Projects" --> What do we do with this page? --> Mark?
+            // Exisiting wiki page: "Partials-and-Circular-References-%28v0.1.x%29" --> What do we do with this page? --> Mark?
+            // Exisiting wiki page: "Partials-and-Circular-References-%28v0.2.x%29" --> What do we do with this page? --> Mark?
+            // Exisiting wiki page: "Putting-Data-%28v0.2.x%29" --> What do we do with this page? --> Mark?
+            // Exisiting wiki page: "Snippets-%28v0.2.x%29" --> What do we do with this page? --> Mark?
+            // Exisiting wiki page: "Snippets-%28v0.3.x%29" --> What do we do with this page? --> Mark?
+            // Exisiting wiki page: "Snippets-%28v0.6.x%29" --> What do we do with this page? --> Mark?
+            // Exisiting wiki page: "Tables" --> What do we do with this page? --> Mark?
+            // Exisiting wiki page: "Temporary-Notes" --> What do we do with this page? --> Mark?
+            // Exisiting wiki page: "Wire-API" --> What do we do with this page? --> Mark?
+            // Exisiting wiki page: "Wire-Protocols-%28v0.1.x%29" --> What do we do with this page? --> Mark?
+            // Exisiting wiki page: "Wire-specification-and-API-%28v0.2.x%29" --> What do we do with this page? --> Mark?
           ]
         }
       ]
@@ -73,6 +122,8 @@
         // - - Values
         // - - Nodes
         // - - Graphs
+        // Exisiting wiki page: "API-%28v0.2.x%29" --> Delete permanenty --> Okay Mark?
+        // Exisiting wiki page: "API-%28v0.3.x%29" --> Delete permanenty --> Okay Mark?
       ]
     },
     { "name": "Resources",
@@ -93,6 +144,7 @@
     { "path": "put.html", "redirect": "API#put" },
     { "path": "key.html", "redirect": "API#key" },
     { "path": "back.html", "redirect": "API#back" },
-    { "path": "opt.html", "redirect": "API#opt" }
+    { "path": "opt.html", "redirect": "API#opt" },
+    { "path": "How-to-Create-GUN", "redirect": "Porting-GUN" }
   ]
 }
