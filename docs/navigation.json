@@ -30,21 +30,21 @@
             //{ "Running a GUN Server": "Running-a-GUN-Server-%28v0.3.x%29" }, // Outdated, delete. Install#Node will replaces it.
             { "Using Amazon S3 for storage": "Using-Amazon-S3-for-Storage" }, // REMOVE, now linked in Adapter Storage section, as this is API info, not a guide. Would love a guide though for it though!
             { "React": "React-Tutorial" }, // They did free promotional work, so let's keep it. HOWEVER, I do want a just "React" named page that is the super simple ToDo app + ideally GUN-React binding library in the future.
-            { "React Native GUN": "React-Native---GUN" }, // rename to "React-Native" please, and create redirect from old to new, needs revamp.
+            { "React Native GUN": "React-Native---GUN" } // rename to "React-Native" please, and create redirect from old to new, needs revamp.
             // Exisiting wiki page: "Getting-Data-%28v0.2.x%29" // YES: delete (no redirects).
           ]
         },
         
         { "name": "How",
           "pages": [ 
-            { "Writes Work": "Partials-and-Circular-References-%28v0.2.x%29" } // rename to "Writes", redirect.
+            { "Writes Work": "Partials-and-Circular-References-%28v0.2.x%29" }, // rename to "Writes", redirect.
             { "To Create Users": "Auth" }, // rename to "Users", redirect. Split into next pages?
             { "To Add Security": "Auth" }, // rename to "Security".
             //{ "To Manage Permissions": "Trust" }, // for when `trust` is out?
             { "To Extend GUN": "Adding-Methods-to-the-Gun-Chain" }, // rename to "Extensions". revamp. Also duplicate into API Chaining section?
             { "To Delete Data": "Delete" },
             { "Functional Reactive Programming": "Functional-Reactive-Programming" }, // maybe rename to "FRP" for SEO? Need to coin term "Chain Reaction Programming"? Have a URL for it too?
-            { "To Help": "Help" }, // intentionally both here and Who!
+            { "To Help": "Help" } // intentionally both here and Who!
           ]
         },
         { "name": "Why", // COMPARISON pages against Firebase, Mongo, etc.
@@ -61,12 +61,12 @@
           "pages": [
             // - - Contributors
             // - - Community
-            { "How to Help": "help" }, // intentionally both here and How!
+            { "How to Help": "help" } // intentionally both here and How!
           ]
         },
         { "name": "What",
           "pages": [
-            { "Roadmap": "Roadmap" }
+            { "Roadmap": "Roadmap" },
             { "Why GUN Won't Shut Down": "Why-GUN-Won%27t-Shut-Down" } // rename to ???, redirect.
             // - - Philosophy
             // - - Our Values
@@ -83,7 +83,7 @@
             { "CAP Theorem Tradeoffs": "CAP-Theorem" },
             { "Sharding": "Sharding" },
             // Exisiting wiki page: "javascript" --> What do we do with this page? --> Mark? Very important page, I hope to improve it. Maybe keep lowercase though?
-            { "JavaScript": "javascript" } 
+            { "JavaScript": "javascript" },
             { "Terminology": "Glossary" }, // rename "Semantics", redirect. Delete or revamp. 
             //{ "DAP theorem": "DAP-Theorem" }, // I remember coming up with something that violates it, maybe hide? Your call.
             //{ "Data Storage": "Storage-Engine" }, // delete, now it is API Adapter Storage page
@@ -93,9 +93,9 @@
             //{ "Building Modules for Gun": "Building-Modules-for-Gun" }, // merge into API Adapter page.
             // Exisiting wiki page: "Building-Modules-for-Gun-%28v0.5.x%29" --> Delete permanenty? --> Okay Mark? Not quite, content is MOSTLY good (`Gun` -> `gun`), should merge into API Adapter page.
             //{ "Building Storage Adapters": "Building-Storage-Adapters" }, merge into API Adapter page.
-            { "Adapter Performance": "Adapter-Performance" } // Do we need a new menu for items like this, like docs>Learn>What? --> Mark? No. Also merge parts of this into API Adapter page, actual systems should report their own perf maybe on ecosystem page/whatever.
+            { "Adapter Performance": "Adapter-Performance" }, // Do we need a new menu for items like this, like docs>Learn>What? --> Mark? No. Also merge parts of this into API Adapter page, actual systems should report their own perf maybe on ecosystem page/whatever.
             
-            { "Shim": "shim.js" }, // merge with awesome/community/ecosystem extensions/tooling, then have Why's "GUN vs Firebase" reference it.
+            { "Shim": "shim.js" } // merge with awesome/community/ecosystem extensions/tooling, then have Why's "GUN vs Firebase" reference it.
             //{ "How GUN's Chaining System Works": "How-GUN%27s-Chaining-System-Works" }, // --> Is this outdated? Delete? Update? --> Mark? YES, delete, wiki/javascript took its place.
             // - - Graph Data Structures
             // - - Ad Hoc Mesh Network
