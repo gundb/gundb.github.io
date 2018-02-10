@@ -361,3 +361,11 @@ form.gsc-search-box, table.gsc-search-box {
 .gn-index > ul {
   padding-left: 0 !important;
 }
+
+code {
+  /* display: inline-block;
+  overflow: auto;
+  max-width: 100%; */
+  /* word-wrap: break-word; */
+  white-space: inherit !important;
+}
