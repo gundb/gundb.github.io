@@ -1,18 +1,12 @@
-{ // by default it is safe to add a redirect notice at the top of all old pages. However, on some of them, it is VERY IMPORTANT to do this and NOT DELETE THEM.
+{ // By default it is safe to add a redirect notice at the top of all old pages. However, on some of them, it is VERY IMPORTANT to do this and NOT DELETE THEM.
   "navigation": [
-    { "name": "Getting Started", // community agreed homepage button is "GET STARTED" but heading titles are "Getting Started"
+    { "name": "Getting Started",
       "pages": [
         { "Introduction": "Introduction" },
-        {"Installation": "Installation"},
-        {"Hello World": "Hello-World"},
-        {"Next Steps": "Next-Steps"},
-        {"Crash Course": "Crash-Course"}
-        // Should add a page: Next Steps
-        // Exisiting wiki page: "Home" --> Merge into introduction --> Okay Mark? CAREFUL: GitHub auto-uses this as wiki default, so we need to... 
-        /// ... keep the page. I recommend: We keep it as GitHub-only, have it link to this new docs system, as well have a stale copy of intro/next-steps
-        // Exisiting wiki page: "0.1.x-Table-of-Contents" --> Delete permanenty --> Okay Mark? DELETE
-        // Exisiting wiki page: "0.2.x-Table-of-Contents" --> Delete permanenty --> Okay Mark? DELETE
-        // Exisiting wiki page: "0.3.x-Table-of-Contents" --> Delete permanenty --> Okay Mark? DELETE
+        { "Installation": "Installation" },
+        { "Hello World": "Hello-World" },
+        { "Next Steps": "Next-Steps" },
+        { "Crash Course": "Crash-Course" }
       ]
     },
     { "name": "Learn",
@@ -23,15 +17,13 @@
           // - - Users app // hackernoon article, or wiki/auth (old name), or scrimba 
         //] },
         { "name": "Guides",
-          "pages": [ // I'm glad you listed them, but yeah, need major clean up! New ones written, improved, etc.
-            { "Graph Databases 101": "Graph-Databases-101" }, // too similar to Crash Course, delete/merge/etc.
-            { "Blog Example": "Design-Examples" }, // probably should be retired / deleted, or revamped and renamed.
-            //{ "Migration Guide": "Migration-Guide" }, // should be deleted, or at least be the How to Port GUN page (which will probably be renamed as well?)
-            //{ "Running a GUN Server": "Running-a-GUN-Server-%28v0.3.x%29" }, // Outdated, delete. Install#Node will replaces it.
-            { "Using Amazon S3 for storage": "Using-Amazon-S3-for-Storage" }, // REMOVE, now linked in Adapter Storage section, as this is API info, not a guide. Would love a guide though for it though!
-            { "React": "React-Tutorial" }, // They did free promotional work, so let's keep it. HOWEVER, I do want a just "React" named page that is the super simple ToDo app + ideally GUN-React binding library in the future.
-            { "React Native GUN": "React-Native---GUN" } // rename to "React-Native" please, and create redirect from old to new, needs revamp.
-            // Exisiting wiki page: "Getting-Data-%28v0.2.x%29" // YES: delete (no redirects).
+          "pages": [
+            { "Graph Databases 101": "Graph-Databases-101" }, // TODO too similar to Crash Course, delete/merge/etc.
+            { "Blog Example": "Design-Examples" }, // TODO probably should be retired / deleted, or revamped and renamed.
+            //{ "Running a GUN Server": "Running-a-GUN-Server-%28v0.3.x%29" }, // Outdated, delete. Install#Node will replaces it. // TODO Discuss with Mark. Should be a separate page. Not in Installation.
+            { "Using Amazon S3 for storage": "Using-Amazon-S3-for-Storage" }, // REMOVE, now linked in Adapter Storage section, as this is API info, not a guide. Would love a guide though for it though! TODO Discuss with Mark. See Storage.
+            { "React": "React-Tutorial" }, // TODO They did free promotional work, so let's keep it. HOWEVER, I do want a just "React" named page that is the super simple ToDo app + ideally GUN-React binding library in the future.
+            { "React Native": "React-Native" }
           ]
         },
         
@@ -131,7 +123,7 @@
         // - - Extended
         // - Adapters
         { "name": "Adapters", "pages": [
-          { "Storage": "Storage" }
+          { "Storage": "Storage" } // TODO Discuss with Mark. We should have only short descriptions here with links to separate docs pages for each engine.
         ]}
         // - - Storage
         // - - - Radix
@@ -165,6 +157,11 @@
     { "path": "key.html", "redirect": "API#key" },
     { "path": "back.html", "redirect": "API#back" },
     { "path": "opt.html", "redirect": "API#opt" },
-    { "path": "How-to-Create-GUN", "redirect": "Porting-GUN" }
+    { "path": "How-to-Create-GUN", "redirect": "Porting-GUN" },
+    { "path": "0.1.x-Table-of-Contents", "redirect": "Site-Index" },
+    { "path": "0.2.x-Table-of-Contents", "redirect": "Site-Index" },
+    { "path": "0.3.x-Table-of-Contents", "redirect": "Site-Index" },
+    { "path": "Migration-Guide", "redirect": "Porting-GUN" },
+    { "path": "React-Native---GUN", "redirect": "React-Native" }
   ]
 }
