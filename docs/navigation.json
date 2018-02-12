@@ -29,19 +29,20 @@
         
         { "name": "How",
           "pages": [ 
-            { "Writes Work": "Partials-and-Circular-References-%28v0.2.x%29" }, // rename to "Writes", redirect.
-            { "To Create Users": "Auth" }, // rename to "Users", redirect. Split into next pages?
-            { "To Add Security": "Auth" }, // rename to "Security".
+            { "How Writes Work": "Partials-and-Circular-References-%28v0.2.x%29" }, // rename to "Writes", redirect. TODO Discuss with Mark.
+            { "How to Create Users": "Auth" }, // rename to "Users", redirect. Split into next pages? TODO Discuss with Mark.
+            { "How to Add Security": "Auth" }, // rename to "Security". TODO Discuss with Mark.
             //{ "To Manage Permissions": "Trust" }, // for when `trust` is out?
-            { "To Extend GUN": "Adding-Methods-to-the-Gun-Chain" }, // rename to "Extensions". revamp. Also duplicate into API Chaining section?
-            { "To Delete Data": "Delete" },
-            { "Functional Reactive Programming": "Functional-Reactive-Programming" }, // maybe rename to "FRP" for SEO? Need to coin term "Chain Reaction Programming"? Have a URL for it too?
-            { "To Help": "Help" } // intentionally both here and Who!
+            { "How to Extend GUN": "Adding-Methods-to-the-Gun-Chain" }, // rename to "Extensions". revamp. Also duplicate into API Chaining section? TODO Discuss with Mark.
+            { "How to Delete Data": "Delete" },
+            { "Functional Reactive Programming": "Functional-Reactive-Programming" }, // maybe rename to "FRP" for SEO? Need to coin term "Chain Reaction Programming"? Have a URL for it too? TODO Discuss with Mark.
+            { "How to Sync Time": "How-to-Sync-Time" },
+            { "How to Help": "Help" } // intentionally both here and Who!
           ]
         },
         { "name": "Why", // COMPARISON pages against Firebase, Mongo, etc.
           "pages": [
-            { "Performance Matters": "100000-ops-sec-in-IE6-on-2GB-Atom-CPU" } // rename to "Performance", redirect.
+            { "Why Performance Matters": "100000-ops-sec-in-IE6-on-2GB-Atom-CPU" } // rename to "Performance", redirect. TODO Discuss with Mark.
             //{"GUN vs Firebase": "GUN-vs-Firebase"}
           ]
         },
