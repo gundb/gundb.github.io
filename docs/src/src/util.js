@@ -42,14 +42,14 @@ export function parse (markdown, cb) {
   //                     </div>
   //                 </div>`
   // }
-  var examplejs = (code, lang, showCodepenIcon) => {
+  var examplejs = (code, lang, showCodepenIcon, defs) => {
     let id = uniqueid(4)
     let ret = `<div class="uk-position-relative qqquk-margin-medium gn-code">
               <pre><code id="${id}" class="lang-${lang}">${escape(code)}</code></pre>
               <div class="uk-position-top-right">
                   <ul class="uk-iconnav">`
     if (showCodepenIcon) {
-      ret += `      <li><a class="js-codepen" uk-tooltip="Edit on Codepen" rel="#${id}" gn-lang="${lang}"><span uk-icon="icon: file-edit"></span></a></li>`
+      ret += `      <li><a class="js-codepen" uk-tooltip="Edit on Codepen" rel="#${id}" gn-lang="${lang}" gn-defs="${defs}"><span uk-icon="icon: file-edit"></span></a></li>`
     }
     ret += `        <li><a class="js-copy" uk-tooltip="Copy to Clipboard" rel="#${id}"><span uk-icon="icon: copy"></span></a></li>
                   </ul>
@@ -66,11 +66,61 @@ export function parse (markdown, cb) {
     // if (lang === 'example') {
     //   return example(code)
     // }
+
+    let defs = {
+      addHtmlBefore: '',
+      addHtmlAfter: '',
+      deleteLinesAtEnd: 0
+    }
+    var regex = /<!-- docDef([\s\S]*?)docDef -->/g
+    var m
+    while ((m = regex.exec(code))) {
+      let modAddHtmlBefore = false
+      let modAddHtmlAfter = false
+      let lines = m[1].split('\n')
+      for (let i in lines) {
+        switch (lines[i]) {
+          case 'endAddHtmlBefore':
+            modAddHtmlBefore = false
+            break
+          case 'endAddHtmlAfter':
+            modAddHtmlAfter = false
+            break
+        }
+        if (lines[i].indexOf('deleteLinesAtEnd') >= 0) {
+          defs.deleteLinesAtEnd = parseInt(lines[i].split('deleteLinesAtEnd ')[1])
+        }
+        if (modAddHtmlBefore) {
+          defs.addHtmlBefore += lines[i] + '\n'
+        }
+        if (modAddHtmlAfter) {
+          defs.addHtmlAfter += lines[i] + '\n'
+        }
+        switch (lines[i]) {
+          case 'startAddHtmlBefore':
+            modAddHtmlBefore = true
+            break
+          case 'startAddHtmlAfter':
+            modAddHtmlAfter = true
+            break
+        }
+      }
+      code = code.replace('<!-- docDef' + m[1] + 'docDef -->\n', '')
+    }
+    defs = JSON.stringify(defs)
+    defs = encodeURIComponent(defs)
+
     let showCodepenIcon = false
-    if (lang === 'javascript' || lang === 'html') {
+    // if (lang === 'javascript' || lang === 'html') {
+    //   showCodepenIcon = true
+    // }
+    if (lang && lang.indexOf('showCodePen') > 0) {
       showCodepenIcon = true
     }
-    return examplejs(code, lang, showCodepenIcon)
+
+    lang = lang && lang.split('#')[0]
+
+    return examplejs(code, lang, showCodepenIcon, defs)
     // return '<div class="uk-margin-medium">' + base.code(code, lang, escaped) + '</div>'
   }
   // renderer.hr = () => `<hr class="uk-margin-large">`
@@ -91,7 +141,7 @@ export function parse (markdown, cb) {
 }
 
 // https://blog.codepen.io/documentation/api/prefill/
-export function openOnCodepen (code, lang) {
+export function openOnCodepen (code, lang, defs) {
   // var regexp = /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi
   // var scripts = (code.match(regexp) || []).join('\n').replace(/<\/?script>/g, '')
 
@@ -99,11 +149,25 @@ export function openOnCodepen (code, lang) {
     // .replace(regexp, '')
     .replace(/<img[^>]+src="(.*?)"|url\((.*?)\)"/g, (match, src) => src.indexOf('../docs/') === 0 ? match.replace(src, `${location.href.split('/docs/')[0]}/docs/${src.replace('../docs/', '')}`) : match)
 
+  if (defs && defs.deleteLinesAtEnd > 0) {
+    // console.log('bbb')
+    let lines = code.split('\n')
+    lines.splice(-defs.deleteLinesAtEnd, defs.deleteLinesAtEnd)
+    code = lines.join('\n')
+  }
+
   let html = ''
   let js = code
   if (lang === 'html') {
     html = code
     js = ''
+  }
+
+  if (defs && defs.addHtmlBefore) {
+    html = defs.addHtmlBefore + '\n' + html
+  }
+  if (defs && defs.addHtmlAfter) {
+    html += '\n' + defs.addHtmlAfter
   }
 
   let nc = Date.now() % 9999

@@ -42,7 +42,11 @@ export default {
       e.preventDefault()
       e.stopImmediatePropagation()
 
-      openOnCodepen($(attr(e.current, "rel")).innerText, attr(e.current, "gn-lang"))
+      let defs = attr(e.current, "gn-defs")
+      defs = decodeURIComponent(defs)
+      defs = JSON.parse(defs)
+
+      openOnCodepen($(attr(e.current, "rel")).innerText, attr(e.current, "gn-lang"), defs)
     })
 
     on(this.$refs.container, "click", '[href="#"]', e => e.preventDefault())

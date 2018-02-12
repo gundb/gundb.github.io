@@ -11,11 +11,12 @@
     },
     { "name": "Learn",
       "pages": [
-        //{ "name": "Tutorials", "pages": [
+        { "name": "Tutorials", "pages": [
+          { "GUN Todo Tutorial": "GUN-Todo-Tutorial" }
           // - - Todo app // gun.js.org/think.html // THESE ARE IMPORTANT! PRIORITIZE!
           // - - Chat app // gun.js.org/converse.html
           // - - Users app // hackernoon article, or wiki/auth (old name), or scrimba 
-        //] },
+        ] },
         { "name": "Guides",
           "pages": [
             { "Graph Databases 101": "Graph-Databases-101" }, // TODO too similar to Crash Course, delete/merge/etc.
