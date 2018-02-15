@@ -16,6 +16,17 @@ var { $, $$, ajax, attr, offset, on, Promise, startsWith } = UIkit.util
 //   label => navigation["Components"][label]
 // )
 
+function findAncestor (el, cls) {
+    while ((el = el.parentElement) && !el.classList.contains(cls));
+    return el;
+}
+
+function convertDefs (defs) {
+    defs = decodeURIComponent(defs)
+    defs = JSON.parse(defs)
+    return defs
+}
+
 export default {
   data: () => ({
     error: null,
@@ -24,7 +35,11 @@ export default {
 
   mounted() {
     new Clipboard("a.js-copy", {
-      text: trigger => $(attr(trigger, "rel")).innerText
+      text: trigger => {
+        let defs = convertDefs(attr(findAncestor(trigger, 'gn-code-tabs-ul'), "gn-defs"))
+        return defs.codePen
+        // return $(attr(trigger, "rel")).innerText
+      }
     })
 
       .on("success", _ => {
@@ -42,11 +57,15 @@ export default {
       e.preventDefault()
       e.stopImmediatePropagation()
 
-      let defs = attr(e.current, "gn-defs")
-      defs = decodeURIComponent(defs)
-      defs = JSON.parse(defs)
+      let defs = convertDefs(attr(findAncestor(e.current, 'gn-code-tabs-ul'), "gn-defs"))
 
-      openOnCodepen($(attr(e.current, "rel")).innerText, attr(e.current, "gn-lang"), defs)
+      // let $el = $(attr(e.current, "rel"))
+      // if ($el && $el.innerText) {
+      //   openOnCodepen($el.innerText, attr(e.current, "gn-lang"), defs)
+      // // } else {
+      // //   console.log('click failed', attr(e.current, "rel"), $el)
+      // }
+      openOnCodepen(attr(e.current, "gn-lang"), defs)
     })
 
     on(this.$refs.container, "click", '[href="#"]', e => e.preventDefault())

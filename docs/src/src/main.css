@@ -74,6 +74,10 @@
   font-weight: bold;
 }
 
+.gn-code {
+  margin-bottom: 16px;
+}
+
 .gn-code pre {
   font: 12px / 1.5 'Roboto Mono',monospace;
   color: #666;
@@ -238,7 +242,7 @@
   font-style: inherit;
 }
 
-.gn-main p, .gn-main blockquote, .gn-main ul, .gn-main ol, .gn-main dl, .gn-main table, .gn-main pre {
+.gn-main p, .gn-main blockquote, .gn-main ul, .gn-main ol, .gn-main dl, .gn-main table/* , .gn-main pre */ {
   margin-top: 0;
   margin-bottom: 16px;
 }
@@ -368,4 +372,16 @@ code {
   max-width: 100%; */
   /* word-wrap: break-word; */
   white-space: inherit !important;
+}
+
+.gn-code-tabs {
+  margin-bottom: 8px !important;
+}
+
+.gn-code > .gn-code-block {
+  margin-top: 8px !important;
+}
+
+.gn-code-tabs a {
+  border-width: 2px !important;
 }
