@@ -1,20 +1,17 @@
 <template>
-    <div>
-        <h1 class="gn-main-title">{{$parent.pageTitle || $route.params.page}}</h1>
-        <div class="uk-alert uk-alert-danger" v-if="error">{{ error }}</div>
-        <div ref="container"></div>
-    </div>
-
+  <div class="gn-md-wrapper">
+    <h1 class="gn-main-title">{{$parent.pageTitle || $route.params.page}}</h1>
+    <div class="uk-alert uk-alert-danger" v-if="error">{{ error }}</div>
+    <component v-if="rawHTML !== ''" :is="pageHTML"/>
+  </div>
 </template>
 
 <script>
-import { parse, openOnCodepen } from "./util"
+import Vue from 'vue/dist/vue.esm.js'
+import CodeBlock from './codeblock.vue'
+import { parse } from "./util"
 
 var { $, $$, ajax, attr, offset, on, Promise, startsWith } = UIkit.util
-
-// var components = Object.keys(navigation["Components"]).map(
-//   label => navigation["Components"][label]
-// )
 
 function findAncestor (el, cls) {
     while ((el = el.parentElement) && !el.classList.contains(cls));
@@ -30,55 +27,26 @@ function convertDefs (defs) {
 export default {
   data: () => ({
     error: null,
-    cache: {}
+    cache: {},
+    rawHTML: ''
   }),
 
+  components: {
+    codeblock: CodeBlock
+  },
+
   mounted() {
-    new Clipboard("a.js-copy", {
-      text: trigger => {
-        let defs = convertDefs(attr(findAncestor(trigger, 'gn-code-tabs-ul'), "gn-defs"))
-        return defs.codePen
-        // return $(attr(trigger, "rel")).innerText
-      }
-    })
-
-      .on("success", _ => {
-        UIkit.notification({ message: "Copied!", pos: "bottom-right" })
-      })
-      .on("error", _ => {
-        UIkit.notification({
-          message: "Copy failed!",
-          status: "danger",
-          pos: "bottom-right"
-        })
-      })
-
-    on(this.$refs.container, "click", "a.js-codepen", e => {
-      e.preventDefault()
-      e.stopImmediatePropagation()
-
-      let defs = convertDefs(attr(findAncestor(e.current, 'gn-code-tabs-ul'), "gn-defs"))
-
-      // let $el = $(attr(e.current, "rel"))
-      // if ($el && $el.innerText) {
-      //   openOnCodepen($el.innerText, attr(e.current, "gn-lang"), defs)
-      // // } else {
-      // //   console.log('click failed', attr(e.current, "rel"), $el)
-      // }
-      openOnCodepen(attr(e.current, "gn-lang"), defs)
-    })
-
     on(this.$refs.container, "click", '[href="#"]', e => e.preventDefault())
 
-    on(
-      this.$refs.container,
-      "click",
-      'a:not([href^="http"]):not([href^="#"]):not([href^="/"]):not([href^="../"])',
-      e => {
-        e.preventDefault()
-        // DocsApp.$router.replace(e.target.pathname + e.target.hash)
-      }
-    )
+    // on(
+    //   this.$refs.container,
+    //   "click",
+    //   'a:not([href^="http"]):not([href^="#"]):not([href^="/"]):not([href^="../"])',
+    //   e => {
+    //     e.preventDefault()
+    //     // DocsApp.$router.replace(e.target.pathname + e.target.hash)
+    //   }
+    // )
 
     on(document, "click", 'a[href^="#"]:not([href="#"])', e =>
       history.pushState({}, "", e.target.href)
@@ -96,6 +64,8 @@ export default {
   watch: {
     $route: {
       handler() {
+        this.$parent.ids = {}
+
         let oc = UIkit.offcanvas('#offcanvas', {})
         if (oc) {
           oc.hide()
@@ -181,6 +151,25 @@ export default {
     }
   },
 
+  computed: {
+    pageHTML() {
+      return Vue.component('docmd', {
+        template: this.rawHTML,
+        components: {
+          codeblock: CodeBlock
+        },
+        mounted() {
+          var ids = {}
+          var els = document.querySelectorAll('.gn-md-wrapper h1 a[href^="#"], .gn-md-wrapper h2 a[href^="#"]')
+          for (var el of els) {
+            ids[el.parentNode.innerText] = attr(el, "href").substr(1)
+          }
+          this.$parent.$parent.ids = ids
+        }
+      })
+    }
+  },
+
   methods: {
     setPage(page) {
       document.title = `${this.$parent.page
@@ -188,19 +177,7 @@ export default {
         .map(UIkit.util.ucfirst)
         .join(" ")} - GUN`
 
-      html(this.$refs.container, page)
-
-      // this.$parent.component = ~components.indexOf(this.$route.params.page)
-      //   ? this.$route.params.page
-      //   : false
-
-      this.$parent.ids = $$('> h1 a[href^="#"],> h2 a[href^="#"]', this.$refs.container).reduce(
-        (ids, el) => {
-          ids[el.parentNode.innerText] = attr(el, "href").substr(1)
-          return ids
-        },
-        {}
-      )
+      this.rawHTML = '<div>' + page + '</div>'
 
       if (location.hash && $(location.hash)) {
         scrollTo(0, offset($(location.hash)).top - 100)
@@ -211,12 +188,5 @@ export default {
       setTimeout(() => $$('pre code', this.$refs.container).forEach(block => hljs.highlightBlock(block)))
     }
   }
-}
-
-function html(el, html) {
-  el.innerHTML = ''
-  var range = document.createRange()
-  range.selectNode(el)
-  el.appendChild(range.createContextualFragment(html))
 }
 </script>

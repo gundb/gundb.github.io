@@ -378,7 +378,7 @@ code {
   margin-bottom: 8px !important;
 }
 
-.gn-code > .gn-code-block {
+.gn-code .gn-code-block {
   margin-top: 8px !important;
 }
 

@@ -48,7 +48,7 @@
                                 </a>
                             </li> -->
 
-                            <li id="gn-src"><a><gcse:search></gcse:search></a></li>
+                            <li id="gn-src"><a><gcse:search v-pre></gcse:search></a></li>
 
                             <li>
                                 <a :href="'https://github.com/amark/gun/wiki/'+page+'/_edit'" target="_blank">
@@ -105,6 +105,7 @@
 var { $, $$, ajax, attr, offset, on, Promise, startsWith } = UIkit.util;
 import NavItems from './navitems.vue'
 import IndexItems from './indexitems.vue'
+import CodeBlock from './codeblock.vue'
 
 export default {
   name: "app",
@@ -123,7 +124,8 @@ export default {
 
   components: {
     navitems: NavItems,
-    indexitems: IndexItems
+    indexitems: IndexItems,
+    codeblock: CodeBlock
   },
 
   watch: {
