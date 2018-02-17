@@ -13,33 +13,31 @@ export default {
   data: () => ({
     loading: true
   }),
-  
+
   props: [
     'codefull',
-    'lang',
-    'showcodesandbox'
+    'lang'
   ],
 
   computed: {
-    dcodefull() {
+    dcodefull () {
       return decodeURIComponent(this.codefull)
     }
   },
 
-  mounted() {
-    if (this.showcodesandbox === 'show') {
-      this.loadCodesandbox('?codemirror=1&runonclick=1')
-    }
-    if (this.showcodesandbox === 'tab') {
-      this.loadCodesandbox('?codemirror=1')
-    }
+  mounted () {
+    // if (this.showcodesandbox === 'show') {
+    //   this.loadCodesandbox('?codemirror=1&runonclick=1')
+    // }
+    // if (this.showcodesandbox === 'tab') {
+    this.loadCodesandbox('?codemirror=1')
+    // }
   },
 
   methods: {
     loadCodesandbox (par) {
       let that = this
 
-      // https://github.com/Rob--W/cors-anywhere/#documentation
       const parameters = getParameters({
         files: {
           'package.json': {
@@ -62,15 +60,16 @@ export default {
       })
 
       var xhttp = new XMLHttpRequest()
-      xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
+      xhttp.onreadystatechange = function () {
+        if (this.readyState === 4 && this.status === 200) {
           that.$refs.gniframe.src = 'https://codesandbox.io/embed/' + JSON.parse(this.responseText).sandbox_id + par
           that.loading = false
         }
-      };
-      xhttp.open("POST", "https://cors-anywhere.herokuapp.com/https://codesandbox.io/api/v1/sandboxes/define?&json=1", true);
-      xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-      xhttp.send("parameters=" + parameters);
+      }
+      // https://github.com/Rob--W/cors-anywhere/#documentation
+      xhttp.open('POST', 'https://cors-anywhere.herokuapp.com/https://codesandbox.io/api/v1/sandboxes/define?&json=1', true)
+      xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
+      xhttp.send('parameters=' + parameters)
       // console.log('LOAD CODE')
     }
   }

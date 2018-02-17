@@ -3,23 +3,16 @@
     <div class="uk-position-relative qqquk-margin-medium gn-code">
       <div v-if="showTabs">
         <ul uk-tab class="gn-code-tabs">
-          <li><a href="#">Code</a></li>
-          <li v-if="showSecondTab"><a href="#">Preview</a></li>
+          <li v-for="tab in doptions.tabs"><a href="#">{{tab.title}}</a></li>
         </ul>
         <ul class="uk-switcher uk-margin gn-code-block" ref="gnul">
-          <li>
-            <codeblocknormal v-if="showNormal" :lang="lang" :code="code"></codeblocknormal>
-            <codeblockcodesandbox v-else :lang="lang" :codefull="codefull" :showcodesandbox="showcodesandbox"></codeblockcodesandbox>
-          </li>
-          <li v-if="showSecondTab" ref="gnil">
-            <codeblocknormal v-if="!showNormal" :lang="lang" :code="code"></codeblocknormal>
-            <codeblockcodesandbox v-if="showNormal && li2activated" :lang="lang" :codefull="codefull" :showcodesandbox="showcodesandbox"></codeblockcodesandbox>
+          <li v-for="tab in doptions.tabs">
+            <codeblocktab v-if="tab.activated" :lang="lang" :code="code" :codefull="codefull" :tab="tab"></codeblocktab>
           </li>
         </ul>
       </div>
       <div v-else>
-        <codeblocknormal v-if="showNormal" :lang="lang" :code="code"></codeblocknormal>
-        <codeblockcodesandbox v-else :lang="lang" :codefull="codefull" :showcodesandbox="showcodesandbox"></codeblockcodesandbox>
+        <codeblocktab :lang="lang" :code="code" :codefull="codefull" :tab="doptions.tabs[0]"></codeblocktab>
       </div>
       <!-- Icons -->
       <div class="uk-position-top-right">
@@ -33,67 +26,79 @@
 </template>
 
 <script>
+import CodeBlockTab from './codeblocktab.vue'
 import CodeBlockNormal from './codeblocknormal.vue'
 import CodeBlockCodeSandbox from './codeblockcodesandbox.vue'
-import { openOnCodepen } from "./util"
+import CodeBlockCodeMirror from './codeblockcodemirror.vue'
+import { openOnCodepen } from './util'
 
 export default {
   name: 'codeblock',
 
-  data: () => ({
-    li2activated: false
-  }),
+  data: function () {
+    return {
+      optionsdata: this.options
+    }
+  },
 
   props: [
     'code',
     'codefull',
     'lang',
     'showcodepenicon',
-    'showcodesandbox'
+    'options'
   ],
 
   computed: {
-    showNormal() {
-      return !this.showcodesandbox || this.showcodesandbox !== 'show'
+    doptions () {
+      return JSON.parse(decodeURIComponent(this.optionsdata))
     },
-    showCodeSandbox() {
-      return this.showcodesandbox === 'show' || this.showcodesandbox === 'tab'
-    },
-    showTabs() {
-      return this.showCodeSandbox
-    },
-    showSecondTab() {
-      return this.showcodesandbox === 'tab'
+    showTabs () {
+      let ret = this.doptions.tabs.length > 1
+      for (let tab of this.doptions.tabs) {
+        if (tab.tp === 'codemirror' || tab.tp === 'codesandbox') {
+          ret = true
+        }
+      }
+      return ret
     }
   },
 
   components: {
+    codeblocktab: CodeBlockTab,
     codeblocknormal: CodeBlockNormal,
-    codeblockcodesandbox: CodeBlockCodeSandbox
+    codeblockcodesandbox: CodeBlockCodeSandbox,
+    codeblockcodemirror: CodeBlockCodeMirror
   },
 
-  mounted() {
+  mounted () {
     let that = this
+
     new Clipboard(this.$refs.gncopy, {
-      text: function(trigger) {
+      text: function (trigger) {
         return decodeURIComponent(that.code)
       }
     })
-    .on("success", _ => {
-      UIkit.notification({ message: "Copied!", pos: "bottom-right" })
+    .on('success', _ => {
+      UIkit.notification({ message: 'Copied!', pos: 'bottom-right' })
     })
-    .on("error", _ => {
+    .on('error', _ => {
       UIkit.notification({
-        message: "Copy failed!",
-        status: "danger",
-        pos: "bottom-right"
+        message: 'Copy failed!',
+        status: 'danger',
+        pos: 'bottom-right'
       })
     })
 
-    if (this.$refs.gnul && this.$refs.gnil) {
+    if (this.$refs.gnul) {
       UIkit.util.on(this.$refs.gnul, 'show', function () {
-        if (that.$refs.gnil.classList.contains('uk-active')) {
-          that.li2activated = true
+        let els = that.$refs.gnul.childNodes
+        for (let i in els) {
+          if (els[i] && els[i].classList && els[i].classList.contains('uk-active')) {
+            let opt = that.doptions
+            opt.tabs[i].activated = true
+            that.optionsdata = encodeURIComponent(JSON.stringify(opt)).replace(/'/g, '%27')
+          }
         }
       })
     }

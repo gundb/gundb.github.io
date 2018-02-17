@@ -22,7 +22,7 @@
             </div>
         </div>
 
-        <div id="gn-bar-left" class="tm-sidebar-left uk-visible@m">
+        <div id="gn-bar-left" class="tm-sidebar-left uk-visible@m gn-style-scroll">
             <div class="gn-expnd" @click="clickExpand"><span v-if="allCollapsed">Expand all</span><span v-else>Collapse all</span></div>
             <h3>Documentation</h3>
             <navitems :items="navigation" :ids="ids" :showanch="true"></navitems>

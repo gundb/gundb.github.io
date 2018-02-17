@@ -78,16 +78,20 @@
   margin-bottom: 16px;
 }
 
-.gn-code pre {
+.gn-code pre, .gn-code .CodeMirror {
   font: 12px / 1.5 'Roboto Mono',monospace;
   color: #666;
-  -moz-tab-size: 4;
-  tab-size: 4;
-  overflow: auto;
+  /* -moz-tab-size: 4; */
+  /* tab-size: 4; */
   padding: 12px;
-  border: 1px solid #e8e8e8;
   border-radius: 0;
   background: #fbfbfb;
+  box-sizing: border-box;
+}
+
+.gn-code pre {
+  overflow: auto;
+  border: 1px solid #e8e8e8;
 }
 
 .uk-iconnav {
@@ -384,4 +388,98 @@ code {
 
 .gn-code-tabs a {
   border-width: 2px !important;
+}
+
+.gn-cm-wrapper {
+  display: flex;
+  width: 100%;
+  height: 500px;
+  border: 1px solid #e8e8e8;
+}
+
+.gn-cm-wrapper > div {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+}
+
+.gn-cm-wrapper > div:first-child {
+    border-right: 1px solid #e8e8e8;
+}
+
+.gn-cm-ta {
+  width: 100%;
+  height: 100%;
+}
+
+.gn-cm-iframe {
+  width: 100%;
+  width: calc(100% - 1px);
+  height: 100%;
+}
+
+.CodeMirror {
+  width: 100%;
+  height: 100% !important;
+}
+
+.gn-browserbar {
+  padding: 8px 8px;
+  background-color: #e5e5e5;
+  display: flex;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.gn-browserbar .uk-icon-button {
+  width: 24px;
+  height: 24px;
+}
+
+.gn-browserbar .uk-icon-button:first-child {
+  margin-right: 4px;
+}
+
+.gn-adr {
+  background-color: #fbfbfb;
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  height: 24px;
+  margin: 0 8px;
+  padding: 0 8px;
+  color: #d8d8d8;
+}
+
+.gn-rfr svg {
+  width: 16px;
+  height: 16px;
+}
+
+.cm-s-default .cm-comment {
+  color: #b0b0b0 !important;
+}
+
+.cm-s-default .cm-def, .cm-s-default .cm-variable, .cm-s-default .cm-variable-2 {
+  color: #00b !important;
+}
+
+.CodeMirror-overlayscroll-horizontal div, .CodeMirror-overlayscroll-vertical div {
+  border-radius: 0 !important;
+  background: rgba(0, 0, 0, 0.1) !important;
+}
+
+.CodeMirror-overlayscroll-horizontal, .CodeMirror-hscrollbar::-webkit-scrollbar {
+  height: 8px !important;
+}
+
+.CodeMirror-overlayscroll-vertical, .CodeMirror-vscrollbar::-webkit-scrollbar {
+  width: 8px !important;
+}
+
+.gn-style-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.gn-style-scroll::-webkit-scrollbar-thumb, .CodeMirror-hscrollbar::-webkit-scrollbar-thumb, .CodeMirror-vscrollbar::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.1); 
 }

@@ -16,13 +16,13 @@ export function parse (markdown, cb) {
                   <img src="${href}" alt="${text}">
                   </div></div>`
   }
-  var examplejs = (code, lang, options, defs, codeFull) => {
+  var examplejs = (code, lang, options, codeFull) => {
     return `<codeblock
       :lang="'${lang}'"
       :showcodepenicon="${options.showCodepenIcon}"
-      :showcodesandbox="'${options.showCodesandbox}'"
       :code="'` + encodeURIComponent(code).replace(/'/g, '%27') + `'"
       :codefull="'` + encodeURIComponent(codeFull).replace(/'/g, '%27') + `'"
+      :options="'` + encodeURIComponent(JSON.stringify(options)).replace(/'/g, '%27') + `'"
       ></codeblock>`
   }
 
@@ -33,10 +33,11 @@ export function parse (markdown, cb) {
   renderer.code = (code, lang, escaped) => {
     let options = {
       showCodepenIcon: false,
-      showCodesandbox: ''
+      tabs: [
+        {tp: 'code', title: 'Code'}
+      ]
     }
 
-    let defs = {}
     let codeClean = ''
     let codePen = ''
     let hideCode = false
@@ -48,17 +49,22 @@ export function parse (markdown, cb) {
           if (lin[1].indexOf('codepen: \'link\'') >= 0) {
             options.showCodepenIcon = true
           }
-          if (lin[1].indexOf('codesandbox: \'tab\'') >= 0) {
-            options.showCodesandbox = 'tab'
-          }
-          if (lin[1].indexOf('codesandbox: \'show\'') >= 0) {
-            options.showCodesandbox = 'show'
-          }
           if (lin[1].indexOf('hide: \'start\'') >= 0) {
             hideCode = true
           }
           if (lin[1].indexOf('hide: \'end\'') >= 0) {
             hideCode = false
+          }
+          for (let j = 0; j < 9; j++) {
+            if (lin[1].indexOf('tab' + (j + 1) + ': \'codemirror\'') >= 0) {
+              options.tabs[j] = {tp: 'codemirror', title: 'Live edit'}
+            }
+            if (lin[1].indexOf('tab' + (j + 1) + ': \'codesandbox\'') >= 0) {
+              options.tabs[j] = {tp: 'codesandbox', title: 'Live edit'}
+            }
+            if (lin[1].indexOf('tab' + (j + 1) + ': \'code\'') >= 0) {
+              options.tabs[j] = {tp: 'code', title: 'Code'}
+            }
           }
           // TODO Add option to define and insert blocks; something like: <!-- {id: 'first', blocks: ['second']} -->
         }
@@ -70,14 +76,10 @@ export function parse (markdown, cb) {
       }
     }
     code = codeClean
-    defs.codePen = codePen
-
-    defs = JSON.stringify(defs)
-    defs = encodeURIComponent(defs).replace(/'/g, '%27')
 
     lang = lang && lang.split('#')[0]
 
-    return examplejs(code, lang, options, defs, codePen)
+    return examplejs(code, lang, options, codePen)
     // return '<div class="uk-margin-medium">' + base.code(code, lang, escaped) + '</div>'
   }
   // renderer.hr = () => `<hr class="uk-margin-large">`
