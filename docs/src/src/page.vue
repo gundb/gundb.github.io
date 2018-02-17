@@ -9,19 +9,30 @@
 <script>
 import Vue from 'vue/dist/vue.esm.js'
 import CodeBlock from './codeblock.vue'
-import { parse } from "./util"
+import { parse } from './util'
 
 var { $/* , $$ */, ajax, attr, offset, on, Promise, startsWith } = UIkit.util
 
-function findAncestor (el, cls) {
-    while ((el = el.parentElement) && !el.classList.contains(cls));
-    return el;
+let waitCount = 0
+
+let waitForAnchor = function () {
+  let el = document.getElementById(window.location.hash.substr(1))
+  if (!el) {
+    el = document.getElementsByName(window.location.hash.substr(1))[0]
+  }
+  if (el) {
+    let y = el.offsetTop + 112 - 16
+    document.documentElement.scrollTop = document.body.scrollTop = y
+  } else {
+    if ((waitCount += 100) < 3000) {
+      setTimeout(waitForAnchor, 100)
+    }
+  }
 }
 
-function convertDefs (defs) {
-    defs = decodeURIComponent(defs)
-    defs = JSON.parse(defs)
-    return defs
+let startWaitForAnchor = function () {
+  waitCount = 0
+  waitForAnchor()
 }
 
 export default {
@@ -35,12 +46,12 @@ export default {
     codeblock: CodeBlock
   },
 
-  mounted() {
-    on(this.$refs.container, "click", '[href="#"]', e => e.preventDefault())
+  mounted () {
+    on(this.$refs.container, 'click', '[href="#"]', e => e.preventDefault())
 
     // on(
     //   this.$refs.container,
-    //   "click",
+    //   'click',
     //   'a:not([href^="http"]):not([href^="#"]):not([href^="/"]):not([href^="../"])',
     //   e => {
     //     e.preventDefault()
@@ -48,11 +59,11 @@ export default {
     //   }
     // )
 
-    on(document, "click", 'a[href^="#"]:not([href="#"])', e =>
-      history.pushState({}, "", e.target.href)
+    on(document, 'click', 'a[href^="#"]:not([href="#"])', e =>
+      history.pushState({}, '', e.target.href)
     )
 
-    on(window, "popstate", () => {
+    on(window, 'popstate', () => {
       setTimeout(() => {
         if (location.hash && $(location.hash)) {
           scrollTo(0, offset($(location.hash)).top - 100)
@@ -63,8 +74,8 @@ export default {
 
   watch: {
     $route: {
-      handler() {
-        this.$parent.ids = {}
+      handler () {
+        // this.$parent.ids = {}
 
         let oc = UIkit.offcanvas('#offcanvas', {})
         if (oc) {
@@ -99,7 +110,7 @@ export default {
             } else {
               ajax(`https://raw.githubusercontent.com/wiki/amark/gun/${page}.md?nc=${Math.random()}`).then(
                 ({ response }) => {
-                  if (startsWith(response.trim(), "<!DOCTYPE html>")) {
+                  if (startsWith(response.trim(), '<!DOCTYPE html>')) {
                     response = `<div class="uk-text-center">
                                                     <h1>404</h1>
                                                     <p class="uk-text-large">Page not found!</p>
@@ -119,31 +130,15 @@ export default {
                 this.error = err
               } else {
                 if ('scrollRestoration' in history) {
-                  history.scrollRestoration = 'manual';
+                  history.scrollRestoration = 'manual'
                 }
                 this.setPage(content)
-                
-                let waitCount = 0
-                function waitForAnchor() {
-                  let el = document.getElementById(window.location.hash.substr(1))
-                  if (!el) {
-                    el = document.getElementsByName(window.location.hash.substr(1))[0]
-                  }
-                  if (el) {
-                    let y = el.offsetTop /* + 112 */
-                    document.documentElement.scrollTop = document.body.scrollTop = y
-                  } else {
-                    if ((waitCount += 100) < 3000) {
-                      setTimeout(waitForAnchor, 100)
-                    }
-                  }
-                }
-                if (window.location.hash) {
-                  waitForAnchor()
-                }
+
+                setTimeout(startWaitForAnchor, 100)
+                setTimeout(startWaitForAnchor, 300)
               }
             })
-          }, () => (this.error = "Failed loading page"))
+          }, () => (this.error = 'Failed loading page'))
         })
       },
 
@@ -152,17 +147,17 @@ export default {
   },
 
   computed: {
-    pageHTML() {
+    pageHTML () {
       return Vue.component('docmd', {
         template: this.rawHTML,
         components: {
           codeblock: CodeBlock
         },
-        mounted() {
+        mounted () {
           var ids = {}
           var els = document.querySelectorAll('.gn-md-wrapper h1 a[href^="#"], .gn-md-wrapper h2 a[href^="#"]')
           for (var el of els) {
-            ids[el.parentNode.innerText] = attr(el, "href").substr(1)
+            ids[el.parentNode.innerText] = attr(el, 'href').substr(1)
           }
           this.$parent.$parent.ids = ids
         }
@@ -171,19 +166,21 @@ export default {
   },
 
   methods: {
-    setPage(page) {
+    setPage (page) {
       document.title = `${this.$parent.page
-        .split("-")
+        .split('-')
         .map(UIkit.util.ucfirst)
-        .join(" ")} - GUN`
+        .join(' ')} - GUN documentation`
 
       this.rawHTML = '<div>' + page + '</div>'
 
-      if (location.hash && $(location.hash)) {
-        scrollTo(0, offset($(location.hash)).top - 100)
-      } else {
-        scrollTo(0, 0)
-      }
+      // setTimeout(() => {
+      //   if (location.hash && $(location.hash)) {
+      //     scrollTo(0, offset($(location.hash)).top/*  - 100 */)
+      //   } else {
+      //     scrollTo(0, 0)
+      //   }
+      // }, 1)
 
       // setTimeout(() => $$('pre code', this.$refs.container).forEach(block => hljs.highlightBlock(block)))
     }

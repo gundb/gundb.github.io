@@ -19,10 +19,10 @@
 
 <script>
 export default {
-  name: "navitems",
+  name: 'navitems',
 
   props: [
-    'items', 'ids',  'showanch'
+    'items', 'ids', 'showanch'
   ],
 
   methods: {

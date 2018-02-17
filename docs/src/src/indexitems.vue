@@ -14,10 +14,10 @@
 
 <script>
 export default {
-  name: "indexitems",
+  name: 'indexitems',
 
   props: [
-    'items', 'ids',  'showanch'
+    'items', 'ids', 'showanch'
   ]
 }
 </script>

@@ -102,15 +102,16 @@
 </template>
 
 <script>
-var { $, $$, ajax, attr, offset, on, Promise, startsWith } = UIkit.util;
 import NavItems from './navitems.vue'
 import IndexItems from './indexitems.vue'
 import CodeBlock from './codeblock.vue'
 
-export default {
-  name: "app",
+var {ajax, Promise} = UIkit.util
 
-  data() {
+export default {
+  name: 'app',
+
+  data () {
     return {
       navigation: [],
       redirects: [],
@@ -130,15 +131,15 @@ export default {
 
   watch: {
     $route: {
-      handler() {
+      handler () {
         this.setPageTitle(this.$route.params.page, this.navigation)
       }
     }
   },
 
   methods: {
-    setPageTitle(urlPart, nav) {
-      for(let item in nav) {
+    setPageTitle (urlPart, nav) {
+      for (let item in nav) {
         if (typeof nav[item] === 'object') {
           this.setPageTitle(urlPart, nav[item])
         } else if (urlPart === decodeURIComponent(nav[item])) {
@@ -147,16 +148,17 @@ export default {
       }
     },
 
-    updateExpanded(nav, rout) {
+    updateExpanded (nav, rout) {
       let ret = false
-      for(let item in nav) {
+      for (let item in nav) {
         if (typeof nav[item] === 'object' && nav[item].pages) {
           let ue = this.updateExpanded(nav[item].pages, rout)
           ue = ue || nav[item].expanded
           ret = ret || ue
           this.$set(nav[item], 'expanded', ue)
-        }  if(rout) {
-          for(let itm in nav[item]) {
+        }
+        if (rout) {
+          for (let itm in nav[item]) {
             if (this.$route.params.page === decodeURIComponent(nav[item][itm])) {
               ret = true
             }
@@ -166,8 +168,8 @@ export default {
       return ret
     },
 
-    allCollapse(nav, st) {
-      for(let item in nav) {
+    allCollapse (nav, st) {
+      for (let item in nav) {
         if (typeof nav[item] === 'object' && nav[item].pages) {
           this.$set(nav[item], 'expanded', !st)
           this.allCollapse(nav[item].pages, st)
@@ -175,7 +177,7 @@ export default {
       }
     },
 
-    clickExpand() {
+    clickExpand () {
       this.allCollapsed = !this.allCollapsed
       if (this.allCollapsed) {
         this.allCollapse(this.navigation, true)
@@ -185,7 +187,7 @@ export default {
       }
     },
 
-    setNavigation(json) {
+    setNavigation (json) {
       this.navigation = json.navigation
       this.redirects = json.redirects
 
@@ -196,9 +198,7 @@ export default {
     }
   },
 
-  created() {
-    let that = this
-
+  created () {
     this.$root.$on('catClicked', (item) => {
       this.allCollapse(this.navigation, true)
       this.$set(item, 'expanded', true)
@@ -206,19 +206,19 @@ export default {
     })
 
     this.menuPromise = new Promise((resolve, reject) => {
-      if(window.location.host.indexOf('breasy.site') >= 0) {
-        const localNav = require("../../navigation.json")
+      if (window.location.host.indexOf('breasy.site') >= 0) {
+        const localNav = require('../../navigation.json')
         this.setNavigation(localNav)
         resolve()
       } else {
         ajax(`http://gun.js.org/docs/navigation.json?nc=${Math.random()}`).then(page => {
           try {
             let s = page.response
-            s = s.replace(/\/\*(.|[\r\n])*?\*\//g, '').replace(/\/\/.*/gm, '');
+            s = s.replace(/\/\*(.|[\r\n])*?\*\//g, '').replace(/\/\/.*/gm, '')
             let json = JSON.parse(s)
             this.setNavigation(json)
             resolve()
-          } catch(e) {
+          } catch (e) {
             // console.error(e)
           }
         })
@@ -226,12 +226,12 @@ export default {
     })
   },
 
-  mounted() {
+  mounted () {
     // UIkit.offcanvas('#offcanvas', {}).show()
 
-    window.addEventListener('scroll', function(e) {
+    window.addEventListener('scroll', function (e) {
       var doc = document.documentElement
-      var top = (window.pageYOffset || doc.scrollTop)  - (doc.clientTop || 0)
+      var top = (window.pageYOffset || doc.scrollTop) - (doc.clientTop || 0)
       let el = document.getElementById('gn-bar-right')
       let y = 96 - top
       if (y < 0) {
@@ -249,13 +249,13 @@ export default {
 
     setTimeout(() => {
       // Google search
-      (function() {
-        var cx = "018061041148283299270:yzadbgjxtxu"
-        var gcse = document.createElement("script")
-        gcse.type = "text/javascript"
+      (function () {
+        var cx = '018061041148283299270:yzadbgjxtxu'
+        var gcse = document.createElement('script')
+        gcse.type = 'text/javascript'
         gcse.async = true
-        gcse.src = "https://cse.google.com/cse.js?cx=" + cx
-        var s = document.getElementsByTagName("script")[0]
+        gcse.src = 'https://cse.google.com/cse.js?cx=' + cx
+        var s = document.getElementsByTagName('script')[0]
         s.parentNode.insertBefore(gcse, s)
       })()
     }, 1000)
