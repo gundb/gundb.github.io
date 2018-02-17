@@ -20,7 +20,8 @@ export default {
   props: [
     'code',
     'codefull',
-    'lang'
+    'lang',
+    'xlang'
   ],
 
   computed: {
@@ -38,7 +39,7 @@ export default {
     setTimeout(() => {
       var delay
       var editor = CodeMirror.fromTextArea(this.$refs.gnta, {
-        mode: 'text/html'
+        mode: that.lang === 'html' ? 'htmlmixed' : this.lang
         // theme: 'dracula'
       })
 

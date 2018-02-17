@@ -393,7 +393,8 @@ code {
 .gn-cm-wrapper {
   display: flex;
   width: 100%;
-  height: 500px;
+  height: auto;
+  max-height: 90vh;
   border: 1px solid #e8e8e8;
 }
 
@@ -403,8 +404,16 @@ code {
   flex-direction: column;
 }
 
+.gn-cm-wrapper.gn-cm-single > div {
+  width: 100%;
+}
+
 .gn-cm-wrapper > div:first-child {
     border-right: 1px solid #e8e8e8;
+}
+
+.gn-cm-wrapper.gn-cm-single > div:first-child {
+    border-right: none;
 }
 
 .gn-cm-ta {

@@ -11,7 +11,7 @@ import Vue from 'vue/dist/vue.esm.js'
 import CodeBlock from './codeblock.vue'
 import { parse } from "./util"
 
-var { $, $$, ajax, attr, offset, on, Promise, startsWith } = UIkit.util
+var { $/* , $$ */, ajax, attr, offset, on, Promise, startsWith } = UIkit.util
 
 function findAncestor (el, cls) {
     while ((el = el.parentElement) && !el.classList.contains(cls));
@@ -185,7 +185,7 @@ export default {
         scrollTo(0, 0)
       }
 
-      setTimeout(() => $$('pre code', this.$refs.container).forEach(block => hljs.highlightBlock(block)))
+      // setTimeout(() => $$('pre code', this.$refs.container).forEach(block => hljs.highlightBlock(block)))
     }
   }
 }
