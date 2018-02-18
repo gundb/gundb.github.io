@@ -21,7 +21,6 @@
           "pages": [
             { "Graph Databases 101": "Graph-Databases-101" }, // TODO too similar to Crash Course, delete/merge/etc.
             { "Blog Example": "Design-Examples" }, // TODO probably should be retired / deleted, or revamped and renamed.
-            //{ "Running a GUN Server": "Running-a-GUN-Server-%28v0.3.x%29" }, // Outdated, delete. Install#Node will replaces it. // TODO Discuss with Mark. Should be a separate page. Not in Installation.
             { "Using Amazon S3 for storage": "Using-Amazon-S3-for-Storage" }, // REMOVE, now linked in Adapter Storage section, as this is API info, not a guide. Would love a guide though for it though! TODO Discuss with Mark. See Storage.
             { "React": "React-Tutorial" }, // TODO They did free promotional work, so let's keep it. HOWEVER, I do want a just "React" named page that is the super simple ToDo app + ideally GUN-React binding library in the future.
             { "React Native": "React-Native" }
@@ -29,7 +28,8 @@
         },
         
         { "name": "How",
-          "pages": [ 
+          "pages": [
+            { "How to Run A GUN Server": "How-to-Run-A-GUN-Server"},
             { "How Writes Work": "Partials-and-Circular-References-%28v0.2.x%29" }, // rename to "Writes", redirect. TODO Discuss with Mark.
             { "How to Create Users": "Auth" }, // rename to "Users", redirect. Split into next pages? TODO Discuss with Mark.
             { "How to Add Security": "Auth" }, // rename to "Security". TODO Discuss with Mark.
@@ -164,6 +164,8 @@
     { "path": "0.2.x-Table-of-Contents", "redirect": "Site-Index" },
     { "path": "0.3.x-Table-of-Contents", "redirect": "Site-Index" },
     { "path": "Migration-Guide", "redirect": "Porting-GUN" },
-    { "path": "React-Native---GUN", "redirect": "React-Native" }
+    { "path": "React-Native---GUN", "redirect": "React-Native" },
+    { "path": "Running-a-GUN-Server-%28v0.3.x%29", "redirect": "How-to-Run-A-GUN-Server" },
+    { "path": "Running-a-GUN-Server-%28v0.9.x%29", "redirect": "How-to-Run-A-GUN-Server" }
   ]
 }
