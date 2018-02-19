@@ -7,7 +7,7 @@
         </ul>
         <ul class="uk-switcher uk-margin gn-code-block" ref="gnul">
           <li v-for="tab in doptions.tabs">
-            <codeblocktab v-if="tab.activated" :lang="lang" :code="code" :codefull="codefull" :tab="tab" :xlang="xlang"></codeblocktab>
+            <codeblocktab v-if="tab.activated" :lang="lang" :code="code" :codefull="codefull" :tab="tab" :xlang="xlang" :hides="doptions.hides"></codeblocktab>
           </li>
         </ul>
       </div>

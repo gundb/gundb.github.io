@@ -1,6 +1,6 @@
 <template>
   <div>
-    <codeblockcodemirror v-if="isCodeMirror" :lang="lang" :code="code" :codefull="codefull" :xlang="xlang"></codeblockcodemirror>
+    <codeblockcodemirror v-if="isCodeMirror" :lang="lang" :code="code" :codefull="codefull" :xlang="xlang" :hides="hides"></codeblockcodemirror>
     <codeblocknormal v-if="isCodeNormal" :lang="lang" :code="code" :codefull="codefull" :xlang="xlang"></codeblocknormal>
     <codeblockcodesandbox v-if="isCodeSandbox" :lang="lang" :codefull="codefull" :xlang="xlang"></codeblockcodesandbox>
   </div>
@@ -17,7 +17,8 @@ export default {
     'codefull',
     'lang',
     'xlang',
-    'tab'
+    'tab',
+    'hides'
   ],
 
   computed: {

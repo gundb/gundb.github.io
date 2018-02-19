@@ -35,12 +35,15 @@ export function parse (markdown, cb) {
       showCodepenIcon: false,
       tabs: [
         {tp: 'code', title: 'Code'}
-      ]
+      ],
+      hides: []
     }
 
     let codeClean = ''
     let codePen = ''
     let hideCode = false
+    let hideStart = 0
+    let lineNr = 0
     let lines = code.split('\n')
     for (let i in lines) {
       if (lines[i].indexOf('<!-- {') >= 0 && lines[i].indexOf('} -->') >= 0) {
@@ -51,28 +54,37 @@ export function parse (markdown, cb) {
           }
           if (lin[1].indexOf('hide: \'start\'') >= 0) {
             hideCode = true
+            hideStart = lineNr
           }
           if (lin[1].indexOf('hide: \'end\'') >= 0) {
             hideCode = false
+            options.hides.push({start: hideStart, end: lineNr - 1})
           }
           for (let j = 0; j < 9; j++) {
             if (lin[1].indexOf('tab' + (j + 1) + ': \'codemirror\'') >= 0) {
-              options.tabs[j] = {tp: 'codemirror', title: 'Live edit'}
+              options.tabs[j] = {tp: 'codemirror', title: 'EDITOR / PREVIEW'}
             }
             if (lin[1].indexOf('tab' + (j + 1) + ': \'codesandbox\'') >= 0) {
-              options.tabs[j] = {tp: 'codesandbox', title: 'Live edit'}
+              options.tabs[j] = {tp: 'codesandbox', title: 'LIVE EDIT'}
             }
             if (lin[1].indexOf('tab' + (j + 1) + ': \'code\'') >= 0) {
-              options.tabs[j] = {tp: 'code', title: 'Code'}
+              options.tabs[j] = {tp: 'code', title: 'CODE'}
             }
           }
           // TODO Add option to define and insert blocks; something like: <!-- {id: 'first', blocks: ['second']} -->
         }
       } else {
-        codePen += lines[i] + '\n'
-        if (!hideCode) {
-          codeClean += lines[i] + '\n'
+        if (codePen.length) {
+          codePen += '\n'
         }
+        codePen += lines[i]
+        if (!hideCode) {
+          if (codeClean.length) {
+            codeClean += '\n'
+          }
+          codeClean += lines[i]
+        }
+        lineNr++
       }
     }
     code = codeClean

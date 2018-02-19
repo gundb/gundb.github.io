@@ -21,7 +21,8 @@ export default {
     'code',
     'codefull',
     'lang',
-    'xlang'
+    'xlang',
+    'hides'
   ],
 
   computed: {
@@ -39,9 +40,27 @@ export default {
     setTimeout(() => {
       var delay
       var editor = CodeMirror.fromTextArea(this.$refs.gnta, {
-        mode: that.lang === 'html' ? 'htmlmixed' : this.lang
+        mode: that.lang === 'html' ? 'htmlmixed' : this.lang,
+        lineNumbers: true,
+        styleSelectedText: true
+        // foldGutter: true,
+        // gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter'],
+        // extraKeys: {'Ctrl-Q': function (cm) { console.log('aaa'); cm.foldCode(cm.getCursor()) }}
         // theme: 'dracula'
       })
+
+      if (this.hides) {
+        for (let hide of this.hides) {
+          editor.foldCode(CodeMirror.Pos(hide.start, 0), function (cm, start) {
+            var end = hide.end
+            return {
+              from: CodeMirror.Pos(start.line, 0),
+              to: CodeMirror.Pos(end, cm.getLine(end).length)
+            }
+          })
+          editor.markText({line: hide.start, ch: 0}, {line: hide.end, ch: editor.getLine(hide.end).length}, {className: 'styled-background'})
+        }
+      }
 
       editor.on('change', function () {
         clearTimeout(delay)

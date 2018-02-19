@@ -83,7 +83,6 @@
   color: #666;
   /* -moz-tab-size: 4; */
   /* tab-size: 4; */
-  padding: 12px;
   border-radius: 0;
   background: #fbfbfb;
   box-sizing: border-box;
@@ -92,6 +91,7 @@
 .gn-code pre {
   overflow: auto;
   border: 1px solid #e8e8e8;
+  padding: 12px;
 }
 
 .uk-iconnav {
@@ -490,5 +490,29 @@ code {
 }
 
 .gn-style-scroll::-webkit-scrollbar-thumb, .CodeMirror-hscrollbar::-webkit-scrollbar-thumb, .CodeMirror-vscrollbar::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 0, 0, 0.1); 
+  background-color: rgba(220, 220, 220, 0.6); 
+}
+
+.CodeMirror-foldmarker {
+  color: #aad;
+  font-family: arial;
+  line-height: .3;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.CodeMirror-foldmarker:hover {
+  color: #00f;
+}
+
+/* .CodeMirror-selected  { background-color: blue !important; } */
+/* .CodeMirror-selectedtext { color: white; } */
+
+.CodeMirror-line .styled-background {
+  background-color: #f0f0f0;
+  color: #aaa !important;
+}
+
+.gn-code .uk-tab>*>a {
+  text-transform: inherit;
 }
