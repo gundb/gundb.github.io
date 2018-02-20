@@ -2,7 +2,9 @@
   <div class="gn-md-wrapper">
     <h1 class="gn-main-title">{{$parent.pageTitle || $route.params.page}}</h1>
     <div class="uk-alert uk-alert-danger" v-if="error">{{ error }}</div>
-    <component v-if="rawHTML !== ''" :is="pageHTML"/>
+    <component v-if="steps.length > 0 && steps[0].content !== ''" :is="pageHTML"/>
+    <!-- <span v-if="currentStep < steps.length - 1" @click="clickNextStep">Next step</span> -->
+    <!-- <span v-if="currentStep > 0" @click="clickPreviousStep">Previous step</span> -->
   </div>
 </template>
 
@@ -39,7 +41,8 @@ export default {
   data: () => ({
     error: null,
     cache: {},
-    rawHTML: ''
+    steps: [],
+    currentStep: 0
   }),
 
   components: {
@@ -124,7 +127,7 @@ export default {
               )
             }
           }).then(page => {
-            parse(page, (err, content) => {
+            parse(page, (err, steps) => {
               if (err) {
                 this.page = null
                 this.error = err
@@ -132,7 +135,7 @@ export default {
                 if ('scrollRestoration' in history) {
                   history.scrollRestoration = 'manual'
                 }
-                this.setPage(content)
+                this.setPage(steps)
 
                 setTimeout(startWaitForAnchor, 100)
                 setTimeout(startWaitForAnchor, 300)
@@ -149,7 +152,7 @@ export default {
   computed: {
     pageHTML () {
       return Vue.component('docmd', {
-        template: this.rawHTML,
+        template: '<div>' + this.steps[this.currentStep].content + '</div>',
         components: {
           codeblock: CodeBlock
         },
@@ -166,13 +169,13 @@ export default {
   },
 
   methods: {
-    setPage (page) {
+    setPage (steps) {
       document.title = `${this.$parent.page
         .split('-')
         .map(UIkit.util.ucfirst)
         .join(' ')} - GUN documentation`
 
-      this.rawHTML = '<div>' + page + '</div>'
+      this.steps = steps
 
       // setTimeout(() => {
       //   if (location.hash && $(location.hash)) {
@@ -183,6 +186,14 @@ export default {
       // }, 1)
 
       // setTimeout(() => $$('pre code', this.$refs.container).forEach(block => hljs.highlightBlock(block)))
+    },
+
+    clickNextStep () {
+      this.currentStep++
+    },
+
+    clickPreviousStep () {
+      this.currentStep--
     }
   }
 }

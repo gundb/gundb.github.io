@@ -23,7 +23,7 @@ export function parse (markdown, cb) {
       :code="'` + encodeURIComponent(code).replace(/'/g, '%27') + `'"
       :codefull="'` + encodeURIComponent(codeFull).replace(/'/g, '%27') + `'"
       :options="'` + encodeURIComponent(JSON.stringify(options)).replace(/'/g, '%27') + `'"
-      ></codeblock>`
+      ></codeblock>\n`
   }
 
   renderer.strong = text => text === 'Note' ? `<span class="uk-label">${text}</span>` : `<strong>${text}</strong>`
@@ -52,6 +52,7 @@ export function parse (markdown, cb) {
           if (lin[1].indexOf('codepen: \'link\'') >= 0) {
             options.showCodepenIcon = true
           }
+
           if (lin[1].indexOf('hide: \'start\'') >= 0) {
             hideCode = true
             hideStart = lineNr
@@ -60,6 +61,7 @@ export function parse (markdown, cb) {
             hideCode = false
             options.hides.push({start: hideStart, end: lineNr - 1})
           }
+
           for (let j = 0; j < 9; j++) {
             if (lin[1].indexOf('tab' + (j + 1) + ': \'codemirror\'') >= 0) {
               options.tabs[j] = {tp: 'codemirror', title: 'EDITOR / PREVIEW'}
@@ -71,7 +73,6 @@ export function parse (markdown, cb) {
               options.tabs[j] = {tp: 'code', title: 'CODE'}
             }
           }
-          // TODO Add option to define and insert blocks; something like: <!-- {id: 'first', blocks: ['second']} -->
         }
       } else {
         if (codePen.length) {
@@ -100,13 +101,59 @@ export function parse (markdown, cb) {
   // renderer.heading = (text, level) => `<h${level} id="${sluggify(text)}" class="uk-h${level > 1 ? level + 1 : level} tm-heading-fragment"><a href="#${sluggify(text)}">${text}</a></h${level}>`
   renderer.heading = (text, level) => `<h${level} id="${sluggify(text)}" class="uk-h${level > 1 ? level + 1 : level} tm-heading-fragment">${text} <a href="#${sluggify(text)}">#</a></h${level}>`
 
+  let blocks = {}
+  let lines = markdown.split('\n')
+  for (let i = 0; i < lines.length; i++) {
+    var lin = lines[i].match(/<!-- {(.*?)} -->/i)
+    if (lin && lin.length > 1) {
+      let matches = decodeURIComponent(lin[1]).match(new RegExp('.*startblock: \'(.*)\'.*', 'm'))
+      if (matches && matches.length > 1) {
+        blocks[matches[1]] = {active: true, content: []}
+      }
+      matches = decodeURIComponent(lin[1]).match(new RegExp('.*endblock: \'(.*)\'.*', 'm'))
+      if (matches && matches.length > 1) {
+        blocks[matches[1]].active = false
+      }
+      matches = decodeURIComponent(lin[1]).match(new RegExp('.*insertblock: \'(.*)\'.*', 'm'))
+      if (matches && matches.length > 1) {
+        lines.splice(i + 1, 0, ...blocks[matches[1]].content)
+      }
+    } else {
+      for (let blk in blocks) {
+        if (blocks[blk].active) {
+          blocks[blk].content.push(lines[i])
+        }
+      }
+    }
+  }
+  markdown = lines.join('\n')
+
   return marked(markdown, { renderer }, (err, content) => {
     if (content.indexOf('{%isodate%}') !== -1) {
       content = content.replace(/{%isodate%}/g, (new Date(Date.now() + 864e5 * 7)).toISOString().replace(/\.(\d+)Z/, '+00:00'))
     }
 
+    let steps = [{name: 'default', content: ''}]
+    let lines = content.split('\n')
+    for (let i in lines) {
+      var lin = lines[i].match(/<!-- {(.*?)} -->/i)
+      if (lin && lin.length > 1) {
+        // console.log('===', lines[i])
+        let matches = decodeURIComponent(lin[1]).match(new RegExp('.*step: \'(.*)\'.*', 'm'))
+        // console.log('###', matches)
+        if (matches.length > 1) {
+          steps.push({name: matches[1], content: ''})
+        }
+      } else {
+        if (steps[steps.length - 1].content !== '') {
+          steps[steps.length - 1].content += '\n'
+        }
+        steps[steps.length - 1].content += lines[i]
+      }
+    }
+
     if (cb) {
-      cb.apply(this, [err, content])
+      cb.apply(this, [err, steps])
     }
   })
 }
