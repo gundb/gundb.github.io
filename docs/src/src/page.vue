@@ -3,8 +3,11 @@
     <h1 class="gn-main-title">{{$parent.pageTitle || $route.params.page}}</h1>
     <div class="uk-alert uk-alert-danger" v-if="error">{{ error }}</div>
     <component v-if="steps.length > 0 && steps[0].content !== ''" :is="pageHTML"/>
-    <!-- <span v-if="currentStep < steps.length - 1" @click="clickNextStep">Next step</span> -->
-    <!-- <span v-if="currentStep > 0" @click="clickPreviousStep">Previous step</span> -->
+    <span v-if="steps.length > 1">
+      <hr class="gn-hr-thin">
+      <button v-if="currentStep > 0" @click="clickPreviousStep" class="uk-button uk-button-default">Previous step</button>
+      <button v-if="currentStep < steps.length - 1" @click="clickNextStep" class="uk-button uk-button-primary">Next step</button>
+    </span>
   </div>
 </template>
 
@@ -42,7 +45,8 @@ export default {
     error: null,
     cache: {},
     steps: [],
-    currentStep: 0
+    currentStep: 0,
+    editors: {}
   }),
 
   components: {
@@ -50,6 +54,18 @@ export default {
   },
 
   mounted () {
+    let that = this
+
+    this.$root.$on('gn-editor-changed', (data) => {
+      that.editors[data.name] = {content: data.content}
+    })
+
+    this.$root.$on('gn-editor-request', (data) => {
+      for (let name in this.editors) {
+        that.$root.$emit('gn-editor-update', {name: name, content: that.editors[name].content})
+      }
+    })
+
     on(this.$refs.container, 'click', '[href="#"]', e => e.preventDefault())
 
     // on(

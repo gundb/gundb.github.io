@@ -16,13 +16,14 @@ export function parse (markdown, cb) {
                   <img src="${href}" alt="${text}">
                   </div></div>`
   }
-  var examplejs = (code, lang, options, codeFull) => {
+  var examplejs = (code, lang, options, codeFull, editorName) => {
     return `<codeblock
       :lang="'${lang}'"
       :showcodepenicon="${options.showCodepenIcon}"
       :code="'` + encodeURIComponent(code).replace(/'/g, '%27') + `'"
       :codefull="'` + encodeURIComponent(codeFull).replace(/'/g, '%27') + `'"
       :options="'` + encodeURIComponent(JSON.stringify(options)).replace(/'/g, '%27') + `'"
+      :editorname="'${editorName}'"
       ></codeblock>\n`
   }
 
@@ -43,6 +44,7 @@ export function parse (markdown, cb) {
     let codePen = ''
     let hideCode = false
     let hideStart = 0
+    let editorName = ''
     let lineNr = 0
     let lines = code.split('\n')
     for (let i in lines) {
@@ -73,6 +75,11 @@ export function parse (markdown, cb) {
               options.tabs[j] = {tp: 'code', title: 'CODE'}
             }
           }
+
+          let matches = decodeURIComponent(lin[1]).match(new RegExp('.*editor: \'(.*)\'.*', 'm'))
+          if (matches && matches.length > 1) {
+            editorName = matches[1]
+          }
         }
       } else {
         if (codePen.length) {
@@ -92,7 +99,7 @@ export function parse (markdown, cb) {
 
     lang = lang && lang.split('#')[0]
 
-    return examplejs(code, lang, options, codePen)
+    return examplejs(code, lang, options, codePen, editorName)
     // return '<div class="uk-margin-medium">' + base.code(code, lang, escaped) + '</div>'
   }
   // renderer.hr = () => `<hr class="uk-margin-large">`

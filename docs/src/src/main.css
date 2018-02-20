@@ -516,3 +516,9 @@ code {
 .gn-code .uk-tab>*>a {
   text-transform: inherit;
 }
+
+.gn-main .gn-hr-thin {
+  height: 1px;
+  margin-top: 32px;
+  margin-bottom: 12px;
+}

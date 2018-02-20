@@ -1,6 +1,6 @@
 <template>
   <div>
-    <codeblockcodemirror v-if="isCodeMirror" :lang="lang" :code="code" :codefull="codefull" :xlang="xlang" :hides="hides"></codeblockcodemirror>
+    <codeblockcodemirror v-if="isCodeMirror" :lang="lang" :code="code" :codefull="codefull" :xlang="xlang" :hides="hides" :editorname="editorname"></codeblockcodemirror>
     <codeblocknormal v-if="isCodeNormal" :lang="lang" :code="code" :codefull="codefull" :xlang="xlang"></codeblocknormal>
     <codeblockcodesandbox v-if="isCodeSandbox" :lang="lang" :codefull="codefull" :xlang="xlang"></codeblockcodesandbox>
   </div>
@@ -18,7 +18,8 @@ export default {
     'lang',
     'xlang',
     'tab',
-    'hides'
+    'hides',
+    'editorname'
   ],
 
   computed: {

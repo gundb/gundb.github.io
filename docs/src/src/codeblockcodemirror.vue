@@ -16,13 +16,16 @@
 </template>
 
 <script>
+let myEditor = null
+
 export default {
   props: [
     'code',
     'codefull',
     'lang',
     'xlang',
-    'hides'
+    'hides',
+    'editorname'
   ],
 
   computed: {
@@ -49,6 +52,8 @@ export default {
         // theme: 'dracula'
       })
 
+      myEditor = editor
+
       if (this.hides) {
         for (let hide of this.hides) {
           editor.foldCode(CodeMirror.Pos(hide.start, 0), function (cm, start) {
@@ -65,6 +70,7 @@ export default {
       editor.on('change', function () {
         clearTimeout(delay)
         delay = setTimeout(updatePreview, 300)
+        that.$root.$emit('gn-editor-changed', {name: that.editorname, content: editor.getValue()})
       })
 
       function updatePreview () {
@@ -77,6 +83,16 @@ export default {
         preview.close()
       }
       setTimeout(updatePreview, 300)
+
+      that.$root.$emit('gn-editor-request', {name: that.editorname})
+
+      that.$root.$on('gn-editor-update', (data) => {
+        if (data.name === that.editorname) {
+          if (myEditor) {
+            myEditor.setValue(data.content)
+          }
+        }
+      })
     }, 1)
   }
 }

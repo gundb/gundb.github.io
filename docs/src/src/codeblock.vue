@@ -7,12 +7,12 @@
         </ul>
         <ul class="uk-switcher uk-margin gn-code-block" ref="gnul">
           <li v-for="tab in doptions.tabs">
-            <codeblocktab v-if="tab.activated" :lang="lang" :code="code" :codefull="codefull" :tab="tab" :xlang="xlang" :hides="doptions.hides"></codeblocktab>
+            <codeblocktab v-if="tab.activated" :lang="lang" :code="code" :codefull="codefull" :tab="tab" :xlang="xlang" :hides="doptions.hides" :editorname="editorname"></codeblocktab>
           </li>
         </ul>
       </div>
       <div v-else>
-        <codeblocktab :lang="lang" :code="code" :codefull="codefull" :tab="doptions.tabs[0]" :xlang="xlang"></codeblocktab>
+        <codeblocktab :lang="lang" :code="code" :codefull="codefull" :tab="doptions.tabs[0]" :xlang="xlang" :editorname="editorname"></codeblocktab>
       </div>
       <!-- Icons -->
       <div class="uk-position-top-right">
@@ -46,7 +46,8 @@ export default {
     'codefull',
     'lang',
     'showcodepenicon',
-    'options'
+    'options',
+    'editorname'
   ],
 
   computed: {
