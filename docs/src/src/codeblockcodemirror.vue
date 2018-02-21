@@ -70,7 +70,7 @@ export default {
       editor.on('change', function () {
         clearTimeout(delay)
         delay = setTimeout(updatePreview, 300)
-        that.$root.$emit('gn-editor-changed', {name: that.editorname, content: editor.getValue()})
+        that.$root.$emit('gn-editor-changed', {name: that.editorname, content: editor.getValue(), originalContent: that.dcodefull})
       })
 
       function updatePreview () {
@@ -89,7 +89,10 @@ export default {
       that.$root.$on('gn-editor-update', (data) => {
         if (data.name === that.editorname) {
           if (myEditor) {
-            myEditor.setValue(data.content)
+            let mergeResult = Diff.diff3_merge(data.content, data.originalContent, myEditor.getValue(), true)
+            if (mergeResult.length === 1 && Array.isArray(mergeResult[0].ok)) {
+              myEditor.setValue(mergeResult[0].ok.join(''))
+            }
           }
         }
       })

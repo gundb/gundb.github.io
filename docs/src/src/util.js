@@ -111,19 +111,21 @@ export function parse (markdown, cb) {
   let blocks = {}
   let lines = markdown.split('\n')
   for (let i = 0; i < lines.length; i++) {
-    var lin = lines[i].match(/<!-- {(.*?)} -->/i)
+    let lin = lines[i].match(/<!-- {(.*?)} -->/i)
     if (lin && lin.length > 1) {
       let matches = decodeURIComponent(lin[1]).match(new RegExp('.*startblock: \'(.*)\'.*', 'm'))
       if (matches && matches.length > 1) {
         blocks[matches[1]] = {active: true, content: []}
+        lines.splice(i--, 1)
       }
       matches = decodeURIComponent(lin[1]).match(new RegExp('.*endblock: \'(.*)\'.*', 'm'))
       if (matches && matches.length > 1) {
         blocks[matches[1]].active = false
+        lines.splice(i--, 1)
       }
       matches = decodeURIComponent(lin[1]).match(new RegExp('.*insertblock: \'(.*)\'.*', 'm'))
       if (matches && matches.length > 1) {
-        lines.splice(i + 1, 0, ...blocks[matches[1]].content)
+        lines.splice(i--, 1, ...blocks[matches[1]].content)
       }
     } else {
       for (let blk in blocks) {
@@ -135,21 +137,32 @@ export function parse (markdown, cb) {
   }
   markdown = lines.join('\n')
 
-  return marked(markdown, { renderer }, (err, content) => {
-    if (content.indexOf('{%isodate%}') !== -1) {
-      content = content.replace(/{%isodate%}/g, (new Date(Date.now() + 864e5 * 7)).toISOString().replace(/\.(\d+)Z/, '+00:00'))
-    }
-
-    let steps = [{name: 'default', content: ''}]
-    let lines = content.split('\n')
-    for (let i in lines) {
-      var lin = lines[i].match(/<!-- {(.*?)} -->/i)
+  let steps = [{name: 'default', content: '', nextCompare: '', nextconditionsmet: false}]
+  let inCompare = 0
+  lines = markdown.split('\n')
+  for (let i in lines) {
+    let matches = decodeURIComponent(lines[i]).match(new RegExp('# _STEP_(.*)', 'm'))
+    if (matches && matches.length > 1) {
+      steps.push({name: matches[1], content: '', nextCompare: '', nextconditionsmet: false})
+    } else {
+      let lin = lines[i].match(/<!-- {(.*?)} -->/i)
       if (lin && lin.length > 1) {
-        // console.log('===', lines[i])
-        let matches = decodeURIComponent(lin[1]).match(new RegExp('.*step: \'(.*)\'.*', 'm'))
-        // console.log('###', matches)
-        if (matches.length > 1) {
-          steps.push({name: matches[1], content: ''})
+        if (lin[1].indexOf('nextstepcompare: \'start\'') >= 0) {
+          inCompare = 1
+        }
+        if (lin[1].indexOf('nextstepcompare: \'end\'') >= 0) {
+          inCompare = 0
+        }
+      }
+
+      if (inCompare > 0) {
+        if (inCompare === 1) {
+          inCompare = 2
+        } else if (lines[i].indexOf('```') !== 0) {
+          if (steps[steps.length - 1].nextCompare !== '') {
+            steps[steps.length - 1].nextCompare += '\n'
+          }
+          steps[steps.length - 1].nextCompare += lines[i]
         }
       } else {
         if (steps[steps.length - 1].content !== '') {
@@ -158,11 +171,23 @@ export function parse (markdown, cb) {
         steps[steps.length - 1].content += lines[i]
       }
     }
+  }
 
-    if (cb) {
-      cb.apply(this, [err, steps])
-    }
-  })
+  let errRet
+  for (let i in steps) {
+    /* return */ marked(steps[i].content, { renderer }, (err, content) => {
+      errRet = err
+      if (content.indexOf('{%isodate%}') !== -1) {
+        content = content.replace(/{%isodate%}/g, (new Date(Date.now() + 864e5 * 7)).toISOString().replace(/\.(\d+)Z/, '+00:00'))
+      }
+
+      steps[i].content = content
+    })
+  }
+
+  if (cb) {
+    cb.apply(this, [errRet, steps])
+  }
 }
 
 // https://blog.codepen.io/documentation/api/prefill/

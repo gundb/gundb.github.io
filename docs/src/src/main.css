@@ -522,3 +522,41 @@ code {
   margin-top: 32px;
   margin-bottom: 12px;
 }
+
+.gn-valid {
+  background-color: green !important;
+}
+
+.gn-step-result {
+  margin-bottom: 8px;
+}
+
+.gn-step-result .gn-step-valid .uk-icon {
+  color: green;
+}
+
+.gn-step-result .gn-step-invalid {
+  position: relative;
+}
+
+/* .gn-step-result .gn-step-invalid .uk-icon {
+  margin: -2px -10px 0 -11px;
+  position: absolute;
+}
+
+.gn-step-result .gn-step-invalid .gn-step-msg {
+  margin-left: 16px;
+} */
+
+.gn-next-warning {
+  margin-right: 12px;
+}
+
+.gn-next-warning .uk-icon {
+  margin-right: 8px;
+  color: #f00;
+}
+
+.gn-step-block button {
+  margin-right: 12px;
+}

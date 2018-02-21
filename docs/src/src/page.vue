@@ -3,10 +3,19 @@
     <h1 class="gn-main-title">{{$parent.pageTitle || $route.params.page}}</h1>
     <div class="uk-alert uk-alert-danger" v-if="error">{{ error }}</div>
     <component v-if="steps.length > 0 && steps[0].content !== ''" :is="pageHTML"/>
-    <span v-if="steps.length > 1">
+    <span v-if="steps.length > 1" class="gn-step-block">
       <hr class="gn-hr-thin">
+      <div class="gn-step-result">
+        <!-- <div v-if="!nextStepValid" class="gn-step-invalid" key="111">
+          <span uk-icon="icon: triangle-right; ratio: 1.5" key="11a"></span> <span class="gn-step-msg">Please take the required action...</span>
+        </div> -->
+        <div v-if="nextStepValid" class="gn-step-valid" key="222">
+          <span uk-icon="icon: check; ratio: 2" key="22a"></span> Good job!
+        </div>
+      </div>
       <button v-if="currentStep > 0" @click="clickPreviousStep" class="uk-button uk-button-default">Previous step</button>
-      <button v-if="currentStep < steps.length - 1" @click="clickNextStep" class="uk-button uk-button-primary">Next step</button>
+      <span v-if="showNextWarning" class="gn-next-warning"><span uk-icon="icon: warning; ratio: 1" key="33a"></span>This step is not yet finished. Continue anyway?</span>
+      <button v-if="currentStep < steps.length - 1" @click="clickNextStep" :class="'uk-button uk-button-primary ' + (nextStepValid ? 'gn-valid' : '')">Next step</button>
     </span>
   </div>
 </template>
@@ -46,6 +55,8 @@ export default {
     cache: {},
     steps: [],
     currentStep: 0,
+    lastStepAction: '',
+    showNextWarning: false,
     editors: {}
   }),
 
@@ -57,12 +68,22 @@ export default {
     let that = this
 
     this.$root.$on('gn-editor-changed', (data) => {
-      that.editors[data.name] = {content: data.content}
+      let content = data.content
+
+      that.editors[data.name] = {content: content, originalContent: data.originalContent}
+
+      that.steps[that.currentStep].nextconditionsmet = Diff.diff3_file2_no_effect(
+        content.replace(/\s\s+/g, ' '),
+        data.originalContent.replace(/\s\s+/g, ' '),
+        that.steps[that.currentStep].nextCompare.replace(/\s\s+/g, ' '), true)
     })
 
     this.$root.$on('gn-editor-request', (data) => {
-      for (let name in this.editors) {
-        that.$root.$emit('gn-editor-update', {name: name, content: that.editors[name].content})
+      if (this.lastStepAction === 'next') {
+        this.lastStepAction = ''
+        for (let name in this.editors) {
+          that.$root.$emit('gn-editor-update', {name: name, content: that.editors[name].content, originalContent: that.editors[name].originalContent})
+        }
       }
     })
 
@@ -181,6 +202,10 @@ export default {
           this.$parent.$parent.ids = ids
         }
       })
+    },
+
+    nextStepValid () {
+      return this.steps && this.steps[this.currentStep] && this.steps[this.currentStep].nextconditionsmet
     }
   },
 
@@ -205,10 +230,18 @@ export default {
     },
 
     clickNextStep () {
-      this.currentStep++
+      if (!this.nextStepValid && !this.showNextWarning) {
+        this.showNextWarning = true
+      } else {
+        this.showNextWarning = false
+        this.lastStepAction = 'next'
+        this.currentStep++
+      }
     },
 
     clickPreviousStep () {
+      this.showNextWarning = false
+      this.lastStepAction = 'previous'
       this.currentStep--
     }
   }
