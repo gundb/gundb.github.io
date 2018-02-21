@@ -2,6 +2,7 @@ import Vue from 'vue/dist/vue.esm.js'
 import App from './app.vue'
 import VueRouter from 'vue-router'
 import Page from './page.vue'
+import './lib/diff.js'
 
 /*
 --------------------------------------------------------------------------
