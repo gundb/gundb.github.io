@@ -186,7 +186,9 @@ export default {
         ajax(`navigation.json?nc=${Math.random()}`).then(page => {
           try {
             let s = page.response
+            s = s.replace(/:\/\//g, '_:_/_/_')
             s = s.replace(/\/\*(.|[\r\n])*?\*\//g, '').replace(/\/\/.*/gm, '')
+            s = s.replace(/_:+\/_\/_/g, '://')
             let json = JSON.parse(s)
             this.setNavigation(json)
             resolve()

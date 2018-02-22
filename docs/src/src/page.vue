@@ -132,7 +132,7 @@ export default {
 
         this.$parent.page = page
 
-        this.$parent.menuPromise.then(() => {
+        this.$parent.menuPromise && this.$parent.menuPromise.then(() => {
           new Promise((resolve, reject) => {
             if (this.cache[page]) {
               resolve(this.cache[page])

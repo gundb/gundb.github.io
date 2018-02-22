@@ -172,7 +172,7 @@
     "topmenu": {
       "items": [
         { "url": "Site-Index", "name": "Index" },
-        { "url": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "name": "Github" }
+        { "url2": "https://github.com/amark/gun", "name": "Github" }
       ]
     }
   }
