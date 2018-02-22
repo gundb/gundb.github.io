@@ -116,7 +116,11 @@ function processBlocks (markdown) {
       }
       matches = decodeURIComponent(lin[1]).match(new RegExp('.*endblock: \'(.*)\'.*', 'm'))
       if (matches && matches.length > 1) {
-        blocks[matches[1]].active = false
+        try {
+          blocks[matches[1]].active = false
+        } catch (e) {
+          console && console.error('!!! Error parsing block: ' + matches[1] + '!!!', e)
+        }
         lines.splice(i--, 1)
       }
       matches = decodeURIComponent(lin[1]).match(new RegExp('.*insertblock: \'(.*)\'.*', 'm'))

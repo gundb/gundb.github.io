@@ -10,7 +10,7 @@
           <span uk-icon="icon: triangle-right; ratio: 1.5" key="11a"></span> <span class="gn-step-msg">Please take the required action...</span>
         </div> -->
         <div v-if="nextStepValid" class="gn-step-valid" key="222">
-          <span uk-icon="icon: check; ratio: 2" key="22a"></span> Good job!
+          <span uk-icon="icon: check; ratio: 2" key="22a"></span> {{getCompliment()}}
         </div>
       </div>
       <button v-if="currentStep > 0" @click="clickPreviousStep" class="uk-button uk-button-default">Previous step</button>
@@ -76,6 +76,8 @@ export default {
         content.replace(/\s\s+/g, ' '),
         data.originalContent.replace(/\s\s+/g, ' '),
         that.steps[that.currentStep].nextCompare.replace(/\s\s+/g, ' '), true)
+
+      that.showNextWarning = false
     })
 
     this.$root.$on('gn-editor-request', (data) => {
@@ -237,6 +239,16 @@ export default {
       this.showNextWarning = false
       this.lastStepAction = 'previous'
       this.currentStep--
+    },
+
+    getCompliment () {
+      let items = [
+        'Well done!',
+        'Good job!',
+        'You rock!',
+        'Awesome!'
+      ]
+      return items[Math.floor(Math.random() * items.length)]
     }
   }
 }
