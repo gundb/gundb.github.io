@@ -164,20 +164,14 @@ export default {
               )
             }
           }).then(page => {
-            parse(page, (err, steps) => {
-              if (err) {
-                this.page = null
-                this.error = err
-              } else {
-                if ('scrollRestoration' in history) {
-                  history.scrollRestoration = 'manual'
-                }
-                this.setPage(steps)
+            let steps = parse(page)
+            if ('scrollRestoration' in history) {
+              history.scrollRestoration = 'manual'
+            }
+            this.setPage(steps)
 
-                setTimeout(startWaitForAnchor, 100)
-                setTimeout(startWaitForAnchor, 300)
-              }
-            })
+            setTimeout(startWaitForAnchor, 100)
+            setTimeout(startWaitForAnchor, 300)
           }, () => (this.error = 'Failed loading page'))
         })
       },
