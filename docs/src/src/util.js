@@ -48,8 +48,8 @@ export function parse (markdown, cb) {
     let lineNr = 0
     let lines = code.split('\n')
     for (let i in lines) {
-      if (lines[i].indexOf('<!-- {') >= 0 && lines[i].indexOf('} -->') >= 0) {
-        var lin = lines[i].match(/<!-- {(.*?)} -->/i)
+      if (lines[i].indexOf(getRegexStart()) >= 0 && lines[i].indexOf(getRegexEnd()) >= 0) {
+        var lin = lines[i].match(getRegex('(.*?)', 'i'))
         if (lin && lin.length > 1) {
           if (lin[1].indexOf('codepen: \'link\'') >= 0) {
             options.showCodepenIcon = true
@@ -111,7 +111,7 @@ export function parse (markdown, cb) {
   let blocks = {}
   let lines = markdown.split('\n')
   for (let i = 0; i < lines.length; i++) {
-    let lin = lines[i].match(/<!-- {(.*?)} -->/i)
+    let lin = lines[i].match(getRegex('(.*?)', 'i'))
     if (lin && lin.length > 1) {
       let matches = decodeURIComponent(lin[1]).match(new RegExp('.*startblock: \'(.*)\'.*', 'm'))
       if (matches && matches.length > 1) {
@@ -138,27 +138,31 @@ export function parse (markdown, cb) {
   markdown = lines.join('\n')
 
   let steps = [{name: 'default', content: '', nextCompare: '', nextconditionsmet: false}]
-  let inCompare = 0
+  let inCompare = false
   lines = markdown.split('\n')
   for (let i in lines) {
-    let matches = decodeURIComponent(lines[i]).match(new RegExp('# _STEP_(.*)', 'm'))
-    if (matches && matches.length > 1) {
-      steps.push({name: matches[1], content: '', nextCompare: '', nextconditionsmet: false})
-    } else {
-      let lin = lines[i].match(/<!-- {(.*?)} -->/i)
-      if (lin && lin.length > 1) {
-        if (lin[1].indexOf('nextstepcompare: \'start\'') >= 0) {
-          inCompare = 1
-        }
-        if (lin[1].indexOf('nextstepcompare: \'end\'') >= 0) {
-          inCompare = 0
-        }
+    let useLine = true
+    let lin = lines[i].match(getRegex('(.*?)', 'i'))
+    if (lin && lin.length > 1) {
+      let matches = decodeURIComponent(lines[i]).match(new RegExp('step: \'(.*)\'', 'm'))
+      if (matches && matches.length > 1) {
+        steps.push({name: matches[1], content: '', nextCompare: '', nextconditionsmet: false})
+        useLine = false
       }
 
-      if (inCompare > 0) {
-        if (inCompare === 1) {
-          inCompare = 2
-        } else if (lines[i].indexOf('```') !== 0) {
+      if (lin[1].indexOf('nextstepcompare: \'start\'') >= 0) {
+        inCompare = true
+        useLine = false
+      }
+      if (lin[1].indexOf('nextstepcompare: \'end\'') >= 0) {
+        inCompare = false
+        useLine = false
+      }
+    }
+
+    if (useLine) {
+      if (inCompare) {
+        if (lines[i].indexOf('```') !== 0) {
           if (steps[steps.length - 1].nextCompare !== '') {
             steps[steps.length - 1].nextCompare += '\n'
           }
@@ -188,6 +192,20 @@ export function parse (markdown, cb) {
   if (cb) {
     cb.apply(this, [errRet, steps])
   }
+}
+
+function getRegexStart () {
+  // return '<!-- {'
+  return '::: {'
+}
+
+function getRegexEnd () {
+  // return '} -->'
+  return '} :::'
+}
+
+function getRegex (r, f) {
+  return new RegExp(getRegexStart() + r + getRegexEnd(), f)
 }
 
 // https://blog.codepen.io/documentation/api/prefill/
