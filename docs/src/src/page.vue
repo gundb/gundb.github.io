@@ -152,8 +152,7 @@ export default {
                 resolve(el.innerHTML)
               }, 1)
             } else {
-              ajax(`https://raw.githubusercontent.com/wiki/amark/gun/${page}.md?nc=${Math.random()}`).then(
-              // ajax(that.replaceParts(that.$parent.settings.page.requestUrl + '?nc=' + Math.random())).then(
+              ajax(that.replaceParts(that.$parent.settings.page.requestUrl + '?nc=' + Math.random())).then(
                 ({ response }) => {
                   if (startsWith(response.trim(), '<!DOCTYPE html>')) {
                     response = `<div class="uk-text-center">

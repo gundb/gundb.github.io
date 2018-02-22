@@ -188,7 +188,7 @@ export default {
             let s = page.response
             s = s.replace(/:\/\//g, '_:_/_/_')
             s = s.replace(/\/\*(.|[\r\n])*?\*\//g, '').replace(/\/\/.*/gm, '')
-            s = s.replace(/_:\/_\/_/g, '://')
+            s = s.replace(/_:_\/_\/_/g, '://')
             let json = JSON.parse(s)
             this.setNavigation(json)
             resolve()
