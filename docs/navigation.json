@@ -171,7 +171,8 @@
   "settings": {
     "topmenu": {
       "items": [
-        { "url": "Site-Index", "name": "Index" }
+        { "url": "Site-Index", "name": "Index" },
+        { "url": "https://github.com/amark/gun", "name": "Github" }
       ]
     }
   }
