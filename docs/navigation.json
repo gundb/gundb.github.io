@@ -171,6 +171,7 @@
   "settings": {
     "topmenu": {
       "items": [
+        { "url": "Site-Index", "name": "Index" }
       ]
     }
   }
