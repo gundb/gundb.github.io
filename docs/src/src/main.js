@@ -11,7 +11,6 @@ import './lib/diff.js'
 const routes = [
   {path: '*/', redirect: './Introduction'},
   {path: '*/docs/', redirect: './docs/Introduction'},
-  {path: '*/gundocs/', redirect: './gundocs/Introduction'},
   {path: '*/:page', component: Page}
 ]
 

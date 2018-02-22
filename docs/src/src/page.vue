@@ -117,6 +117,8 @@ export default {
   watch: {
     $route: {
       handler () {
+        let that = this
+
         // this.$parent.ids = {}
 
         let oc = UIkit.offcanvas('#offcanvas', {})
@@ -150,7 +152,7 @@ export default {
                 resolve(el.innerHTML)
               }, 1)
             } else {
-              ajax(`https://raw.githubusercontent.com/wiki/amark/gun/${page}.md?nc=${Math.random()}`).then(
+              ajax(that.replaceParts(that.$parent.settings.page.requestUrl + '?nc=' + Math.random())).then(
                 ({ response }) => {
                   if (startsWith(response.trim(), '<!DOCTYPE html>')) {
                     response = `<div class="uk-text-center">
@@ -210,7 +212,7 @@ export default {
       document.title = `${this.$parent.page
         .split('-')
         .map(UIkit.util.ucfirst)
-        .join(' ')} - GUN documentation`
+        .join(' ')}` + this.$parent.settings.page.title.add
 
       this.steps = steps
 
@@ -249,6 +251,10 @@ export default {
         'Awesome!'
       ]
       return items[Math.floor(Math.random() * items.length)]
+    },
+
+    replaceParts (s) {
+      return s.replace(/\{%slug%\}/, this.$parent.page)
     }
   }
 }

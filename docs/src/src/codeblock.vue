@@ -137,7 +137,6 @@ export default {
         js = ''
       }
 
-      let nc = Date.now() % 9999
       let data = {
         title: '',
         description: '',
@@ -151,8 +150,8 @@ export default {
         js_pre_processor: 'none',
         js_modernizr: false,
         html_classes: '',
-        css_external: '', // `https://getuikit.com/assets/uikit/dist/css/uikit.css?nc=${nc}`,
-        js_external: `https://cdn.rawgit.com/amark/gun/master/gun.js?nc=${nc}`
+        css_external: '',
+        js_external: this.replaceParts(this.$parent.$parent.$parent.settings.editor.codepen.jsExternal)
       }
 
       data = JSON.stringify(data)
@@ -165,6 +164,10 @@ export default {
 
       form.submit()
       remove(form)
+    },
+
+    replaceParts (s) {
+      return s.replace(/\{%random%\}/, Date.now() % 9999)
     }
   }
 }

@@ -42,7 +42,7 @@ export default {
         files: {
           'package.json': {
             content: {
-              name: 'GUN',
+              name: 'Main',
               main: 'index.html',
               dependencies: {
               }

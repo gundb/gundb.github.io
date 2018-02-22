@@ -108,6 +108,7 @@
 
 #gn-bar-right {
   padding-top: 16px;
+  z-index: 999;
 }
 
 .gn-sideright {
@@ -322,6 +323,8 @@
 .gn-logo {
   margin-top: 8px;
   margin-left: -15px;
+  height: 42px;
+  max-width: 76px;
 }
 
 #gn-src {

@@ -1,1 +1,1 @@
-Documentation system for GUN.
+Documentation system.
