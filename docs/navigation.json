@@ -170,6 +170,8 @@
   ],
   "settings": {
     "topmenu": {
+      "items": [
+      ]
     }
   }
 }
