@@ -30,7 +30,7 @@ import CodeBlockTab from './codeblocktab.vue'
 import CodeBlockNormal from './codeblocknormal.vue'
 import CodeBlockCodeSandbox from './codeblockcodesandbox.vue'
 import CodeBlockCodeMirror from './codeblockcodemirror.vue'
-import { openOnCodepen } from './util'
+let { append, remove } = UIkit.util
 
 export default {
   name: 'codeblock',
@@ -120,7 +120,51 @@ export default {
 
   methods: {
     clickCodepenIcon: function (event) {
-      openOnCodepen(decodeURIComponent(this.codefull), this.lang)
+      // https://blog.codepen.io/documentation/api/prefill/
+      let code = decodeURIComponent(this.codefull)
+      let lang = this.lang
+      // var regexp = /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi
+      // var scripts = (code.match(regexp) || []).join('\n').replace(/<\/?script>/g, '')
+
+      code = code
+        // .replace(regexp, '')
+        .replace(/<img[^>]+src="(.*?)"|url\((.*?)\)"/g, (match, src) => src.indexOf('../docs/') === 0 ? match.replace(src, `${location.href.split('/docs/')[0]}/docs/${src.replace('../docs/', '')}`) : match)
+
+      let html = ''
+      let js = code
+      if (lang === 'html') {
+        html = code
+        js = ''
+      }
+
+      let nc = Date.now() % 9999
+      let data = {
+        title: '',
+        description: '',
+        html: html,
+        html_pre_processor: 'none',
+        css: '',
+        css_pre_processor: 'none',
+        css_starter: 'neither',
+        css_prefix_free: false,
+        js: js, // scripts || '',
+        js_pre_processor: 'none',
+        js_modernizr: false,
+        html_classes: '',
+        css_external: '', // `https://getuikit.com/assets/uikit/dist/css/uikit.css?nc=${nc}`,
+        js_external: `https://cdn.rawgit.com/amark/gun/master/gun.js?nc=${nc}`
+      }
+
+      data = JSON.stringify(data)
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&apos;')
+
+      var form = append(document.body, `<form action="https://codepen.io/pen/define" method="POST" target="_blank">
+                <input type="hidden" name="data" value='${data}'>
+            </form>`)[0]
+
+      form.submit()
+      remove(form)
     }
   }
 }

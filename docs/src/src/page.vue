@@ -23,7 +23,7 @@
 <script>
 import Vue from 'vue/dist/vue.esm.js'
 import CodeBlock from './codeblock.vue'
-import { parse } from './util'
+import { parse } from './parse'
 
 var { $/* , $$ */, ajax, attr, offset, on, Promise, startsWith } = UIkit.util
 

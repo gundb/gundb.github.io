@@ -1,9 +1,3 @@
-var { append, remove } = UIkit.util
-
-export function sluggify (text) {
-  return text.toLowerCase().trim().replace(/(&amp;| & )/g, '-and-').replace(/&(.+?);/g, '').replace(/[\s\W-]+/g, '-')
-}
-
 export function parse (markdown) {
   var renderer = new marked.Renderer({ langPrefix: 'lang-' })
   var base = new marked.Renderer({ langPrefix: 'lang-' })
@@ -20,6 +14,10 @@ export function parse (markdown) {
   markdown = processBlocks(markdown)
 
   return getSteps(markdown, renderer)
+}
+
+function sluggify (text) {
+  return text.toLowerCase().trim().replace(/(&amp;| & )/g, '-and-').replace(/&(.+?);/g, '').replace(/[\s\W-]+/g, '-')
 }
 
 function rendererCode (code, lang, escaped) {
@@ -202,51 +200,4 @@ function getRegexEnd () {
 
 function getRegex (r, f) {
   return new RegExp(getRegexStart() + r + getRegexEnd(), f)
-}
-
-// https://blog.codepen.io/documentation/api/prefill/
-export function openOnCodepen (code, lang) {
-  // var regexp = /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi
-  // var scripts = (code.match(regexp) || []).join('\n').replace(/<\/?script>/g, '')
-
-  code = code
-    // .replace(regexp, '')
-    .replace(/<img[^>]+src="(.*?)"|url\((.*?)\)"/g, (match, src) => src.indexOf('../docs/') === 0 ? match.replace(src, `${location.href.split('/docs/')[0]}/docs/${src.replace('../docs/', '')}`) : match)
-
-  let html = ''
-  let js = code
-  if (lang === 'html') {
-    html = code
-    js = ''
-  }
-
-  let nc = Date.now() % 9999
-  let data = {
-    title: '',
-    description: '',
-    html: html,
-    html_pre_processor: 'none',
-    css: '',
-    css_pre_processor: 'none',
-    css_starter: 'neither',
-    css_prefix_free: false,
-    js: js, // scripts || '',
-    js_pre_processor: 'none',
-    js_modernizr: false,
-    html_classes: '',
-    css_external: '', // `https://getuikit.com/assets/uikit/dist/css/uikit.css?nc=${nc}`,
-    js_external: `https://cdn.rawgit.com/amark/gun/master/gun.js?nc=${nc}`
-  }
-
-  data = JSON.stringify(data)
-    // Quotes will screw up the JSON
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&apos;')
-
-  var form = append(document.body, `<form action="https://codepen.io/pen/define" method="POST" target="_blank">
-            <input type="hidden" name="data" value='${data}'>
-        </form>`)[0]
-
-  form.submit()
-  remove(form)
 }
