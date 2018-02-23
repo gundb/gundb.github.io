@@ -177,6 +177,14 @@ export default {
 
             setTimeout(startWaitForAnchor, 100)
             setTimeout(startWaitForAnchor, 300)
+
+            if (that.$route.query && that.$route.query.step && that.steps) {
+              for (let i in that.steps) {
+                if (that.steps[i].name === that.$route.query.step) {
+                  that.currentStep = i
+                }
+              }
+            }
           }, () => (this.error = 'Failed loading page'))
         })
       },
@@ -239,6 +247,7 @@ export default {
         this.showNextWarning = false
         this.lastStepAction = 'next'
         this.currentStep++
+        this.$router.replace({query: {...this.$route.query, step: this.steps[this.currentStep].name}})
       }
     },
 
@@ -246,6 +255,7 @@ export default {
       this.showNextWarning = false
       this.lastStepAction = 'previous'
       this.currentStep--
+      this.$router.replace({query: {...this.$route.query, step: this.steps[this.currentStep].name}})
     },
 
     getCompliment () {
