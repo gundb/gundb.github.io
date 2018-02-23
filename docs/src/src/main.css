@@ -563,3 +563,18 @@ code {
 .gn-step-block button {
   margin-right: 12px;
 }
+
+#gn-debug {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  z-index: 9999999;
+  background-color: white;
+  border: 2px solid red;
+  padding: 4px;
+  font-size: 11px;
+  line-height: 12px;
+  max-width: 33vw;
+  max-height: 50vh;
+  overflow: auto;
+}

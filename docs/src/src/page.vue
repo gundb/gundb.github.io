@@ -9,7 +9,7 @@
         <!-- <div v-if="!nextStepValid" class="gn-step-invalid" key="111">
           <span uk-icon="icon: triangle-right; ratio: 1.5" key="11a"></span> <span class="gn-step-msg">Please take the required action...</span>
         </div> -->
-        <div v-if="nextStepValid" class="gn-step-valid" key="222">
+        <div v-if="nextStepValidState === 1" class="gn-step-valid" key="222">
           <span uk-icon="icon: check; ratio: 2" key="22a"></span> {{getCompliment()}}
         </div>
       </div>
@@ -72,10 +72,7 @@ export default {
 
       that.editors[data.name] = {content: content, originalContent: data.originalContent}
 
-      that.steps[that.currentStep].nextconditionsmet = Diff.diff3_file2_no_effect(
-        content.replace(/\s\s+/g, ' '),
-        data.originalContent.replace(/\s\s+/g, ' '),
-        that.steps[that.currentStep].nextCompare.replace(/\s\s+/g, ' '), true)
+      that.checkValid(content, data.originalContent)
 
       that.showNextWarning = false
     })
@@ -87,6 +84,8 @@ export default {
           that.$root.$emit('gn-editor-update', {name: name, content: that.editors[name].content, originalContent: that.editors[name].originalContent})
         }
       }
+
+      that.checkValid('', '') // So debug is shown if needed.
     })
 
     on(this.$refs.container, 'click', '[href="#"]', e => e.preventDefault())
@@ -174,6 +173,8 @@ export default {
             }
             this.setPage(steps)
 
+            that.checkValid('', '')
+
             setTimeout(startWaitForAnchor, 100)
             setTimeout(startWaitForAnchor, 300)
           }, () => (this.error = 'Failed loading page'))
@@ -203,6 +204,10 @@ export default {
     },
 
     nextStepValid () {
+      return this.steps && this.steps[this.currentStep] && this.steps[this.currentStep].nextconditionsmet > 0
+    },
+
+    nextStepValidState () {
       return this.steps && this.steps[this.currentStep] && this.steps[this.currentStep].nextconditionsmet
     }
   },
@@ -228,7 +233,7 @@ export default {
     },
 
     clickNextStep () {
-      if (!this.nextStepValid && !this.showNextWarning) {
+      if (this.nextStepValidState <= 0 && !this.showNextWarning) {
         this.showNextWarning = true
       } else {
         this.showNextWarning = false
@@ -255,6 +260,36 @@ export default {
 
     replaceParts (s) {
       return s.replace(/\{%slug%\}/, this.$parent.page)
+    },
+
+    checkValid (content, originalContent) {
+      let that = this
+
+      if (that.steps[that.currentStep].nextCompare !== '_NONE_') {
+        that.steps[that.currentStep].nextconditionsmet = Diff.diff3_file2_no_effect(
+          content.replace(/\n/g, ' ').replace(/\s\s+/g, ' '),
+          originalContent.replace(/\n/g, ' ').replace(/\s\s+/g, ' '),
+          that.steps[that.currentStep].nextCompare.replace(/\n/g, ' ').replace(/\s\s+/g, ' '), true) ? 1 : -1
+      } else {
+        that.steps[that.currentStep].nextconditionsmet = 2
+      }
+
+      if (that.$route.query && that.$route.query.debug === '1') {
+        let el = document.getElementById('gn-debug')
+        if (!el) {
+          el = document.createElement('div')
+          el.setAttribute('id', 'gn-debug')
+          document.body.appendChild(el)
+        }
+        el.innerHTML = 'Debug:<br><br>' + 'nextstepcompare:<br><br>' + that.steps[that.currentStep].nextCompare
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/'/g, '&quot;')
+          .replace(/'/g, '&#039;')
+          .replace(/\n/g, '<br>')
+          .replace(/ /g, '&nbsp;')
+      }
     }
   }
 }

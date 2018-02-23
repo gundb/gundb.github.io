@@ -141,7 +141,7 @@ function processBlocks (markdown) {
 }
 
 function getSteps (markdown, renderer) {
-  let steps = [{name: 'default', content: '', nextCompare: '', nextconditionsmet: false}]
+  let steps = [{name: 'default', content: '', nextCompare: '', nextconditionsmet: 0}]
   let inCompare = false
   let lines = markdown.split('\n')
   for (let i in lines) {
@@ -150,7 +150,7 @@ function getSteps (markdown, renderer) {
     if (lin && lin.length > 1) {
       let matches = decodeURIComponent(lines[i]).match(new RegExp('step: \'(.*)\'', 'm'))
       if (matches && matches.length > 1) {
-        steps.push({name: matches[1], content: '', nextCompare: '', nextconditionsmet: false})
+        steps.push({name: matches[1], content: '', nextCompare: '', nextconditionsmet: 0})
         useLine = false
       }
 
@@ -160,6 +160,10 @@ function getSteps (markdown, renderer) {
       }
       if (lin[1].indexOf('nextstepcompare: \'end\'') >= 0) {
         inCompare = false
+        useLine = false
+      }
+      if (lin[1].indexOf('nextstepcompare: \'none\'') >= 0) {
+        steps[steps.length - 1].nextCompare = '_NONE_'
         useLine = false
       }
     }
