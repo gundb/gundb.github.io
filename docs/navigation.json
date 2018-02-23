@@ -12,7 +12,8 @@
     { "name": "Learn",
       "pages": [
         { "name": "Tutorials", "pages": [
-          { "Basic App for Beginners Tutorial": "Basic-App-for-Beginners-Tutorial" }
+          { "Basic App for Beginners Tutorial": "Basic-App-for-Beginners-Tutorial" },
+          { "Basic Todo App Tutorial": "Basic-Todo-App-Tutorial" }
           // - - Todo app // gun.js.org/think.html // THESE ARE IMPORTANT! PRIORITIZE!
           // - - Chat app // gun.js.org/converse.html
           // - - Users app // hackernoon article, or wiki/auth (old name), or scrimba 
