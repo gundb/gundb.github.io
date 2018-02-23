@@ -143,6 +143,10 @@ export default {
       }
 
       // Always expand the first level.
+      this.expandFirstLevel()
+    },
+
+    expandFirstLevel () {
       for (let item in this.navigation) {
         this.$set(this.navigation[item], 'expanded', true)
       }
@@ -167,6 +171,7 @@ export default {
 
       this.setPageTitle(this.$route.params.page, this.navigation)
       this.updateExpanded(this.navigation, true)
+      this.expandFirstLevel()
     },
 
     replaceParts (s) {
@@ -179,6 +184,7 @@ export default {
       this.allCollapse(this.navigation, true)
       this.$set(item, 'expanded', true)
       this.updateExpanded(this.navigation, false)
+      this.expandFirstLevel()
     })
 
     this.menuPromise = new Promise((resolve, reject) => {
