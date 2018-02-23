@@ -1,6 +1,7 @@
 <template>
   <div class="gn-md-wrapper">
     <h1 class="gn-main-title">{{$parent.pageTitle || $route.params.page}}</h1>
+    <h2 v-if="_stepName">{{_stepName}}</h2>
     <div class="uk-alert uk-alert-danger" v-if="error">{{ error }}</div>
     <component v-if="steps.length > 0 && steps[0].content !== ''" :is="pageHTML"/>
     <span v-if="steps.length > 1" class="gn-step-block">
@@ -168,6 +169,7 @@ export default {
             }
           }).then(page => {
             let steps = parse(page)
+
             if ('scrollRestoration' in history) {
               history.scrollRestoration = 'manual'
             }
@@ -195,6 +197,7 @@ export default {
 
   computed: {
     pageHTML () {
+      let that = this
       return Vue.component('docmd', {
         template: '<div>' + this.steps[this.currentStep].content + '</div>',
         components: {
@@ -202,9 +205,17 @@ export default {
         },
         mounted () {
           var ids = {}
-          var els = document.querySelectorAll('.gn-md-wrapper h1 a[href^="#"], .gn-md-wrapper h2 a[href^="#"]')
-          for (var el of els) {
-            ids[el.parentNode.innerText] = attr(el, 'href').substr(1)
+          if (that.steps.length > 1) {
+            for (let step of that.steps) {
+              if (step.name !== '_default_') {
+                ids[step.name] = '?step=' + encodeURIComponent(step.name)
+              }
+            }
+          } else {
+            var els = document.querySelectorAll('.gn-md-wrapper h1 a[href^="#"], .gn-md-wrapper h2 a[href^="#"]')
+            for (var el of els) {
+              ids[el.parentNode.innerText] = attr(el, 'href')
+            }
           }
           this.$parent.$parent.ids = ids
         }
@@ -217,6 +228,16 @@ export default {
 
     nextStepValidState () {
       return this.steps && this.steps[this.currentStep] && this.steps[this.currentStep].nextconditionsmet
+    },
+
+    _stepName () {
+      if (this.steps && this.steps[this.currentStep]) {
+        let name = this.steps[this.currentStep].name
+        if (name !== '_default_') {
+          return name
+        }
+      }
+      return false
     }
   },
 

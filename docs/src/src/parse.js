@@ -141,7 +141,7 @@ function processBlocks (markdown) {
 }
 
 function getSteps (markdown, renderer) {
-  let steps = [{name: 'default', content: '', nextCompare: '', nextconditionsmet: 0}]
+  let steps = [{name: '_default_', content: '', nextCompare: '', nextconditionsmet: 0}]
   let inCompare = false
   let lines = markdown.split('\n')
   for (let i in lines) {

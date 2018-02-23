@@ -9,7 +9,7 @@
         <a>{{name}}</a><br>
         <ul class="uk-nav uk-nav-default tm-nav gn-indent" v-if="showanch && $route.params.page === decodeURIComponent(url)">
           <li class="gn-menu-bookmark-link" v-for="(id, subject) in ids">
-              <a :href="'#'+id">{{ subject }}</a>
+              <a :href="id">{{ subject }}</a>
           </li>
         </ul>
       </router-link>
