@@ -182,7 +182,6 @@ export default {
         this.setNavigation(localNav)
         resolve()
       } else {
-        // ajax(`http://gun.js.org/docs/navigation.json?nc=${Math.random()}`).then(page => {
         ajax(`navigation.json?nc=${Math.random()}`).then(page => {
           try {
             let s = page.response
@@ -193,7 +192,7 @@ export default {
             this.setNavigation(json)
             resolve()
           } catch (e) {
-            // console.error(e)
+            console && console.error('!!! Failed loading navigation !!!', e)
           }
         })
       }

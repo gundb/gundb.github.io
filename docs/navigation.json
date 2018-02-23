@@ -12,13 +12,14 @@
     { "name": "Learn",
       "pages": [
         { "name": "Tutorials", "pages": [
-          { "GUN Todo Tutorial": "GUN-Todo-Tutorial" }
+          { "Basic App for Beginners Tutorial": "Basic-App-for-Beginners-Tutorial" }
           // - - Todo app // gun.js.org/think.html // THESE ARE IMPORTANT! PRIORITIZE!
           // - - Chat app // gun.js.org/converse.html
           // - - Users app // hackernoon article, or wiki/auth (old name), or scrimba 
         ] },
         { "name": "Guides",
           "pages": [
+            { "Basic Todo App Guide": "Basic-Todo-App-Guide" },
             { "Graph Databases 101": "Graph-Databases-101" }, // TODO too similar to Crash Course, delete/merge/etc.
             { "Blog Example": "Design-Examples" }, // TODO probably should be retired / deleted, or revamped and renamed.
             { "Using Amazon S3 for storage": "Using-Amazon-S3-for-Storage" }, // REMOVE, now linked in Adapter Storage section, as this is API info, not a guide. Would love a guide though for it though! TODO Discuss with Mark. See Storage.
@@ -166,7 +167,8 @@
     { "path": "Migration-Guide", "redirect": "Porting-GUN" },
     { "path": "React-Native---GUN", "redirect": "React-Native" },
     { "path": "Running-a-GUN-Server-%28v0.3.x%29", "redirect": "How-to-Run-A-GUN-Server" },
-    { "path": "Running-a-GUN-Server-%28v0.9.x%29", "redirect": "How-to-Run-A-GUN-Server" }
+    { "path": "Running-a-GUN-Server-%28v0.9.x%29", "redirect": "How-to-Run-A-GUN-Server" },
+    { "path": "GUN-Todo-Tutorial", "redirect": "Basic-Todo-App-Guide" }
   ],
 
   "settings": {
