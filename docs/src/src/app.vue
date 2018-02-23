@@ -141,6 +141,11 @@ export default {
           this.allCollapse(nav[item].pages, st)
         }
       }
+
+      // Always expand the first level.
+      for (let item in this.navigation) {
+        this.$set(this.navigation[item], 'expanded', true)
+      }
     },
 
     clickExpand () {
