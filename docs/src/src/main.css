@@ -578,3 +578,7 @@ code {
   max-height: 50vh;
   overflow: auto;
 }
+
+.gn-code-tabs-wrapper {
+  z-index: 99;
+}

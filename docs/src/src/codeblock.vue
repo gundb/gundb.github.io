@@ -15,7 +15,7 @@
         <codeblocktab :lang="lang" :code="code" :codefull="codefull" :tab="doptions.tabs[0]" :xlang="xlang" :editorname="editorname"></codeblocktab>
       </div>
       <!-- Icons -->
-      <div class="uk-position-top-right">
+      <div class="uk-position-top-right gn-code-tabs-wrapper">
         <ul class="uk-iconnav gn-code-tabs-ul">
           <li v-if="showcodepenicon"><a class="js-codepen" uk-tooltip="Edit on Codepen" :gn-lang="lang" v-on:click="clickCodepenIcon"><span uk-icon="icon: file-edit"></span></a></li>
           <li><a ref="gncopy" class="js-copy" uk-tooltip="Copy to Clipboard"><span uk-icon="icon: copy"></span></a></li>

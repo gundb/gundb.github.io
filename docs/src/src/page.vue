@@ -228,6 +228,9 @@ export default {
         .join(' ')}` + this.$parent.settings.page.title.add
 
       this.steps = steps
+      this.currentStep = 0
+      this.lastStepAction = ''
+      this.showNextWarning = false
 
       // setTimeout(() => {
       //   if (location.hash && $(location.hash)) {
