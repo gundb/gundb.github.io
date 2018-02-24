@@ -13,7 +13,7 @@
       "pages": [
         { "name": "Tutorials", "pages": [
           { "Basic Todo App Tutorial": "Basic-Todo-App-Tutorial" },
-          { "Basic App for Beginners Tutorial": "Basic-App-for-Beginners-Tutorial" }
+          { "My First Todo App": "My-First-Todo-App" }
           // - - Todo app // gun.js.org/think.html // THESE ARE IMPORTANT! PRIORITIZE!
           // - - Chat app // gun.js.org/converse.html
           // - - Users app // hackernoon article, or wiki/auth (old name), or scrimba 
@@ -169,7 +169,8 @@
     { "path": "React-Native---GUN", "redirect": "React-Native" },
     { "path": "Running-a-GUN-Server-%28v0.3.x%29", "redirect": "How-to-Run-A-GUN-Server" },
     { "path": "Running-a-GUN-Server-%28v0.9.x%29", "redirect": "How-to-Run-A-GUN-Server" },
-    { "path": "GUN-Todo-Tutorial", "redirect": "Basic-Todo-App-Guide" }
+    { "path": "GUN-Todo-Tutorial", "redirect": "Basic-Todo-App-Guide" },
+    { "path": "think", "redirect": "My-First-Todo-App" }
   ],
 
   "settings": {
