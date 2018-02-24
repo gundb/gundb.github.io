@@ -73,20 +73,39 @@ export default {
 
       that.editors[data.name] = {content: content, originalContent: data.originalContent}
 
-      that.checkValid(content, data.originalContent)
+      that.checkValid(content, that.steps[that.currentStep].nextCompare)
+
+      let ky = encodeURIComponent('GUNdoc_code_' + that.$route.params.page + '_EDT_' + data.name + '_STEP_' + that.steps[that.currentStep].name)
+      localStorage.setItem(ky, data.content)
+      let chk = localStorage.getItem(ky)
+      if (chk !== data.content) {
+        localStorage.removeItem(ky)
+      }
 
       that.showNextWarning = false
     })
 
     this.$root.$on('gn-editor-request', (data) => {
-      if (this.lastStepAction === 'next') {
-        this.lastStepAction = ''
+      let chkd = false
+
+      if (that.lastStepAction === 'next') {
+        that.lastStepAction = ''
         for (let name in this.editors) {
           that.$root.$emit('gn-editor-update', {name: name, content: that.editors[name].content, originalContent: that.editors[name].originalContent})
         }
+      } else {
+        let ky = encodeURIComponent('GUNdoc_code_' + that.$route.params.page + '_EDT_' + data.name + '_STEP_' + that.steps[that.currentStep].name)
+        let cntnt = localStorage.getItem(ky)
+        if (cntnt && cntnt !== '') {
+          that.$root.$emit('gn-editor-update-from-storage', {name: data.name, content: cntnt, originalContent: ''})
+          that.checkValid(cntnt, that.editors[data.name].originalContent)
+          chkd = true
+        }
       }
 
-      that.checkValid('', '') // So debug is shown if needed.
+      if (!chkd) {
+        that.checkValid('', '') // So debug is shown if needed.
+      }
     })
 
     on(this.$refs.container, 'click', '[href="#"]', e => e.preventDefault())
@@ -116,79 +135,75 @@ export default {
 
   watch: {
     $route: {
-      handler () {
-        let that = this
+      handler (to, from) {
+        if (!to || !from || to.path !== from.path) {
+          let that = this
 
-        // this.$parent.ids = {}
+          // this.$parent.ids = {}
 
-        let oc = UIkit.offcanvas('#offcanvas', {})
-        if (oc) {
-          oc.hide()
-        }
+          let oc = UIkit.offcanvas('#offcanvas', {})
+          if (oc) {
+            oc.hide()
+          }
 
-        var page = this.$route.params.page
+          var page = this.$route.params.page
 
-        this.error = null
+          this.error = null
 
-        this.$parent.page = page
+          this.$parent.page = page
 
-        this.$parent.menuPromise && this.$parent.menuPromise.then(() => {
-          new Promise((resolve, reject) => {
-            if (this.cache[page]) {
-              resolve(this.cache[page])
-              return
-            }
-
-            for (let i in this.$parent.redirects) {
-              if (page === this.$parent.redirects[i].path) {
-                window.location.replace(this.$parent.redirects[i].redirect)
+          this.$parent.menuPromise && this.$parent.menuPromise.then(() => {
+            new Promise((resolve, reject) => {
+              if (this.cache[page]) {
+                resolve(this.cache[page])
                 return
               }
-            }
 
-            if (page === 'Site-Index') {
-              setTimeout(() => {
-                let el = document.getElementById('gn-site-index')
-                resolve(el.innerHTML)
-              }, 1)
-            } else {
-              ajax(that.replaceParts(that.$parent.settings.page.requestUrl + '?nc=' + Math.random())).then(
-                ({ response }) => {
-                  if (startsWith(response.trim(), '<!DOCTYPE html>')) {
-                    response = `<div class="uk-text-center">
-                                                    <h1>404</h1>
-                                                    <p class="uk-text-large">Page not found!</p>
-                                                </div>`
-                  }
-
-                  this.cache[page] = response
-                  resolve(response)
-                },
-                err => reject(err)
-              )
-            }
-          }).then(page => {
-            let steps = parse(page)
-
-            if ('scrollRestoration' in history) {
-              history.scrollRestoration = 'manual'
-            }
-            this.setPage(steps)
-
-            that.checkValid('', '')
-
-            setTimeout(startWaitForAnchor, 100)
-            setTimeout(startWaitForAnchor, 300)
-
-            if (that.$route.query && that.$route.query.step && that.steps) {
-              for (let i in that.steps) {
-                if (that.steps[i].name === that.$route.query.step) {
-                  that.currentStep = i
+              for (let i in this.$parent.redirects) {
+                if (page === this.$parent.redirects[i].path) {
+                  window.location.replace(this.$parent.redirects[i].redirect)
+                  return
                 }
               }
-            }
-          }, () => (this.error = 'Failed loading page'))
-        })
+
+              if (page === 'Site-Index') {
+                setTimeout(() => {
+                  let el = document.getElementById('gn-site-index')
+                  resolve(el.innerHTML)
+                }, 1)
+              } else {
+                ajax(that.replaceParts(that.$parent.settings.page.requestUrl + '?nc=' + Math.random())).then(
+                  ({ response }) => {
+                    if (startsWith(response.trim(), '<!DOCTYPE html>')) {
+                      response = `<div class="uk-text-center">
+                                                      <h1>404</h1>
+                                                      <p class="uk-text-large">Page not found!</p>
+                                                  </div>`
+                    }
+
+                    this.cache[page] = response
+                    resolve(response)
+                  },
+                  err => reject(err)
+                )
+              }
+            }).then(page => {
+              let steps = parse(page)
+
+              if ('scrollRestoration' in history) {
+                history.scrollRestoration = 'manual'
+              }
+
+              that.setPage(steps)
+
+              that.checkValid('', '')
+
+              that.checkHash()
+            }, () => (this.error = 'Failed loading page'))
+          })
+        } else {
+          this.checkHash()
+        }
       },
 
       immediate: true
@@ -208,7 +223,7 @@ export default {
           if (that.steps.length > 1) {
             for (let step of that.steps) {
               if (step.name !== '_default_') {
-                ids[step.name] = '?step=' + encodeURIComponent(step.name)
+                ids[step.name] = '#step=' + encodeURIComponent(step.name)
               }
             }
           } else {
@@ -271,7 +286,7 @@ export default {
         this.showNextWarning = false
         this.lastStepAction = 'next'
         this.currentStep++
-        this.$router.replace({query: {...this.$route.query, step: this.steps[this.currentStep].name}})
+        this.addStepToRoute()
       }
     },
 
@@ -279,7 +294,11 @@ export default {
       this.showNextWarning = false
       this.lastStepAction = 'previous'
       this.currentStep--
-      this.$router.replace({query: {...this.$route.query, step: this.steps[this.currentStep].name}})
+      this.addStepToRoute()
+    },
+
+    addStepToRoute () {
+      this.$router.push({hash: this.steps[this.currentStep].name === '_default_' ? '' : 'step=' + this.steps[this.currentStep].name})
     },
 
     getCompliment () {
@@ -323,6 +342,27 @@ export default {
           .replace(/'/g, '&#039;')
           .replace(/\n/g, '<br>')
           .replace(/ /g, '&nbsp;')
+      }
+    },
+
+    checkHash () {
+      let that = this
+
+      setTimeout(startWaitForAnchor, 100)
+      setTimeout(startWaitForAnchor, 300)
+
+      if (that.steps && that.steps.length > 1) {
+        document.documentElement.scrollTop = 0
+      }
+
+      if (that.$route.hash && that.$route.hash.indexOf('#step=') === 0 && that.steps) {
+        for (let i in that.steps) {
+          if (that.steps[i].name === decodeURIComponent(that.$route.hash.substr('#step='.length))) {
+            that.currentStep = i
+          }
+        }
+      } else if (that.steps && that.steps.length > 1) {
+        that.currentStep = 0
       }
     }
   }

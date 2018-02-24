@@ -84,18 +84,26 @@ export default {
       }
       setTimeout(updatePreview, 300)
 
-      that.$root.$emit('gn-editor-request', {name: that.editorname})
-
       that.$root.$on('gn-editor-update', (data) => {
         if (data.name === that.editorname) {
           if (myEditor) {
-            let mergeResult = Diff.diff3_merge(data.content, data.originalContent, myEditor.getValue(), true)
+            let mergeResult = Diff.diff3_merge(data.content.replace(/[^\S\r\n]+$/gm, ''), data.originalContent.replace(/[^\S\r\n]+$/gm, ''), myEditor.getValue().replace(/[^\S\r\n]+$/gm, ''), true)
             if (mergeResult.length === 1 && Array.isArray(mergeResult[0].ok)) {
               myEditor.setValue(mergeResult[0].ok.join(''))
             }
           }
         }
       })
+
+      that.$root.$on('gn-editor-update-from-storage', (data) => {
+        if (data.name === that.editorname) {
+          if (myEditor) {
+            myEditor.setValue(data.content)
+          }
+        }
+      })
+
+      that.$root.$emit('gn-editor-request', {name: that.editorname})
     }, 1)
   }
 }
