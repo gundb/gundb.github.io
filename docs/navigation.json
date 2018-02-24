@@ -1,10 +1,10 @@
-{ // By default it is safe to add a redirect notice at the top of all old pages. However, on some of them, it is VERY IMPORTANT to do this and NOT DELETE THEM.
+{
   "navigation": [
     { "name": "Getting Started",
       "pages": [
         { "Introduction": "Introduction" },
         { "Installation": "Installation" },
-        { "Hello World": "Hello-World" },
+        { "Todo Application": "Basic-Todo-App-Tutorial" },
         { "Next Steps": "Next-Steps" },
         { "Crash Course": "Crash-Course" }
       ]
@@ -35,7 +35,7 @@
             { "How Writes Work": "Partials-and-Circular-References-%28v0.2.x%29" }, // rename to "Writes", redirect. TODO Discuss with Mark.
             { "How to Create Users": "Auth" }, // rename to "Users", redirect. Split into next pages? TODO Discuss with Mark.
             { "How to Add Security": "Auth" }, // rename to "Security". TODO Discuss with Mark.
-            //{ "To Manage Permissions": "Trust" }, // for when `trust` is out?
+            //{ "To Manage Permissions": "Trust" }, // for when 'trust' is out?
             { "How to Extend GUN": "Adding-Methods-to-the-Gun-Chain" }, // rename to "Extensions". revamp. Also duplicate into API Chaining section? TODO Discuss with Mark.
             { "How to Delete Data": "Delete" },
             { "Functional Reactive Programming": "Functional-Reactive-Programming" }, // maybe rename to "FRP" for SEO? Need to coin term "Chain Reaction Programming"? Have a URL for it too? TODO Discuss with Mark.
@@ -87,7 +87,7 @@
             // ^ This was a nice article somebody else wrote. You think it is worth keeping/cleaning up? Or just delete?
             
             //{ "Building Modules for Gun": "Building-Modules-for-Gun" }, // merge into API Adapter page.
-            // Exisiting wiki page: "Building-Modules-for-Gun-%28v0.5.x%29" --> Delete permanenty? --> Okay Mark? Not quite, content is MOSTLY good (`Gun` -> `gun`), should merge into API Adapter page.
+            // Exisiting wiki page: "Building-Modules-for-Gun-%28v0.5.x%29" --> Delete permanenty? --> Okay Mark? Not quite, content is MOSTLY good ('Gun' -> 'gun'), should merge into API Adapter page.
             //{ "Building Storage Adapters": "Building-Storage-Adapters" }, merge into API Adapter page.
             { "Adapter Performance": "Adapter-Performance" }, // Do we need a new menu for items like this, like docs>Learn>What? --> Mark? No. Also merge parts of this into API Adapter page, actual systems should report their own perf maybe on ecosystem page/whatever.
             
@@ -170,7 +170,9 @@
     { "path": "Running-a-GUN-Server-%28v0.3.x%29", "redirect": "How-to-Run-A-GUN-Server" },
     { "path": "Running-a-GUN-Server-%28v0.9.x%29", "redirect": "How-to-Run-A-GUN-Server" },
     { "path": "GUN-Todo-Tutorial", "redirect": "Basic-Todo-App-Guide" },
-    { "path": "think", "redirect": "My-First-Todo-App" }
+    { "path": "think", "redirect": "My-First-Todo-App" },
+    { "path": "Hello-World", "redirect": "Basic-Todo-App-Tutorial" }
+    // In old Github pages, on the old page add this: Page moved to [React Native](React-Native)
   ],
 
   "settings": {
