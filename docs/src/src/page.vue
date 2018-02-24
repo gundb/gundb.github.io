@@ -3,6 +3,12 @@
     <h1 class="gn-main-title">{{$parent.pageTitle || $route.params.page}}</h1>
     <h2 v-if="_stepName">{{_stepName}}</h2>
     <div class="uk-alert uk-alert-danger" v-if="error">{{ error }}</div>
+    <div v-if="hasStoredCode && currentStep === 0" class="gn-reset-tut-wrapper">
+      <div>
+      You have previously changed code in this tutorial. Feel free to continue where you left of. Or click this reset button if you want to start all over.
+      </div>
+      <div><button @click="clickResetTutorial" class="uk-button uk-button-default">Reset&nbsp;tutorial</button></div>
+    </div>
     <component v-if="steps.length > 0 && steps[0].content !== ''" :is="pageHTML"/>
     <span v-if="steps.length > 1" class="gn-step-block">
       <hr class="gn-hr-thin">
@@ -58,7 +64,8 @@ export default {
     currentStep: 0,
     lastStepAction: '',
     showNextWarning: false,
-    editors: {}
+    editors: {},
+    editorNames: {}
   }),
 
   components: {
@@ -71,15 +78,18 @@ export default {
     this.$root.$on('gn-editor-changed', (data) => {
       let content = data.content
 
-      that.editors[data.name] = {content: content, originalContent: data.originalContent}
+      that.$set(that.editors, data.name, {content: content, originalContent: data.originalContent})
+      that.$set(that.editorNames, data.name, {name: data.name})
 
       that.checkValid(content, that.steps[that.currentStep].nextCompare)
 
-      let ky = encodeURIComponent('GUNdoc_code_' + that.$route.params.page + '_EDT_' + data.name + '_STEP_' + that.steps[that.currentStep].name)
-      localStorage.setItem(ky, data.content)
-      let chk = localStorage.getItem(ky)
-      if (chk !== data.content) {
-        localStorage.removeItem(ky)
+      if (content !== data.originalContent) {
+        let ky = that.getStorageKey(data.name, this.steps[this.currentStep].name)
+        localStorage.setItem(ky, data.content)
+        let chk = localStorage.getItem(ky)
+        if (chk !== data.content) {
+          localStorage.removeItem(ky)
+        }
       }
 
       that.showNextWarning = false
@@ -88,13 +98,15 @@ export default {
     this.$root.$on('gn-editor-request', (data) => {
       let chkd = false
 
+      that.$set(that.editorNames, data.name, {name: data.name})
+
       if (that.lastStepAction === 'next') {
         that.lastStepAction = ''
         for (let name in this.editors) {
           that.$root.$emit('gn-editor-update', {name: name, content: that.editors[name].content, originalContent: that.editors[name].originalContent})
         }
       } else {
-        let ky = encodeURIComponent('GUNdoc_code_' + that.$route.params.page + '_EDT_' + data.name + '_STEP_' + that.steps[that.currentStep].name)
+        let ky = that.getStorageKey(data.name, this.steps[this.currentStep].name)
         let cntnt = localStorage.getItem(ky)
         if (cntnt && cntnt !== '') {
           that.$root.$emit('gn-editor-update-from-storage', {name: data.name, content: cntnt, originalContent: ''})
@@ -253,6 +265,22 @@ export default {
         }
       }
       return false
+    },
+
+    hasStoredCode () {
+      let ret = false
+      if (this.steps) {
+        for (let name in this.editorNames) {
+          for (let step of this.steps) {
+            let ky = this.getStorageKey(name, step.name)
+            let cntnt = localStorage.getItem(ky)
+            if (cntnt && cntnt !== '') {
+              ret = true
+            }
+          }
+        }
+      }
+      return ret
     }
   },
 
@@ -295,6 +323,19 @@ export default {
       this.lastStepAction = 'previous'
       this.currentStep--
       this.addStepToRoute()
+    },
+
+    clickResetTutorial () {
+      if (this.steps) {
+        for (let name in this.editorNames) {
+          for (let step of this.steps) {
+            let ky = this.getStorageKey(name, step.name)
+            localStorage.removeItem(ky)
+          }
+          this.$root.$emit('gn-editor-update-from-storage', {name: name, content: this.editors[name].originalContent, originalContent: this.editors[name].originalContent})
+        }
+        this.$set(this.editorNames, '_' + Math.random(), {name: ''}) // Force Reset button recalc.
+      }
     },
 
     addStepToRoute () {
@@ -364,6 +405,10 @@ export default {
       } else if (that.steps && that.steps.length > 1) {
         that.currentStep = 0
       }
+    },
+
+    getStorageKey (n, n2) {
+      return encodeURIComponent('GUNdoc_code_' + this.$route.params.page + '_EDT_' + n + '_STEP_' + n2)
     }
   }
 }
