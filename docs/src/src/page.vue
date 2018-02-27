@@ -81,7 +81,7 @@ export default {
       that.$set(that.editors, data.name, {content: content, originalContent: data.originalContent})
       that.$set(that.editorNames, data.name, {name: data.name})
 
-      that.checkValid(content, that.steps[that.currentStep].nextCompare)
+      that.checkValid(content, data.originalContent)
 
       if (content !== data.originalContent) {
         let ky = that.getStorageKey(data.name, this.steps[this.currentStep].name)
