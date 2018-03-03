@@ -1,23 +1,15 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-	<script src="https://gunjs.herokuapp.com/gun.js"></script>
-	<script src="dep/rsc/analytics.js"></script>
-</head>
-<body style="white-space: pre;">
-	loading...
-	<script>
-		var key = decodeURIComponent((location.search.match(/key\=(.*?)(\&|$)/i)||[])[1]||'') || alert("Please provide a key in a query parameter, such as `?key=example/tutorial`.");
-
-		var gun = Gun('https://gunjs.herokuapp.com/gun');
-		var ref = gun.get(key);
-		ref.on(function(data){
-			data = Gun.obj.copy(data);
-			delete data._;
-		  $('body').text(JSON.stringify(data,0,2));
-		});
-	</script>
-</body>
+  <head>
+    <link rel="canonical" href="https://gun.eco/tabs.html" />
+    <meta charset="utf-8">
+    <title>GUN</title>
+    <script type="text/javascript">
+      var u = document.URL.replace(/gun\.js\.org/, 'gun.eco')
+      location.replace(u)
+    </script>
+  </head>
+  <body>
+    <h1>This site moved to <a>https://gun.eco</a></a></h1>
+  </body>
 </html>
