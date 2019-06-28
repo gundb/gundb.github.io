@@ -1,15 +1,93 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <link rel="canonical" href="https://gun.eco/index.html" />
-    <meta charset="utf-8">
-    <title>GUN</title>
-    <script type="text/javascript">
-      var u = document.URL.replace(/gun\.js\.org/, 'gun.eco')
-      location.replace(u)
-    </script>
-  </head>
-  <body>
-    <h1>This site moved to <a>https://gun.eco</a></a></h1>
-  </body>
+<head>
+<!-- always start with these two lines to set a clean baseline for different devices -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/gun/examples/style.css">
+<script src="https://cdn.jsdelivr.net/npm/gun/examples/jquery.js"></script>
+
+<title>Decentralized Database</title>
+</head>
+<body class="black whitet">
+<style>
+	/*
+		Choose white text on a black background so you can add color in.
+		Pick your favorite font and choose a font size.
+	*/
+	@import url('https://fonts.googleapis.com/css?family=Raleway');
+	html, body {
+		font-family: "Raleway", sans-serif;
+	}
+	.unit img {
+		max-height: 90vh;
+	}
+	.board {
+		padding: 7% 1em;
+	}
+
+	.fade {
+		opacity: 0.75;
+	  transition: all 0.3s;
+	}
+	.fade:hover {
+		opacity: 1;
+	}
+
+	button {
+		font-size: 100%;
+		padding: 1em;
+		background: transparent;
+		border: 1px solid white;
+		border-radius: 1.5em;
+		color: white;
+		margin: 0.5em;
+		margin-bottom: 0;
+		cursor: pointer;
+	}
+	button:hover {
+		background: white;
+		color: black;
+	}
+</style>
+
+<!-- for educational sites, consider starting with a nice full screen welcome message -->
+<div id="hi" class="hold full hue center">
+	<div class="row">
+		<a href="https://era.eco" class="left gap"><img src="https://gun.eco/media/era.png" style="height: 1.75em;"></a>
+		<a href="https://github.com/amark/gun" class="right gap fade"><img src="https://gun.eco/media/github.svg" style="height: 1.5em;"></a>
+	</div>
+	<div class="focus min row leak gap">
+		<!-- just like in real life, looking pretty attracts attention, so show off and look glamorous! -->
+		<img id="logo" src="https://gun.eco/media/gun-white.svg" style="width: 30%; min-width: 250px;">
+	</div>
+	<div class="focus row gap">
+		<p class="loud">protecting <span id="many"></span> people's privacy <span></span></p>
+		<p>the decentralized database for developers.</p>
+		<a href="https://gun.eco/docs/Todo-Dapp"><button>GET STARTED</button></a>
+		<a href="https://gun.eco/docs/API"><button>DOCUMENTATION</button></a>
+	</div>
+	<script>
+	;(function(){
+		var c = ['hue', 'hue2', 'hue3', 'hue4'], d;
+		var hi = $('#hi'), logo = $('#logo'), w = $(window).on('mousemove touchmove', function(eve){
+			eve = eve.originalEvent || eve;
+			eve = (eve.touches && eve.touches[0]) || eve;
+			var x = eve.clientX - (w.outerWidth()/2), y = eve.clientY - (w.outerHeight()/2);
+			logo.css({'transform': 'rotateX('+y/15+'deg) rotateY('+x/15+'deg)'});
+			hi.removeClass(c.join(' '));
+			if(x < 0 && y < 0){ hi.addClass('hue2') } else
+			if(x > 0 && y < 0){ hi.addClass('hue4') } else
+			if(x < 0 && y > 0){ hi.addClass('hue3') } else
+			if(x > 0 && y > 0){ hi.addClass('hue') }
+		});
+		//$.getJSON('https://guntest.herokuapp.com/gun/stats.radata'), function(data){ console.log(data) });
+	}());
+	</script>
+</div>
+<div class="row" style="position: absolute; bottom: 0;">
+	<a href="https://gitter.im/amark/gun" class="left gap fade"><img src="https://gun.eco/media/gitter.svg" style="height: 1.5em;"></a>
+	<a href="https://twitter.com/marknadal" class="right gap fade"><img src="https://gun.eco/media/twitter.png" style="height: 1.5em;"></a>
+</div>
+
+</body>
 </html>
